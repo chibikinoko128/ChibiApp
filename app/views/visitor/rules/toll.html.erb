@@ -1,0 +1,27 @@
+<div class="main">
+<h2>ユーザー登録し利用料金を入金いただくと</h2>
+
+<h2><strong>ビジネスへの参加と特典情報が閲覧可能となります。</strong></h2>
+<p>情報は都度更新されます。</p>
+
+<h2>ビジネスに参加するとこのサイトの拡散実績に応じて<br>報酬を受け取ることができます。</h2>
+<h2>詳しくは以下で確認してください。</h2>
+<ul>
+  <p><%= link_to 'キャッシュバックとは？', :cache_visitor_rule %></p>
+  <p><%= link_to 'ボーナスとは？', :bonus_visitor_rule %></p>
+  <p><%= link_to '特典ボーナスとは？', :privilege_bonus_visitor_rule %></p>
+</ul>
+
+<div class="links">
+  <ul>
+    <p><strong>会員登録ページへ</strong>をクリックすると会員特典等の詳細が確認できます。</p>
+  </ul>
+  
+  <%= link_to(image_tag("new.png", size: "60*60", alt: "新規会員登録画面へ進む", align: "top" ), :dashboard_visitor_rule) %>
+  </div>
+<div class="table-wrapper">
+<div class="links">
+    <%= link_to '閉じる', :welcome_visitor_rule %>
+  </div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+<%= f.fields_for :number, f.object.number do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingNumberFormPresenter.new(ff, self) :  NumberFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:entries_month, '月', Number::ENTRIES_MONTH)
+      m << q.drop_down_list_block(:entries_week, '週', Number::ENTRIES_WEEK)
+      m << q.drop_down_list_block(:entries_day, '日', Number::ENTRIES_DAY) 
+    end
+  end %>
+<% end %>

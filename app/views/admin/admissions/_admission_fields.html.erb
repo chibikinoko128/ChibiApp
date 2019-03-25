@@ -1,0 +1,14 @@
+<%= f.fields_for :admission, f.object.admission do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingAdmissionFormPresenter.new(ff, self) :  AdmissionFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:entries_year, '年', Admission::ENTRIES_YEAR)
+      m << q.drop_down_list_block(:entries_month, '月', Admission::ENTRIES_MONTH)
+      m << q.drop_down_list_block(:entries_day, '日,集計、未入金', Admission::ENTRIES_DAY) 
+    end
+  end %>
+<lo>
+  <li>日付欄　＝　集計　→　月の新規登録者検索</li>
+  <li>日付欄　＝　未入金　→　月の初回登録料未入金者検索</li>
+</lo>
+<% end %>

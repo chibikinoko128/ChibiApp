@@ -1,0 +1,122 @@
+<% @title = '紹介した会員の成績と列の成績' %>
+<h1><strong><%= @myname %>さんが<%= @title %></strong></h1>
+
+<div class="table-wrapper">
+  <% if @mysponsor.empty? %>
+  <h3><p><strong>紹介者はおりません。</strong></p></h3>
+  <% end %>
+  
+  <h3><p>ポイント(pt)の計算方法は<%= link_to 'キャッシュバックとは？', :cache_customer_rule %>のページで確認してください。</p></h3>
+  <h3><p>ポイント(pt)は紹介列の数及び紹介列の総人数によります。したがって紹介者の方がご自身よりポイント(pt)を多く獲得している場合もあります。</p></h3>
+  
+  <h3><p>表の見方</p></h3>
+  <table class="attributes">
+  <tr><th colspan= "3">紹介した人の列のボーナス成績（※クオーター）</th></tr>
+  <tr><th>紹介者氏名</th><td>あなたが紹介した人の氏名</td></tr>
+  <tr><th>ニックネーム</th><td>紹介した人のニックネーム</td></tr>
+  <tr><th>在籍状況</th><td>紹介した人の在籍有無状況</td></tr>
+  <tr><th>紹介者個人のpt</th><td>紹介した人の現在のクオーターpt
+    </td></tr>
+  <tr><th>紹介者列のボーナスpt</th><td>紹介した人の列全体のクオーターpt</td></tr>
+  <tr><th>列のタイトル</th><td>紹介した人の列のボーナスタイトル</td></tr>
+</table>
+  
+  <% @mysponsor.each do |v| %> 
+    
+    <% @sf_name = v.family_name + ' ' + v.given_name %>
+    <% @sn_name = v.nickname %>
+    <% score = v.point %>
+    <% score5 = v.score %>
+    <% if @month <= 3 %>
+      <% @q = 1 %>
+      <% @s_point = score5.scc_1 %>                                
+    <% elsif @month <= 6 %>
+      <% @q = 2 %>
+      <% @s_point = score5.scc_2 %>                                
+    <% elsif @month <= 9 %>
+      <% @q = 3 %>
+      <% @s_point = score5.scc_3 %>                                
+    <% else %>
+      <% @q = 4 %>
+      <% @s_point = score5.scc_4 %>                                
+    <% end %>
+  
+    <% regist = Register.find_by(customer_id: v.id) %>
+    <% @rgpt = regist["rg_#{@month}"] %>
+  
+    <% @s1_sponsor = Sponsor.where(sponsor1: @sn_name).pluck(:customer_id) %> 
+    
+    <% qp_array = [] %>
+  
+    <% @s1_sponsor.each do |e| %>
+      <% if @month <= 3 %>
+        <% qp_array << score.cbns_1 %>
+      <% elsif @month <= 6 %>
+        <% qp_array << score.cbns_2 %>
+      <% elsif @month <= 9 %>
+        <% qp_array << score.cbns_3 %>
+      <% else %>
+        <% qp_array << score.cbns_4 %>
+      <% end %>
+    <% end %>
+    
+    <% q_value = qp_array.count { |val| val >= 20000 } %>
+    
+    <% if @month <= 3 %> 
+      <% sp1_qp = score.cbns_1 %>                                        
+    <% elsif @month <= 6 %>  
+      <% sp1_qp = score.cbns_2 %>                                         
+    <% elsif @month <= 9 %>
+      <% sp1_qp = score.cbns_3 %>                                        
+    <% else %>
+      <% sp1_qp = score.cbns_4 %>                                         
+    <% end %>
+  
+    <% if q_value < 3 %>
+      <% if sp1_qp < 4999 %>
+        <% @b_title = "ボーナス資格はありません" %>
+      <% elsif sp1_qp <= 19999 %>   
+        <% @b_title = "ノーマル" %>
+      <% else %>
+        <% @b_title = "ベーシック" %>
+      <% end %>
+    <% elsif q_value <= 4 %>
+      <% @b_title = "クリスタルベーシック" %>
+    <% elsif q_value <= 6 %>
+      <% @b_title = "シルバーベーシック" %>
+    <% elsif q_value <= 8 %>
+      <% @b_title = "ゴールドベーシック" %>
+    <% else %>
+      <% @b_title = "プラチナベーシック" %>
+    <% end %>
+  
+    <% aaa = v.point %>
+    <% if @month <= 3 %>
+      <% @bbb = aaa.cbns_1 %>
+    <% elsif @month <= 6 %>
+      <% @bbb = aaa.cbns_2 %>
+    <% elsif @month <= 9 %>
+      <% @bbb = aaa.cbns_3 %>
+    <% else %>
+      <% @bbb = aaa.cbns_4 %>
+    <% end %>
+    <%= render "customer/shared/sponsor" %> 
+  <% end %>
+  
+    <h3><p>「在籍」、「退会」に関係なく紹介者列ごとの成績を表示しています。<br>退会者に対してのサイトからの支払いは発生しません。</p></h3>
+    <h3>列の成績によってあなたのボーナスが評価され決定します。</h3>
+    <h3><p>ボーナス額の算出方法は<%= link_to 'ボーナスとは？', :bonus_customer_rule %>のページで確認してください。</p></h3>
+   
+</div>
+    
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'ボーナス成績画面へ戻る', :bonus_record_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

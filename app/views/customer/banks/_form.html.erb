@@ -1,0 +1,10 @@
+<%= FormPresenter.new(f, self).notes %>
+<fieldset id="Bank-fields">
+  <legend>口座情報（正確に入力してください。）</legend>
+  <%= render 'bank_fields_a', f: f, confirming: false %>
+</fieldset>
+<p><strong>不正防止のため</strong></p>
+<p>登録された口座情報は本人及びサイト運営管理者以外は閲覧出来ないシステムになっております。</p>
+<p>銀行口座名義が本人と一致しない場合は報酬の<br>支払いは行いません。<br>報酬の繰り越しも行わず該当報酬の受取り権利も失効します。</p>
+<p>必ず会員様本人名義の口座を登録してください。</p>
+

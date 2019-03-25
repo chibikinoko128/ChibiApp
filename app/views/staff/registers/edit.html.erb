@@ -1,0 +1,13 @@
+<% @title = '在籍 / 退会　の編集' %>
+<h1><%= @title %>　　※今月は <%= @month %> 月です。</h1>
+
+<div id="generic-form">
+  <%= form_for @register_form, as: 'form', url: [ :staff, @register_form.register ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+      <%= link_to 'キャンセル', :staff_customers %>
+    </div>
+  <% end %>
+</div>
+   

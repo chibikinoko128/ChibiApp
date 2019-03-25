@@ -1,0 +1,12 @@
+ja:
+  activerecord:
+    attributes:
+      commission:
+        pay_bank: 振込み口座
+    errors:
+      models:
+        commission:
+          attributes:
+            pay_bank:
+              taken: が他の銀行と重複しています。
+            

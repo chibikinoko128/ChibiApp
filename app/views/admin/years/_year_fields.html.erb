@@ -1,0 +1,11 @@
+<%= f.fields_for :year, f.object.year do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingYearFormPresenter.new(ff, self) : YearFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year_check, '年', Year::RETRIEVAL_YEAR)
+    end
+  end %>
+<lo>
+  <li>会員個人の年度別報酬検索表示の検索（詳細ページにて）</li>
+</lo>
+<% end %>

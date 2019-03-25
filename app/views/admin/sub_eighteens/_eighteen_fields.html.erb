@@ -1,0 +1,211 @@
+<%= f.fields_for :eighteen, f.object.eighteen do |ff| %>
+  <% if @choice_title == "キャッシュバック" %>
+    <% if @month == 1 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_1, '1月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 2 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_2, '2月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 3 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_3, '3月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 4 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_4, '4月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 5 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_5, '5月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 6 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_6, '6月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 7 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_7, '7月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 8 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_8, '8月キャッシュバック  送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 9 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_9, '9月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 10 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_10, '10月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 11 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_11, '11月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_12, '12月キャッシュバック送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% end %>
+
+  <% elsif @choice_title == "ボーナス" %>
+    <% if @quarter == 1 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_1, '1クオーター送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @quarter == 2 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_2, '2クオーター送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% elsif @quarter == 3 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_3, '3クオーター送金', Eighteen::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <% if @quarter == 4 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:transfer_c_4, '4クオーター送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% end %>
+    <% end %>
+
+  <% else %>
+    <% if @choice_title == "特別会員ボーナス" %>
+      <% if @month == 1 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_1, '1月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 2 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_2, '2月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 3 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_3, '3月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 4 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_4, '4月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 5 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_5, '5月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 6 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_6, '6月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 7 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_7, '7月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 8 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_8, '8月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 9 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_9, '9月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 10 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_10, '10月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% elsif @month == 11 %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_11, '11月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% else %>
+        <%= markup do |m|
+          p = confirming ? ConfirminEighteenFormPresenter.new(ff, self) : EighteenFormPresenter.new(ff, self)
+          p.with_options(required: true) do |q|
+            m << q.drop_down_list_block(:sp_transfer_12, '12月特別会員ボーナス送金', Eighteen::TRANSFER)
+          end
+        end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

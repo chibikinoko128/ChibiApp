@@ -1,0 +1,15 @@
+<%= f.fields_for :retrieval, f.object.retrieval do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingRetrievalFormPresenter.new(ff, self) :  RetrievalFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year, '年', Retrieval::RETRIEVAL_YEAR)
+      m << q.drop_down_list_block(:month, '月', Retrieval::RETRIEVAL_MONTH)
+      m << q.drop_down_list_block(:item, '実績、支払', Retrieval::RETRIEVAL_ITEM)
+    end
+  end %>
+<lo>
+  <li>未支払い会員ー欄　＝　検索年月日に支払うべき会員の表示</li>
+  <li>企　業　実　績　　＝　会員数/売上げ/支払い実績/
+  粗利益の表示</li>
+</lo>
+<% end %>

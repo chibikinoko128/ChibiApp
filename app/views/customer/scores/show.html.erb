@@ -1,0 +1,87 @@
+<% @title = '今月の獲得ｐｔ' %>
+<h1><strong><%= @title %></strong></h1>
+<div id="wrapper">
+  <h4>※ キャッシュバックは1pt=￥1で計算します。※</h4>
+  <h4>※ このデータは3時間ごとに更新されます。※</h4>
+</div>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <ul>
+      <h2><p>あなたが紹介した人数は<strong><%= @sponsor %>人</strong>です。<br>そのうち在籍しているのは<strong><%= @enro %>人</strong>です。<br>有効紹介列は<strong><%= @row %>列</strong>となっているので<strong><%= @row1 %>段目</strong>までのptを集計しています。</p></h2>
+      <h3><p><li>紹介列が7列以上だった場合の最高獲得ptも表示しています。</li></p></h3>
+      <h3><p>キャッシュバックシステムについては<%= link_to 'キャッシュバックとは？', :cache_customer_rule %>のページで確認してください。</p></h3>
+      <h2><strong>来月分（<%= @mpt4 %>月分）の利用料金のお振込みはお済みですか？</strong></h2>
+    </ul>
+    <tr><th colspan= "2">現在のｐｔ</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    
+    <tr><th>現在のｐｔ（今月）</th><td><p><%= number_with_delimiter(@mpt) %>pt</p></td></tr>
+    
+    <tr><th>キャッシュバック額</th><td><p>￥<%= number_with_delimiter(@mpt1) %>（振込み事務手数料を差し引いた額）</p><p><%= @mpt2 %></p></td></tr>
+    
+    <tr><th colspan= "2"><%= @month1 %>月末までに振込みさせていただく額</th></tr>
+    
+    <tr><th><%= @month1 %>月分の利用料金を<br>差し引いた額です。</th><td><p>￥<%= number_with_delimiter(@mpt5) %>（実際に振り込まれる金額）</p><p><%= @mpt6 %></p></td></tr>
+    
+    <tr><th colspan= "2">参考データ（最高獲得pt,最高グループ人数）</th></tr>
+    
+    <tr><th>紹介列が7列以上なら<br>あなたの今月のptは？</th><td><p>あなたが7人以上へ拡散すると獲得ptは<strong><%= number_with_delimiter(@all_pt) %>pt</strong>です。</p></td></tr>
+    
+    <tr><th>紹介列が7列以上なら<br>グループ総人数は？</th><td><p>あなたが7人以上へ拡散するとグループ人数は<strong><%= number_with_delimiter(@member1) %>人</strong>です。</p></td></tr>
+    
+    <tr><th colspan= "2"><strong><%= @mpt3 %></strong></th></tr>
+  </table>
+  
+  <ul>
+    <h3><p>サービス利用料金の入金状況については<%= link_to 'サービス利用料金の入金状況', :customer_register %>のページで確認してください。</p></h3>
+  </ul>
+  
+  <% if @sp1.empty? %>
+    <ul>
+      <h2><p><strong>※※※紹介したユーザーの在籍状況※※※</strong></p></h2>
+      <h2><p><strong>紹介者はおりません。</strong></p></h2>
+    </ul>
+  <% else %>
+    <ul>
+      <h2><p><strong>※※※紹介したユーザーの在籍状況※※※</strong></p></h2>
+    </ul>
+  
+    <div class="table-wrapper">
+      
+    <% @sp1.each do |v| %>  
+      <% sp = Customer.find(v) %>
+      <% @f_name = sp.family_name + ' ' + sp.given_name %>
+      <% @n_name = sp.nickname %>
+     
+      <% subs = Register.find_by(customer_id: v) %>
+      <% data = subs.attributes %>
+      <% @enroll = data["rg_#{@month}"] %>
+      
+      <%= render "customer/shared/score" %> 
+    <% end %>
+    </div>
+  <% end %>
+  
+  <ul>
+    <h2><p>上記金額(pt)は消費税込みの金額(pt)となります。<br>※注意※<br>ptが振込事務手数料未満の場合はキャッシュバック対象外となります。翌々月の利用料金についてはptが1,000＋振込事務手数料を超えた場合に差し引きます。振込み事務手数料については<%= link_to 'キャッシュバックとは？', :cache_customer_rule %>で確認ください。</p></h2>
+  </ul>
+  
+  <ul>
+    <h2><p><strong>※紹介列が7列以上あれば7段目までのptがすべて加算されます。<br></strong>すべてのptを獲得するようにがんばりましょう！。</p></h2>
+  </ul>
+</div>
+  
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表画面へ戻る', :individual_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<% @title = '報酬実績一覧' %>
+<h1><strong><%= @title %></strong></h1>
+
+<div class="table-wrapper">
+  <% if @customer.member_type == "一般会員" %>
+  <table class="attributes">
+    <tr><th colspan= "5">報酬実績（毎月1日に更新）</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <% p6 = OnePresenter.new(@one, self) %>
+    <tr><th>年</th><td><%= p6.year %>年</td></tr>
+    <tr><th>１月<br>（３月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_1) %>  振込み　＞＞　<strong><%= @one.transfer_m_1 %></strong></p></td></tr>
+    <tr><th>２月<br>（４月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_2) %>  振込み　＞＞　<strong><%= @one.transfer_m_2 %></strong></p></td></tr>
+    <tr><th>３月<br>（５月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_3) %>  振込み　＞＞　<strong><%= @one.transfer_m_3 %></strong></p></td></tr>
+    <tr><th>１回目ボーナス<br>１月～3月の成績<br>（４月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_1) %>  振込み　＞＞　<strong><%= @one.transfer_c_1 %></strong></p></td></tr>
+    <tr><th>４月<br>（６月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_4) %>  振込み　＞＞　<strong><%= @one.transfer_m_4 %></strong></p></td></tr>
+    <tr><th>５月<br>（７月末振り込み）</th><td><P>￥<%= number_with_delimiter(@m_5) %>  振込み　＞＞　<strong><%= @one.transfer_m_5 %></strong></P></td></tr>
+    <tr><th>６月<br>（８月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_6) %>  振込み　＞＞　<strong><%= @one.transfer_m_6 %></strong></p></td></tr>
+    <tr><th>２回目ボーナス<br>４月～６月の成績<br>（７月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_2) %>  振込み　＞＞　<strong><%= @one.transfer_c_2 %></strong></p></td></tr>
+    <tr><th>７月<br>（９月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_7) %>  振込み　＞＞　<strong><%= @one.transfer_m_7 %></strong></p></td></tr>
+    <tr><th>８月<br>（１０月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_8) %>  振込み　＞＞　<strong><%= @one.transfer_m_8 %></strong></p></td></tr>
+    <tr><th>９月<br>（１１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_9) %>  振込み　＞＞　<strong><%= @one.transfer_m_9 %></strong></p></td></tr>
+    <tr><th>３回目ボーナス<br>7月～９月の成績<br>（１０月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_3) %>  振込み　＞＞　<strong><%= @one.transfer_c_3 %></strong></p></td></tr>
+    <tr><th>１０月<br>（12月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_10) %>  振込み　＞＞　<strong><%= @one.transfer_m_10 %></strong></p></td></tr>
+    <tr><th>１１月<br>（１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_11) %>  振込み　＞＞　<strong><%= @one.transfer_m_11 %></strong></p></td></tr>
+    <tr><th>１２月<br>（２月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_12) %>  振込み　＞＞　<strong><%= @one.transfer_m_12 %></strong></p></td></tr>
+    <tr><th>４回目ボーナス<br>１０月～12月の成績<br>（１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_4) %>  振込み　＞＞　<strong><%= @one.transfer_c_4 %></strong></p></td></tr>
+    <tr><th>2021年合計</th><td><p>￥<%= number_with_delimiter(@total) %></p></td></tr>
+  </table>
+  
+  <% else %>
+  <table class="attributes">
+    <tr><th colspan= "5">報酬実績（毎月1日に更新）</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <% p6 = OnePresenter.new(@one, self) %>
+    <tr><th>年</th><td><%= p6.year %>年</td></tr>
+    <tr><th>１月<br>（３月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_1) %>  振込み　＞＞　<strong><%= @one.sp_transfer_1 %></strong></p></td></tr>
+    <tr><th>１月特別会員ボーナス<br>（2月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= @one.sp_transfer_1 %></strong></p></td></tr>
+    <tr><th>２月<br>（４月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_2) %>  振込み　＞＞　<strong><%= @one.transfer_m_2 %></strong></p></td></tr>
+    <tr><th>２月特別会員ボーナス<br>（3月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= @one.sp_transfer_2 %>
+    <tr><th>３月<br>（５月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_3) %>  振込み　＞＞　<strong><%= @one.transfer_m_3 %></strong></p></td></tr>
+    <tr><th>３月特別会員ボーナス<br>（4月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= @one.sp_transfer_3 %>
+    <tr><th>１回目ボーナス<br>１月～3月の成績<br>（４月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_1) %>  振込み　＞＞　<strong><%= @one.transfer_c_1 %></strong></p></td></tr>
+    <tr><th>４月<br>（６月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_4) %>  振込み　＞＞　<strong><%= @one.transfer_m_4 %></strong></p></td></tr>
+    <tr><th>４月特別会員ボーナス<br>（5月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= @one.sp_transfer_4 %>
+    <tr><th>５月<br>（７月末振り込み）</th><td><P>￥<%= number_with_delimiter(@m_5) %>  振込み　＞＞　<strong><%= @one.transfer_m_5 %></strong></P></td></tr>
+    <tr><th>５月特別会員ボーナス<br>（6月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= @one.sp_transfer_5 %>
+    <tr><th>６月<br>（８月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_6) %>  振込み　＞＞　<strong><%= @one.transfer_m_6 %></strong></p></td></tr>
+    <tr><th>６月特別会員ボーナス<br>（7月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= @one.sp_transfer_6 %>
+    <tr><th>２回目ボーナス<br>４月～６月の成績<br>（７月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_2) %>  振込み　＞＞　<strong><%= @one.transfer_c_2 %></strong></p></td></tr>
+    <tr><th>７月<br>（９月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_7) %>  振込み　＞＞　<strong><%= @one.transfer_m_7 %></strong></p></td></tr>
+    <tr><th>７月特別会員ボーナス<br>（8月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= @one.sp_transfer_7 %>
+    <tr><th>８月<br>（１０月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_8) %>  振込み　＞＞　<strong><%= @one.transfer_m_8 %></strong></p></td></tr>
+    <tr><th>８月特別会員ボーナス<br>（9月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= @one.sp_transfer_8 %>
+    <tr><th>９月<br>（１１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_9) %>  振込み　＞＞　<strong><%= @one.transfer_m_9 %></strong></p></td></tr>
+    <tr><th>９月特別会員ボーナス<br>（10月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= @one.sp_transfer_9 %>
+    <tr><th>３回目ボーナス<br>7月～９月の成績<br>（１０月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_3) %>  振込み　＞＞　<strong><%= @one.transfer_c_3 %></strong></p></td></tr>
+    <tr><th>１０月<br>（12月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_10) %>  振込み　＞＞　<strong><%= @one.transfer_m_10 %></strong></p></td></tr>
+    <tr><th>１０月特別会員ボーナス<br>（11月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= @one.sp_transfer_10 %>
+    <tr><th>１１月<br>（１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_11) %>  振込み　＞＞　<strong><%= @one.transfer_m_11 %></strong></p></td></tr>
+    <tr><th>１１月特別会員ボーナス<br>（12月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= @one.sp_transfer_11 %>
+    <tr><th>１２月<br>（２月末振り込み）</th><td><p>￥<%= number_with_delimiter(@m_12) %>  振込み　＞＞　<strong><%= @one.transfer_m_12 %></strong></p></td></tr>
+    <tr><th>１２月特別会員ボーナス<br>（1月末振り込み）</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= @one.sp_transfer_12 %>
+    <tr><th>４回目ボーナス<br>１０月～12月の成績<br>（１月末振り込み）</th><td><p>￥<%= number_with_delimiter(@c_4) %>  振込み　＞＞　<strong><%= @one.transfer_c_4 %></strong></p></td></tr>
+    <tr><th>2021年合計</th><td><p>￥<%= number_with_delimiter(@total) %></p></td></tr>
+  </table>
+  <% end %>
+  
+  <ul>
+    <ul>
+      <h2><p>上記金額は振込み事務手数料を差し引いた獲得額となります。（税込み）</p><p>振込み時期はキャッシュバックは翌々月末。ボーナスは翌月末となります。</p><p>また、キャッシュバック額が￥1700を超えている場合は振込み事務手数料と翌々月のサービス利用料金（￥1000）も差し引いた金額となっております。</p><p>ボーナスの金額は振込み事務手数料を差し引いた金額となっております。</p></h2>
+    <h3><p>サービス利用料金の入金状況については<%= link_to 'サービス利用料金の入金状況', :customer_register %>のページで確認してください。</p></h3>
+  </ul>
+  </ul>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索画面へ戻る', :edit_customer_customer_year %>
+  </div>
+</div>       
+      
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表画面へ戻る', :individual_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

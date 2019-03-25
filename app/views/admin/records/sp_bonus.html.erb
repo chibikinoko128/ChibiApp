@@ -1,0 +1,27 @@
+<% @title = '月別キャッシュバック支払い額、予算、差額（利益）' %>
+<h1><%= @title %></h1>
+<%= link_to '月別会員数、売り上げ', :month_member_admin_record %>　<%= link_to '月別ボーナス支払い実績', :quarter_bonus_admin_record %>　<%= link_to '月別キャッシュバック支払い実績', :month_cache_admin_record %> <%= link_to '年度別粗利益', :year_record_admin_record %>
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　特別会員ボーナス</strong></th></tr>
+    
+    <tr><th>支払い額・<%= @next_month %>月支払い</th><td>総額￥<%= number_with_delimiter(@check_sp) %></td></tr>
+    
+  </table>
+</div>
+<p>支払い額には消費税を含んでおります。</p>
+<p>消費税は支払い額÷1.08で算出する。</p>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '前ページへ戻る', :individual_admin_record %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_retrieval %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

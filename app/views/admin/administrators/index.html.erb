@@ -1,0 +1,55 @@
+<% @title = '管理者一覧' %>
+<h1><%= @title %></h1>
+
+<% if @admin_id_1.id == current_administrator.id %> 
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to '新規管理者登録', :new_admin_administrator %>
+    </div>
+
+    <%= paginate @administrators %>
+  
+    <table class="listing">
+      <tr>
+        <th>氏名</th>
+        <th>フリガナ</th>
+        <th>メールアドレス</th>
+        <th>開始日</th>
+        <th>終了日</th>
+        <th>停止フラグ</th>
+        <th>アクション</th>
+      </tr>
+      <% @administrators.each do |m| %>
+        <% p = AdministratorPresenter.new(m, self) %>
+        <tr>
+          <td><%= p.full_name %></td>
+          <td><%= p.full_name_kana %></td>
+          <td class="email"><%= m.email %></td>
+          <td class="date"><%= m.start_date.strftime('%Y/%m/%d') %></td>
+          <td class="date"><%= m.end_date.try(:strftime, '%Y/%m/%d') %></td>
+          <td class="boolean"><%= p.suspended_mark %></td>
+          <td class="actions">
+            <%= link_to '編集', [ :edit, :admin, m ] %> |
+            <%= link_to 'Events', [ :admin, m, :admin_events ] %> |
+            <%= link_to '削除', [ :admin, m ], method: :delete,
+            data: { confirm: '本当に削除しますか？' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= paginate @administrators %>
+  
+    <div class="links">
+      <%= link_to '新規管理者登録', :new_admin_administrator %>
+    </div>
+  </div>
+
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to 'トップ画面へ戻る', :admin_root %>
+    </div>
+  </div>
+<% else %>
+  <h2>このページへのアクセスは主管理者のみとなります。</h2>
+<% end %>

@@ -1,0 +1,35 @@
+<% @title = 'サービス利用料金の入金状況　(ギリギリにならないようにお早目のご入金お願いします。)' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    
+    <tr><th colspan= "4">入金状況</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <% p4 = RegisterPresenter.new(@register, self) %>
+    <tr><th>1月</th><td><%= p4.rg_1 %></td></tr>
+    <tr><th>2月</th><td><%= p4.rg_2 %></td></tr>
+    <tr><th>3月</th><td><%= p4.rg_3 %></td></tr>
+    <tr><th>4月</th><td><%= p4.rg_4 %></td></tr>
+    <tr><th>5月</th><td><%= p4.rg_5 %></td></tr>
+    <tr><th>6月</th><td><%= p4.rg_6 %></td></tr>
+    <tr><th>7月</th><td><%= p4.rg_7 %></td></tr>
+    <tr><th>8月</th><td><%= p4.rg_8 %></td></tr>
+    <tr><th>9月</th><td><%= p4.rg_8 %></td></tr>
+    <tr><th>10月</th><td><%= p4.rg_10 %></td></tr>
+    <tr><th>11月</th><td><%= p4.rg_11 %></td></tr>
+    <tr><th>12月</th><td><%= p4.rg_12 %></td></tr>
+  </table>
+  <ul>
+    <h2><p>在籍と表示されている月は前月に入金済みで利用可能月になります。キャッシュバックと相殺された時も先行で在籍となります。手違い等で二重に入金した場合は返金せず後の月へ引き当てします。サイト利用料を入金する際は入金状況をよく確認の上入金するようにしてください。</p></h2>
+  </ul>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>
+          

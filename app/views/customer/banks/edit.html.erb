@@ -1,0 +1,13 @@
+<% @title = '口座アカウントの編集/登録' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for @bank_form, as: 'form', url: [ :customer, @bank_form.bank ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '更新　/　登録', class: "btn btn-default", data: {disable_with: '更新　/　登録中・・・' } %>
+      <%= link_to 'キャンセル', :customer_root %>
+    </div>
+  <% end %>
+</div>
+   

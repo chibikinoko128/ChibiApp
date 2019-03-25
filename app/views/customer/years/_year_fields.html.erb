@@ -1,0 +1,8 @@
+<%= f.fields_for :year, f.object.year do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingYearFormPresenter.new(ff, self) : YearFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year_check, '年', Year::RETRIEVAL_YEAR)
+    end
+  end %>
+<% end %>

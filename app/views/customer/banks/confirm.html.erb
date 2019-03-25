@@ -1,0 +1,13 @@
+<% @title = '口座アカウントの更新（確認）' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for @bank_form, as: 'form', url: :customer_bank do |f| %>
+    <p>以下の内容で口座アカウントを更新します。よろしいですか？</p>
+    <%= render 'confirming_form', f: f %>
+    <div class="buttons">
+      <%= f.submit '更新' %>
+      <%= f.submit '訂正', name: 'correct' %>
+    </div>
+  <% end %>
+</div>

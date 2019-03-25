@@ -1,0 +1,19 @@
+<% @title = 'キャッシュバック・ボーナス獲得者一覧' %>
+<h1><strong><%= @title %></strong></h1>
+
+<ul class='menu'></ul>
+<li><%= link_to '月別キャッシュバック獲得者一覧', :cache_acquisition_admin_record %></li>
+<li><%= link_to 'ボーナス獲得者一覧', :bonus_acquisition_admin_record %></li>
+<li><%= link_to '特別会員ボーナス獲得者一覧', :sp_member_admin_record %></li>
+</ul>
+<li><%= link_to '現在のクオーターのボーナス獲得者一覧　（途中経過の表示のみ）', :bonus_confirm_admin_record %></li>
+</ul>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_pay %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

@@ -1,0 +1,193 @@
+<div class="table-wrapper">   
+  <table class="attributes">
+    <%= paginate @cash_list %>
+    <tr><th colspan="3"><strong><%= @cache_year %>年　<%= @cache_month %>月分キャッシュバック未支払い者一覧　</strong></th></tr>
+  </table>
+  <table class="listing">
+    <tr>
+      <th>ID</th>
+      <th>氏名</th>
+      <th>フリガナ</th>
+      <th>ニックネーム</th>
+      <th>キャッシュバック額</th>
+      <th>WEB総振登録</th>
+      <th>銀行名</th>
+      <th>支店名</th>
+      <th>口座番号</th>
+      <th>送金状況</th>
+      <th>登録口座誤り</th>
+    </tr>
+    <% @cash_list.each do |c| %>
+    <% e = c.customer_id %>
+      <% p = Customer.find_by(id: e) %>
+      <% b = Bank.find_by(customer_id: e) %>
+      <% @lock = p.lock %>
+      <% if @year == 2018 %>
+        <% cache_record = Eighteen.find_by(customer_id: e) %>
+        <% data = cache_record.attributes %>
+        <% cacheback = data["m_#{@cache_month}"] %>
+      <% elsif @year == 2019 %>
+        <% if @month <= 2 %>
+          <% cache_record = Eighteen.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = Nineteen.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2020 %>
+        <% if @month <= 2 %>
+          <% cache_record = Nineteen.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = Twentie.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2021 %>
+        <% if @month <= 2 %>
+          <% cache_record = Twentie.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = One.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2022 %>
+        <% if @month <= 2 %>
+          <% cache_record = One.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = TwentyTwo.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2023 %>
+        <% if @month <= 2 %>
+          <% cache_record = TwentyTwo.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = TwentyThree.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2024 %>
+        <% if @month <= 2 %>
+          <% cache_record = TwentyThree.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = TwentyFour.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2025 %>
+        <% if @month <= 2 %>
+          <% cache_record = TwentyFour.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = TwentyFive.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% elsif @year == 2026 %>
+        <% if @month <= 2 %>
+          <% cache_record = TwentyFive.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% else %>
+          <% cache_record = TwentySix.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@cache_month}"] %>
+        <% end %>
+      <% else %>
+        <% if @year == 2027 %>
+          <% if @month <= 2 %>
+            <% cache_record = TwentySix.find_by(customer_id: e) %>
+            <% data = cache_record.attributes %>
+            <% cacheback = data["m_#{@cache_month}"] %>
+          <% else %>
+            <% cache_record = TwentySeven.find_by(customer_id: e) %>
+            <% data = cache_record.attributes %>
+            <% cacheback = data["m_#{@cache_month}"] %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <tr>
+        <td><%= cache_record.customer_id %></td>
+        <td><%= p.family_name + p.given_name %></td>
+        <td><%= p.family_name_kana + p.given_name_kana %></td>
+        <td><%= p.nickname %></td>
+        <td>￥<%= number_with_delimiter(cacheback) %></td>
+        <% if b.web_registration == "未登録" %>
+        <td><strong>※<%= b.web_registration %>※</strong></td>
+        <% else %>
+          <td><%= b.web_registration %></td>
+        <% end %>
+        <% if b.bk_name.blank? %>
+          <td><strong>※未登録※</strong></td>
+          <td><strong>※未登録※</strong></td>
+          <td><strong>※未登録※</strong></td>
+        <% else %>
+          <td><%= b.bk_name %></td>
+          <td><%= b.office %></td>
+          <td><%= b.account %></td>
+        <% end %>
+
+        <% if @year == 2018 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_eighteen_path(e) %>
+          </td>
+        <% elsif @year == 2019 %>
+          <td class="actions">  
+            <%= link_to '未送金', edit_admin_cache_nineteen_path(e) %>
+          </td>
+        <% elsif @year == 2020 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_twenty_path(e) %>
+          </td>
+        <% elsif @year == 2021 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_one_path(e) %>
+          </td>
+        <% elsif @year == 2022 %>
+          <td class="actions">
+            <%= link_to '未送金', edit_admin_cache_twenty_two_path(e) %>
+          </td>
+        <% elsif @year == 2023 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_twenty_three_path(e) %>
+          </td>
+        <% elsif @year == 2024 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_twenty_four_path(e) %>
+          </td>
+        <% elsif @year == 2025 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_twenty_fife_path(e) %>
+          </td>
+        <% elsif @year == 2026 %>
+          <td class="actions"> 
+            <%= link_to '未送金', edit_admin_cache_twenty_six_path(e) %>
+          </td>
+        <% else %>
+          <% if @year == 2027 %>
+            <td class="actions">
+            <%= link_to '未送金', edit_admin_cache_twenty_seven_path(e) %>
+            </td>
+          <% end %>
+        <% end %>
+        <td class="actions"> 
+          <%= link_to '送金不可メール', admin_bank_not_account_path(e) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

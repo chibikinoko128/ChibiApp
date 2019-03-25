@@ -1,0 +1,141 @@
+<% @title = '新規登録者一覧' %>
+<h1><%= @b %> 年　<%= @c %> 月 <%= @d %> 日　<%= @title %></h1>
+
+<% if @day_admission.present? %>
+  <div class="table-wrapper">
+    <% if @l == "集計" %>
+      <h2><%= @b %> 年　<%= @c %> 月の登録者数は<%= @len %> 人です。</h2>
+      <table class="attributes">
+        <tr><th colspan="3"><strong><%= @b %>年　<%= @c %>　月　の新規登録者　</strong></th></tr>
+      </table>
+      <%= paginate @day_admission %>
+      <table class="listing">
+        <tr>
+          <td>No</td>
+          <th>ID</th>
+          <th>氏名</th>
+          <th>フリガナ</th>
+          <th>ニックネーム</th>
+          <th>初回入金</th>
+          <th>在籍登録</th>
+        </tr>
+        <% @g = 0 %>
+        <% @day_admission.each do |c| %>
+          <% x = c.id %>
+          <% p = Customer.find_by(id: x) %>
+          <% z = Register.find_by(customer_id: x) %>
+          <% a = Admission.find(1) %>
+          <% if z["rg_#{a.entries_month}"] == "在籍" %>
+            <% @h = "在籍" %>
+            <% @j = "済み" %>
+          <% else %>
+            <% @h = "退会" %>
+            <% @j = "未入金" %>
+          <% end %>
+          <% @g = @g + 1 %>
+          <tr>
+            <td><%= @g %></td>
+            <td><%= p.id %></td>
+            <td><%= p.family_name + p.given_name %></td>
+            <td><%= p.family_name_kana + p.given_name_kana %></td>
+            <td><%= p.nickname %></td>
+            <td><%= @j %></td>
+            <td><%= @h %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @day_admission %>
+    <% elsif @k == "未入金" %>
+      <h2><%= @b %> 年　<%= @c %> 月の登録者で初回未入金者は<%= @len %> 人です。</h2>
+      <table class="attributes">
+        <tr><th colspan="3"><strong><%= @b %>年　<%= @c %>　月　の新規登録未入金者　</strong></th></tr>
+      </table>
+      <table class="listing">
+        <tr>
+          <td>No</td>
+          <th>ID</th>
+          <th>氏名</th>
+          <th>フリガナ</th>
+          <th>ニックネーム</th>
+          <th>初回入金</th>
+          <th>在籍登録</th>
+        </tr>
+        <% @g = 0 %>
+        <% @day_admission.each do |c| %>
+          <% d = Customer.find_by(id: c) %>
+          <% x = d.id %>
+          <% p = Customer.find_by(id: x) %>
+          <% @g = @g + 1 %>
+          <tr>
+            <td><%= @g %></td>
+            <td><%= p.id %></td>
+            <td><%= p.family_name + p.given_name %></td>
+            <td><%= p.family_name_kana + p.given_name_kana %></td>
+            <td><%= p.nickname %></td>
+            <td><%= @j %></td>
+            <td><%= @h %></td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <h2><%= @b %> 年　<%= @c %> 月　<%= @d %> 日の登録者数は<%= @len %> 人です。</h2>
+      <table class="attributes"> 
+        <tr><th colspan="3"><strong><%= @b %>年　<%= @c %>　月 <%= @d %> 日　の新規登録者　</strong></th></tr>
+      </table>
+      <%= paginate @day_admission %>
+      <table class="listing">
+        <tr>
+          <td>No</td>
+          <th>ID</th>
+          <th>氏名</th>
+          <th>フリガナ</th>
+          <th>ニックネーム</th>
+          <th>初回入金</th>
+          <th>在籍登録</th>
+        </tr>
+        <% @g = 0 %>
+        <% @day_admission.each do |c| %>
+        <% x = c.id %>
+          <% p = Customer.find_by(id: x) %>
+          <% z = Register.find_by(customer_id: x) %>
+          <% a = Admission.find(1) %>
+          <% if z["rg_#{a.entries_month}"] == "在籍" %>
+            <% @h = "在籍" %>
+            <% @j = "済み" %>
+          <% else %>
+            <% @h = "退会" %>
+            <% @j = "未入金" %>
+          <% end %>
+          <% @g = @g + 1 %>
+          <tr>
+            <td><%= @g %></td>
+            <td><%= p.id %></td>
+            <td><%= p.family_name + p.given_name %></td>
+            <td><%= p.family_name_kana + p.given_name_kana %></td>
+            <td><%= p.nickname %></td>
+            <td><%= @j %></td>
+            <td><%= @h %></td>
+          </tr>
+        <% end %>
+      </table>
+      <%= paginate @day_admission %>
+    <% end %>
+  </div>
+<% else %>
+  <% if @l == "集計" %>
+    <h2><%= @b %> 年　<%= @c %> 月　の新規登録者はおりません。</h2>
+  <% elsif @k == "未入金" %>
+    <h2><%= @b %> 年　<%= @c %> 月　の入会者で未入金者はおりません。</h2>
+  <% else %>
+    <h2><%= @b %> 年　<%= @c %> 月　<%= @d %> 日　の新規登録者はおりません。</h2>
+  <% end %>
+<% end %>
+    
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_admission %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

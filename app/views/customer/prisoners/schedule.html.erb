@@ -1,0 +1,20 @@
+<% @title = '逮捕から出所まで' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <p>逮捕から出所までの流れ</p>
+    <p>
+    <%= image_tag("taiho.jpg", size: "60*60", alt: "逮捕から出所までの流れ", align: "top") %>
+    </p>
+    <ul>
+      <p>細かい部分は各ページで閲覧してください。</p>
+    </ul>
+  </table>
+</div>
+    
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '開業手順へ戻る', :top_customer_prisoner %>
+  </div>
+</div>

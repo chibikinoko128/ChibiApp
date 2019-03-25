@@ -1,0 +1,17 @@
+<% @title = '判決（刑期決定）' %>
+<h1><%= @title %></h1>
+
+<tr><th>結審すると言うみたいです。刑期の言い渡しだけで終わるのですぐ終わっちゃうみたいです。</th></tr>
+<div class="table-wrapper">
+  <table class="attributes">
+     <tr><th colspan= "3">判決文の読み上げ</th></tr>
+    <tr><th>裁判長が読み上げる</th><td>「主文、被告人を懲役○○年○○月に処す。」みたいに言い渡されます。その後で「ただし刑の執行を○○年猶予する。」と言われれば執行猶予が付きその場で釈放されます。</td></tr>
+    <tr><th>拘置所へ</th><td>執行猶予がつかなければそのま拘置所へ戻ります。</td></tr>
+  </table>
+</div> 
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップへ戻る', :top_customer_prisoner %>
+  </div>
+</div>

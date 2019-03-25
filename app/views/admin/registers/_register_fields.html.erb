@@ -1,0 +1,19 @@
+<%= f.fields_for :register, f.object.register do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingRegisterFormPresenter.new(ff, self) :  RegisterFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:rg_1, '1月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_2, '2月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_3, '3月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_4, '4月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_5, '5月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_6, '6月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_7, '7月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_8, '8月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_9, '9月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_10, '10月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_11, '11月', Register::EXISTENCE)
+      m << q.drop_down_list_block(:rg_12, '12月', Register::EXISTENCE)
+    end
+  end %>
+<% end %>

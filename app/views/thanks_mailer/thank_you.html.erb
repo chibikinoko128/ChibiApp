@@ -1,0 +1,37 @@
+<%= @user.family_name + @user.given_name %>さま
+<hr />
+<p>この度は、本サイトへ会員登録をいただきましてありがとうございました。<br>
+以下は、登録いただいた会員情報です。</p>
+
+<ul>
+<li>会　員　名　　：　<%= @user.family_name + @user.given_name  %></li>
+<li>ニックネーム　：　<%= @user.nickname %></li>
+<li>パスワード　　：　（セキュリティ保護のため、伏せています。）</li>
+<li>メールアドレス：　<%= @user.email %></li>
+</ul>
+
+<P>サイトをご利用いただくには、下記口座へ初回利用料金（￥2,000）を<br>振り込みしていただく必要があります。<br>入金の確認が取れ次第サイトが利用できるようになります。</P>
+
+<p><h3><strong>初回振込額：￥2,000</strong></h3></p>
+<ul>
+  <li>内訳：今月利用料金+新規登録料￥1,000</li>
+  　　　　　　+
+  <li>内訳：翌月利用料金￥1,000</li>
+</ul>
+<p><h3><strong>振込先</strong></h3></p>
+<ul>
+<li>銀行名　：　ジャパンネット銀行</li>
+<li>支店名　：　ビジネス営業部</li>
+<li>預金種目：　普通預金</li>  
+<li>口座番号：　1 7 4 8 3 8 3</li>
+<li>口座名義：　WONDER GATE</li>
+</ul>
+
+<p><h3>お振込み依頼人氏名は下記のようにお願いします。<br>（氏名+ニックネーム）</h3></p>
+<ul>
+  <h2><strong><%= @user.family_name + @user.given_name + @user.nickname %></strong></h2>
+</ul>
+
+<p><strong>上記のように氏名の後にニックネームをつけてください。</strong></p>
+
+<P>サイトをご利用いただくには<%= link_to 'こちら', 'https://wonder-gate.com/visitor/rule/welcome' %>からログインを行ってください。</P>

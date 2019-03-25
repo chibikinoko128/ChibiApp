@@ -1,0 +1,31 @@
+<%= f.fields_for :eighteen, f.object.eighteen do |ff| %>
+  <% if @quarter1 == 1 %>
+    <%= markup do |m|
+      p = confirming ? ConfirminEeighteenFormPresenter.new(ff,self) :  EighteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_1, '1クオーターボーナス送金', Eighteen::TRANSFER)
+      end
+    end %>
+  <% elsif @quarter1 == 2 %>
+    <%= markup do |m|
+      p = confirming ? ConfirminEeighteenFormPresenter.new(ff,self) :  EighteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_2, '２クオーターボーナス送金', Eighteen::TRANSFER)
+      end
+    end %>
+  <% elsif @quarter1 == 3 %>
+    <%= markup do |m|
+      p = confirming ? ConfirminEeighteenFormPresenter.new(ff,self) :  EighteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_3, '３クオーターボーナス送金', Eighteen::TRANSFER)
+      end
+    end %>
+  <% else %>
+    <%= markup do |m|
+      p = confirming ? ConfirminEeighteenFormPresenter.new(ff,self) :  EighteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_4, '４クオーターボーナス送金', Eighteen::TRANSFER)
+      end
+    end %>
+  <% end %>
+<% end %>

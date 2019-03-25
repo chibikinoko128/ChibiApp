@@ -1,0 +1,27 @@
+<% @title = '月別総人数、総売り上げ' %>
+<h1><%= @title %></h1>
+<%= link_to '月別キャッシュバック支払い実績', :month_cache_admin_record %>　<%= link_to '月別ボーナス支払い実績', :quarter_bonus_admin_record %> <%= link_to '特別会員ボーナス支払い実績', :sp_bonus_admin_record %>　<%= link_to '年度別粗利益', :year_record_admin_record %>
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　</strong></th></tr>
+    
+    <tr><th>会員数</th><td><%= number_with_delimiter(@member_check) %>人</td></tr>
+    
+    <tr><th>売り上げ</th><td>￥<%= number_with_delimiter(@month_money) %></td></tr>  
+  </table>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '前ページへ戻る', :individual_admin_record %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_retrieval %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>
+
+

@@ -1,0 +1,310 @@
+<% @title = '都道府県別会員数' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <table class="listing">
+    <tr>
+      <th>No.</th>
+      <th>都道府県名（人口）</th>
+      <th>会員登録履歴数</th>
+      <th><%= @month %>月 在籍者数</th>
+    </tr>
+    
+    <tr>
+      <td>1</td>
+      <td>北海道（５３１万人）</td>
+      <td><%= number_with_delimiter(@hokkaidou) %>人</td>
+      <td><%= number_with_delimiter(@hokkaidou_now) %>人</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>青森県（１２６万人）</td>
+      <td><%= number_with_delimiter(@aomori) %>人</td>
+      <td><%= number_with_delimiter(@aomori_now) %>人</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>岩手県（１２４万人）</td>
+      <td><%= number_with_delimiter(@iwate) %>人</td>
+      <td><%= number_with_delimiter(@iwate_now) %>人</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>宮城県（２３１万人）</td>
+      <td><%= number_with_delimiter(@miyagi) %>人</td>
+      <td><%= number_with_delimiter(@miyagi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>秋田県（９８万人）</td>
+      <td><%= number_with_delimiter(@akita) %>人</td>
+      <td><%= number_with_delimiter(@akita_now) %>人</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>山形県（１０９万人）</td>
+      <td><%= number_with_delimiter(@yamagata) %>人</td>
+      <td><%= number_with_delimiter(@yamagata_now) %>人</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>福島県（１８６万人）</td>
+      <td><%= number_with_delimiter(@fukusima) %>人</td>
+      <td><%= number_with_delimiter(@fukusima_now) %>人</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>茨城県（２８８万人）</td>
+      <td><%= number_with_delimiter(@ibaraki) %>人</td>
+      <td><%= number_with_delimiter(@ibaraki_now) %>人</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>栃木県（１９５万人）</td>
+      <td><%= number_with_delimiter(@totigi) %>人</td>
+      <td><%= number_with_delimiter(@totigi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>群馬県（１９５万人）</td>
+      <td><%= number_with_delimiter(@gunma) %>人</td>
+      <td><%= number_with_delimiter(@gunma_now) %>人</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>埼玉県（７３１万人）</td>
+      <td><%= number_with_delimiter(@saitama) %>人</td>
+      <td><%= number_with_delimiter(@saitama_now) %>人</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>千葉県（６２５万人）</td>
+      <td><%= number_with_delimiter(@chiba) %>人</td>
+      <td><%= number_with_delimiter(@chiba_now) %>人</td>
+    </tr>
+    <tr>
+      <td>13</td>
+      <td>東京都（１３７８万人）</td>
+      <td><%= number_with_delimiter(@tokyo) %>人</td>
+      <td><%= number_with_delimiter(@tokyo_now) %>人</td>
+    </tr>
+    <tr>
+      <td>14</td>
+      <td>神奈川県（９１６万人）</td>
+      <td><%= number_with_delimiter(@kanagawa) %>人</td>
+      <td><%= number_with_delimiter(@kanagawa_now) %>人</td>
+    </tr>
+    <tr>
+      <td>15</td>
+      <td>新潟県（２２５万人）</td>
+      <td><%= number_with_delimiter(@niigata) %>人</td>
+      <td><%= number_with_delimiter(@niigata_now) %>人</td>
+    </tr>
+    <tr>
+      <td>16</td>
+      <td>富山県（１０５万人）</td>
+      <td><%= number_with_delimiter(@toyama) %>人</td>
+      <td><%= number_with_delimiter(@toyama_now) %>人</td>
+    </tr>
+    <tr>
+      <td>17</td>
+      <td>石川県（１１４万人）</td>
+      <td><%= number_with_delimiter(@isikawa) %>人</td>
+      <td><%= number_with_delimiter(@isikawa_now) %>人</td>
+    </tr>
+    <tr>
+      <td>18</td>
+      <td>福井県（７７万人）</td>
+      <td><%= number_with_delimiter(@fukui) %>人</td>
+      <td><%= number_with_delimiter(@fukui_now) %>人</td>
+    </tr>
+    <tr>
+      <td>19</td>
+      <td>山梨県（８１万人）</td>
+      <td><%= number_with_delimiter(@yamanasi) %>人</td>
+      <td><%= number_with_delimiter(@yamanasi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>20</td>
+      <td>長野県（２０６万人）</td>
+      <td><%= number_with_delimiter(@nagano) %>人</td>
+      <td><%= number_with_delimiter(@nagano_now) %>人</td>
+    </tr>
+    <tr>
+      <td>21</td>
+      <td>岐阜県（２００万人）</td>
+      <td><%= number_with_delimiter(@gifu) %>人</td>
+      <td><%= number_with_delimiter(@gifu_now) %>人</td>
+    </tr>
+    <tr>
+      <td>22</td>
+      <td>静岡県（３６５万人）</td>
+      <td><%= number_with_delimiter(@sizuoka) %>人</td>
+      <td><%= number_with_delimiter(@sizuoka_now) %>人</td>
+    </tr>
+    <tr>
+      <td>23</td>
+      <td>愛知県（７５２万人）</td>
+      <td><%= number_with_delimiter(@aichi) %>人</td>
+      <td><%= number_with_delimiter(@aichi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>24</td>
+      <td>三重県（１７９万人）</td>
+      <td><%= number_with_delimiter(@mie) %>人</td>
+      <td><%= number_with_delimiter(@mie_now) %>人</td>
+    </tr>
+    <tr>
+      <td>25</td>
+      <td>滋賀県（１４１万人）</td>
+      <td><%= number_with_delimiter(@siga) %>人</td>
+      <td><%= number_with_delimiter(@siga_now) %>人</td>
+    </tr>
+    <tr>
+      <td>26</td>
+      <td>京都府（２５８万人）</td>
+      <td><%= number_with_delimiter(@kyoto) %>人</td>
+      <td><%= number_with_delimiter(@kyoto_now) %>人</td>
+    </tr>
+    <tr>
+      <td>27</td>
+      <td>大阪府（８８１万人）</td>
+      <td><%= number_with_delimiter(@oosaka) %>人</td>
+      <td><%= number_with_delimiter(@oosaka_now) %>人</td>
+    </tr>
+    <tr>
+      <td>28</td>
+      <td>兵庫県（５４８万人）</td>
+      <td><%= number_with_delimiter(@hyogo) %>人</td>
+      <td><%= number_with_delimiter(@hyogo_now) %>人</td>
+    </tr>
+    <tr>
+      <td>29</td>
+      <td>奈良県（１３４万人）</td>
+      <td><%= number_with_delimiter(@nara) %>人</td>
+      <td><%= number_with_delimiter(@nara_now) %>人</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>和歌山県（９３万人）</td>
+      <td><%= number_with_delimiter(@wakayama) %>人</td>
+      <td><%= number_with_delimiter(@wakayama_now) %>人</td>
+    </tr>
+    <tr>
+      <td>31</td>
+      <td>鳥取県（５６万人）</td>
+      <td><%= number_with_delimiter(@tottori) %>人</td>
+      <td><%= number_with_delimiter(@tottori_now) %>人</td>
+    </tr>
+    <tr>
+      <td>32</td> 
+      <td>島根県（６８万人）</td>
+      <td><%= number_with_delimiter(@simane) %>人</td>
+      <td><%= number_with_delimiter(@simane_now) %>人</td>
+    </tr>
+    <tr>
+      <td>33</td>
+      <td>岡山県（１９０万人）</td>
+      <td><%= number_with_delimiter(@okayama) %>人</td>
+      <td><%= number_with_delimiter(@okayama_now) %>人</td>
+    </tr>
+    <tr>
+      <td>34</td>
+      <td>広島県（２８１万人）</td>
+      <td><%= number_with_delimiter(@hirosima) %>人</td>
+      <td><%= number_with_delimiter(@hirosima_now) %>人</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>山口県（１７３万人）</td>
+      <td><%= number_with_delimiter(@yamaguchi) %>人</td>
+      <td><%= number_with_delimiter(@yamaguchi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>36</td>
+      <td>徳島県（７３万人）</td>
+      <td><%= number_with_delimiter(@tokusima) %>人</td>
+      <td><%= number_with_delimiter(@tokusima_now) %>人</td>
+    </tr>
+    <tr>
+      <td>37</td>
+      <td>香川県（９６万人）</td>
+      <td><%= number_with_delimiter(@kagawa) %>人</td>
+      <td><%= number_with_delimiter(@kagawa_now) %>人</td>
+    </tr>
+    <tr>
+      <td>38</td>
+      <td>愛媛県（１３５万人）</td>
+      <td><%= number_with_delimiter(@ehime) %>人</td>
+      <td><%= number_with_delimiter(@ehime_now) %>人</td>
+    </tr>
+    <tr>
+      <td>39</td>
+      <td>高知県（７０万人）</td>
+      <td><%= number_with_delimiter(@kochi) %>人</td>
+      <td><%= number_with_delimiter(@kochi_now) %>人</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>福岡県（５０９万人）</td>
+      <td><%= number_with_delimiter(@fukuoka) %>人</td>
+      <td><%= number_with_delimiter(@fukuoka_now) %>人</td>
+    </tr>
+    <tr>
+      <td>41</td>
+      <td>佐賀県（８１万人）</td>
+      <td><%= number_with_delimiter(@saga) %>人</td>
+      <td><%= number_with_delimiter(@saga_now) %>人</td>
+    </tr>
+    <tr>
+      <td>42</td>
+      <td>長崎県（１３４万人）</td>
+      <td><%= number_with_delimiter(@nagasaki) %>人</td>
+      <td><%= number_with_delimiter(@nagasaki_now) %>人</td>
+    </tr>
+    <tr>
+      <td>43</td>
+      <td>熊本県（１７５万人）</td>
+      <td><%= number_with_delimiter(@kumamoto) %>人</td>
+      <td><%= number_with_delimiter(@kumamoto_now) %>人</td>
+    </tr>
+    <tr>
+      <td>44</td>
+      <td>大分県（１１４万人）</td>
+      <td><%= number_with_delimiter(@ooita) %>人</td>
+      <td><%= number_with_delimiter(@ooita_now) %>人</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>宮崎県（１０８万人）</td>
+      <td><%= number_with_delimiter(@miyazaki) %>人</td>
+      <td><%= number_with_delimiter(@miyazaki_now) %>人</td>
+    </tr>
+    <tr>
+      <td>46</td>
+      <td>鹿児島県（１６１万人）</td>
+      <td><%= number_with_delimiter(@kagoshima) %>人</td>
+      <td><%= number_with_delimiter(@kagoshima_now) %>人</td>
+    </tr>
+    <tr>
+      <td>47</td>
+      <td>沖縄県（１４４万人）</td>
+      <td><%= number_with_delimiter(@okinawa) %>人</td>
+      <td><%= number_with_delimiter(@okinawa_now) %>人</td>
+    </tr>
+    <tr>
+      <td><strong></strong></td>
+      <td><strong>集計　12,660万人</strong></td>
+      <td><strong>登録履歴　<%= number_with_delimiter(@hokkaidou + @aomori + @iwate + @miyagi + @akita + @yamagata + @fukusima + @ibaraki + @totigi + @gunma + @saitama + @chiba + @tokyo + @kanagawa + @niigata + @toyama + @isikawa + @fukui + @yamanasi + @nagano + @gifu + @sizuoka + @aichi + @mie + @siga + @kyoto + @oosaka + @hyogo + @nara + @wakayama + @tottori + @simane + @okayama + @hirosima + @yamaguchi + @tokusima + @kagawa + @ehime + @kochi + @fukuoka + @saga + @nagasaki + @kumamoto + @ooita + @miyazaki + @kagoshima + @okinawa) %>人</strong></td>
+      <td><strong>在籍者　<%= number_with_delimiter(@hokkaidou_now + @aomori_now + @iwate_now + @miyagi_now + @akita_now + @yamagata_now + @fukusima_now + @ibaraki_now + @totigi_now + @gunma_now + @saitama_now + @chiba_now + @tokyo_now + @kanagawa_now + @niigata_now + @toyama_now + @isikawa_now + @fukui_now + @yamanasi_now + @nagano_now + @gifu_now + @sizuoka_now + @aichi_now + @mie_now + @siga_now + @kyoto_now + @oosaka_now + @hyogo_now + @nara_now + @wakayama_now + @tottori_now + @simane_now + @okayama_now + @hirosima_now + @yamaguchi_now + @tokusima_now + @kagawa_now + @ehime_now + @kochi_now + @fukuoka_now + @saga_now + @nagasaki_now + @kumamoto_now + @ooita_now + @miyazaki_now + @kagoshima_now + @okinawa_now) %>人</strong></td>
+    </tr>
+  </table>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :staff_root %>
+  </div>
+</div>
+    
+    

@@ -1,0 +1,181 @@
+<% @title = '年度、月別キャッシュバック獲得者一覧' %>
+<h1><%= @title %></h1>
+
+<% if @cacheback_member.present? %>
+  <div class="table-wrapper">   
+    <table class="attributes">
+      <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　</strong></th></tr>
+    </table>
+    <%= paginate @cacheback_member %>
+    <table class="listing">
+      <tr>
+        <th>送金</th>
+        <th>送金日</th>
+        <th>ID</th>
+        <th>氏名</th>
+        <th>フリガナ</th>
+        <th>ニックネーム</th>
+        <th>キャッシュバック額</th>
+      </tr>
+      <% @cacheback_member.each do |c| %>
+      <% e = c.customer_id %>
+        <% p = Customer.find_by(id: e) %>
+        <% w = p.id %>
+        <% if @year == "2018" %>
+          <% cache_record = Eighteen.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2019" %>
+          <% cache_record = Nineteen.find_by(customer_id: w) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = cache_record["m_#{@month}"] %>
+          <% transfer = cache_record["transfer_m_#{@month}"] %>
+        <% elsif @year == "2020" %>
+          <% cache_record = Twentie.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2021" %>
+          <% cache_record = One.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2022" %>
+          <% cache_record = TwentyTWO.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2023" %>
+          <% cache_record = TwentyThree.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2024" %>
+          <% cache_record = TwentyFour.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2025" %>
+          <% cache_record = TwentyFive.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% elsif @year == "2026" %>
+          <% cache_record = TwentySix.find_by(customer_id: e) %>
+          <% data = cache_record.attributes %>
+          <% cacheback = data["m_#{@month}"] %>
+          <% transfer = data["transfer_m_#{@month}"] %>
+        <% else %>
+          <% if @year == "2027" %>
+            <% cache_record = TwentySeven.find_by(customer_id: e) %>
+            <% data = cache_record.attributes %>
+            <% cacheback = data["m_#{@month}"] %>
+            <% transfer = data["transfer_m_#{@month}"] %>
+          <% end %>
+        <% end %>
+      
+        <tr>
+          <% if transfer = "未送金" %>
+            <td><strong>※<%= transfer %>※</strong></td>
+          <% else %>
+            <td><%= transfer %></td>
+          <% end %>
+          
+          <% if @month == "1" %>
+            <% if cache_record.cache_payment_1 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_1 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_1 %></td>
+            <% end %>
+          <% elsif @month == "2" %>
+            <% if cache_record.cache_payment_2 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_2 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_2 %></td>
+            <% end %>
+          <% elsif @month == "3" %>
+            <% if cache_record.cache_payment_3 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_3 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_3 %></td>
+            <% end %>
+          <% elsif @month == "4" %>
+            <% if cache_record.cache_payment_4 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_4 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_4 %></td>
+            <% end %>
+          <% elsif @month == "5" %> 
+            <% if cache_record.cache_payment_5 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_5 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_5 %></td>
+            <% end %>
+          <% elsif @month == "6" %>
+            <% if cache_record.cache_payment_6 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_6 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_6 %></td>
+            <% end %>
+          <% elsif @month == "7" %>
+            <% if cache_record.cache_payment_7 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_7 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_7 %></td>
+            <% end %>   
+          <% elsif @month == "8" %> 
+            <% if cache_record.cache_payment_8 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_8 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_8 %></td>
+            <% end %>
+          <% elsif @month == "9" %>
+            <% if cache_record.cache_payment_9 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_9 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_9 %></td>
+            <% end %>
+          <% elsif @month == "10" %>
+            <% if cache_record.cache_payment_10 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_10 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_10 %></td>
+            <% end %> 
+          <% elsif @month == "11" %>
+            <% if cache_record.cache_payment_11 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_11 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_11 %></td>
+            <% end %>
+          <% else %>
+            <% if cache_record.cache_payment_12 == "未送金" %>
+              <td><strong>※<%= cache_record.cache_payment_12 %>※</strong></td>
+            <% else %>
+              <td><%= cache_record.cache_payment_12 %></td>
+            <% end %>
+          <% end %>
+          <td><%= p.id %></td>
+          <td><%= p.family_name + p.given_name %></td>
+          <td><%= p.family_name_kana + p.given_name_kana %></td>
+          <td><%= p.nickname %></td>
+          <td>￥<%= number_with_delimiter(cacheback) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <%= paginate @cacheback_member %>
+  </div>
+<% else %>
+  <h2><%= @year %> 年　<%= @month %> 月　のキャッシュバック獲得者はおりません。</h2>
+<% end %>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_staff_staff_month %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :staff_root %>
+  </div>
+</div>
+
+      

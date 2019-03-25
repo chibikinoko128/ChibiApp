@@ -1,0 +1,47 @@
+<% @title = '報酬実績一覧' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+  
+    <tr><th colspan= "5">報酬実績</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <% p5 = SeventeenPresenter.new(@seventeen, self) %>
+    <tr><th>年</th><td><%= p5.year %>年</td></tr>
+    <tr><th>１月</th><td><p>￥<%= number_with_delimiter(@m_1) %></p></td></tr>
+    <tr><th>２月</th><td><p>￥<%= number_with_delimiter(@m_2) %></p></td></tr>
+    <tr><th>３月</th><td><p>￥<%= number_with_delimiter(@m_3) %></p></td></tr>
+    <tr><th>１回目ボーナス</th><td><p>￥<%= number_with_delimiter(@c_1) %></p></td></tr>
+    <tr><th>４月</th><td><p>￥<%= number_with_delimiter(@m_4) %></p></td></tr>
+    <tr><th>５月</th><td><P>￥<%= number_with_delimiter(@m_5) %></P></td></tr>
+    <tr><th>６月</th><td><p>￥<%= number_with_delimiter(@m_6) %></p></td></tr>
+    <tr><th>２回目ボーナス</th><td><p>￥<%= number_with_delimiter(@c_2) %></p></td></tr>
+    <tr><th>７月</th><td><p>￥<%= number_with_delimiter(@m_7) %></p></td></tr>
+    <tr><th>８月</th><td><p>￥<%= number_with_delimiter(@m_8) %></p></td></tr>
+    <tr><th>９月</th><td><p>￥<%= number_with_delimiter(@m_9) %></p></td></tr>
+    <tr><th>３回目ボーナス</th><td><p>￥<%= number_with_delimiter(@c_3) %></p></td></tr>
+    <tr><th>１０月</th><td><p>￥<%= number_with_delimiter(@m_10) %></p></td></tr>
+    <tr><th>１１月</th><td><p>￥<%= number_with_delimiter(@m_11) %></p></td></tr>
+    <tr><th>１２月</th><td><p>￥<%= number_with_delimiter(@m_12) %></p></td></tr>
+    <tr><th>４回目ボーナス</th><td><p>￥<%= number_with_delimiter(@c_4) %></p></td></tr>
+    <tr><th>2017年合計</th><td><p>￥<%= number_with_delimiter(@total) %></p></td></tr>
+  </table>
+  <ul>
+    <h2><p>上記金額は振り込み前の消費税込みの金額です。<br>実際の振込額は上記金額より振込手数料が差し引かれた金額となります。</p>また、￥1700を超えている場合は翌々月のサービス利用料金（￥1000）も差し引きいたします。</h2>
+    <h3><p>サービス利用料金の入金状況については<%= link_to 'サービス利用料金の入金状況', :customer_register %>のページで確認してください。</p></h3>
+  </ul>
+</div>
+  
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表画面へ戻る', :individual_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

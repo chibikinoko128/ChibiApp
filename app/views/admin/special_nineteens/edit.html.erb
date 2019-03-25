@@ -1,0 +1,25 @@
+<% @title = '年月　特別会員ボーナス振込チェック' %>
+<h1><%= @title %></h1>
+
+<% if @month == 1 %>
+  <div id="generic-form">
+    <%= form_for @eighteen_form, as: 'form', url: :admin_special_eighteen do |f| %>
+      <%= render 'sp_member_form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :payment_list_admin_record %>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+  <div id="generic-form">
+    <%= form_for @nineteen_form, as: 'form', url: :admin_special_nineteen do |f| %>
+      <%= render 'sp_member_form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :payment_list_admin_record %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

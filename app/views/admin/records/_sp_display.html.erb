@@ -1,0 +1,229 @@
+<table class="listing">
+  <tr>
+    <th>送金</th>
+    <th>送金日</th>
+    <th>ID</th>
+    <th>会員形態</th>
+    <th>氏名</th>
+    <th>フリガナ</th>
+    <th>ニックネーム</th>
+    <th>特会員ボーナス額</th>
+    <th>WEB総振登録</th>
+    <th>銀行名</th>
+    <th>支店名</th>
+    <th>口座番号</th>
+    <th>振込み期日</th>
+    <th>送金状況</th>
+  </tr>
+  <% @sp_member.each do |c| %>
+    <% e = c.customer_id %>
+    <% p = Customer.find_by(id: e) %>
+    <% b = Bank.find_by(customer_id: e) %>
+    <% @special_lock = p.special_lock %>
+    <% if @year == 2018 %>
+      <% @sp_bonus = Eighteen.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2019 %>
+      <% @sp_bonus = Nineteen.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2020 %>
+      <% @sp_bonus = Twentie.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2021 %>
+      <% @sp_bonus = One.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2022 %>
+      <% @sp_bonus = TwentyTwo.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2023 %>
+      <% @sp_bonus = TwentyThree.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2024 %>
+      <% @sp_bonus = TwentyFour.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2025 %>
+      <% @sp_bonus = TwentyFive.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% elsif @year == 2026 %>
+      <% @sp_bonus = TwentySix.find_by(customer_id: e) %>
+      <% render 'sp_year' %>
+    <% else %>
+      <% if @year == 2027 %>
+        <% @sp_bonus = TwentySeven.find_by(customer_id: e) %>
+        <% render 'sp_year' %>
+      <% end %>
+    <% end %>
+
+    <tr>
+      <% if @transfer == "未送金" %>
+        <td><strong>※<%= @transfer %>※</strong></td>
+      <% else %>
+        <td><%= @transfer %></td>
+      <% end %>
+
+      <% if @month == 1 %>
+        <% if @sp_bonus.special_payment_1 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_1 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_1 %></td>
+        <% end %>
+      <% elsif @month == 2 %>
+        <% if @sp_bonus.special_payment_2 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_2 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_2 %></td>
+        <% end %>
+      <% elsif @month == 3 %>
+        <% if @sp_bonus.special_payment_3 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_3 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_3 %></td>
+        <% end %>
+      <% elsif @month == 4 %>
+        <% if @sp_bonus.special_payment_4 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_4 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_4 %></td>
+        <% end %>
+      <% elsif @month == 5 %>
+        <% if @sp_bonus.special_payment_5 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_5 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_5 %></td>
+        <% end %>
+      <% elsif @month == 6 %>
+        <% if @sp_bonus.special_payment_6 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_6 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_6 %></td>
+        <% end %>
+      <% elsif @month == 7 %>
+        <% if @sp_bonus.special_payment_7 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_7 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_7 %></td>
+        <% end %>
+      <% elsif @month == 8 %>
+        <% if @sp_bonus.special_payment_8 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_8 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_8 %></td>
+        <% end %>
+      <% elsif @month == 9 %>
+        <% if @sp_bonus.special_payment_9 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_9 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_9 %></td>
+        <% end %>
+      <% elsif @month == 10 %>
+        <% if @sp_bonus.special_payment_10 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_10 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_10 %></td>
+        <% end %>
+      <% elsif @month == 11 %>
+        <% if @sp_bonus.special_payment_11 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_11 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_11 %></td>
+        <% end %>
+      <% else %>
+        <% if @sp_bonus.special_payment_12 == "未送金" %> 
+          <td><strong>※<%= @sp_bonus.special_payment_12 %>※</strong></td>
+        <% else %>
+          <td><%= @sp_bonus.special_payment_12 %></td>
+        <% end %>
+      <% end %>
+      <td><%= @sp_bonus.customer_id %></td>
+      <td><strong><%= p.member_type %></strong></td>
+      <td><%= p.family_name + p.given_name %></td>
+      <td><%= p.family_name_kana + p.given_name_kana %></td>
+      <td><%= p.nickname %></td>
+      <td>￥<%= number_with_delimiter(@money_sp) %></td>
+      <% if b.web_registration == "未登録" %>
+        <td><strong>※<%= b.web_registration %>※</strong></td>
+      <% else %>
+        <td><%= b.web_registration %></td>
+      <% end %>
+      <% if b.bk_name.blank? %>
+        <td><strong>※未登録※</strong></td>
+        <td><strong>※未登録※</strong></td>
+        <td><strong>※未登録※</strong></td>
+      <% else %>
+        <td><%= b.bk_name %></td>
+        <td><%= b.office %></td>
+        <td><%= b.account %></td>
+      <% end %>
+
+        <td><%= @sp_pay %></td>
+
+      <% if @special_lock == "0" %>
+        <% if @transfer == "送金済" %>
+          <% if @year == 2018 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_eighteen_path(e) %>
+            </td>
+          <% elsif @year == 2019 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_nineteen_path(e) %>
+            </td>
+          <% elsif @year == 2020 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_path(e) %>
+            </td>
+          <% elsif @year == 2021 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_one_path(e) %>
+            </td>
+          <% elsif @year == 2022 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_two_path(e) %>
+            </td>
+          <% elsif @year == 2023 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_three_path(e) %>
+            </td>
+          <% elsif @year == 2024 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_four_path(e) %>
+            </td>
+          <% elsif @year == 2025 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_fife_path(e) %>
+            </td>
+          <% elsif @year == 2026 %>
+            <td class="actions"> 
+              <%= link_to '送金済[変更可]', edit_admin_sub_twenty_six_path(e) %>
+            </td>
+          <% else %>
+            <% if @year == 2027 %>
+              <td class="actions"> 
+                <%= link_to '送金済[変更可]', edit_admin_sub_twenty_seven_path(e) %>
+              </td>
+            <% end %>
+          <% end %>
+        <% else %>
+          <td class="actions">
+            <% if @year == @year_now %>
+              <% if @month == @month_now %>
+                <%= '集計途中' %>
+              <% else %>
+                <strong><%= '未送金' %></strong>
+              <% end %>
+            <% else %>
+              <strong><%= '未送金' %></strong>
+            <% end %>
+          </td>
+        <% end %>
+      <% else %>
+        <% if @transfer == "送金済" %>
+          <td>送金済[変更不可]</td>
+        <% else %>
+          <td><strong><%= '未送金' %></strong></td>
+        <% end %>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+      
+ 

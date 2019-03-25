@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    attributes:
+      register:
+        rg_1: 1月
+        rg_2: 2月
+        rg_3: 3月
+        rg_4: 4月
+        rg_5: 5月
+        rg_6: 6月
+        rg_7: 7月
+        rg_8: 8月
+        rg_9: 9月
+        rg_10: 10月
+        rg_11: 11月
+        rg_12: 12月

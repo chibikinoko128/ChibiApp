@@ -1,0 +1,25 @@
+<% @title = '顧客の新規登録' %>
+<h1><%= @title %></h1>
+
+<ul>
+<p>ニックネーム、パスワードは忘れないようにメモを取ってください。</p>
+<p>ログインに必要となります。</p>
+<p><strong>パスワードは英数字で入力願います。（英字は大文字/小文字が区別されます。）</strong></p>
+<p><strong>ニックネームは英数字、かな、カナで入力願います。（英字は大文字/小文字が区別されます。）</strong></p>
+<p><strong>紹介者の登録は一度登録すると修正不可です。<br>間違いのないようにお願いします。</strong></p>
+</ul>
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>
+
+<div id="generic-form">
+  <%= form_for @customer_form, as: 'form', url: :admin_customers do |f| %>
+    <%= render 'form_a', f: f %>
+    <div class="buttons">
+      <%= f.submit '登録', class: "btn btn-default", data: {disable_with: '登録中・・・' } %>
+      <%= link_to 'キャンセル', :admin_root %>
+    </div>
+  <% end %>
+</div>

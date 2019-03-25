@@ -1,0 +1,35 @@
+<% @title = 'ダッシュボード' %>
+<h1><%= @title %></h1>
+
+<ul class="menu">
+  <h2><%= @year %>年　<%= @month %>月　現在のサイト登録在籍者総人数<strong><%= number_with_delimiter(@customer_ids) %></strong>人</h2>
+  <li><%= link_to '会員管理、会員成績、在籍入力', :edit_staff_staff_year %></li>
+  <li><%= link_to 'サイトイベント管理', :staff_programs %></li>
+  <li>メッセージ管理
+    <ul>
+      <li><%= link_to '問い合わせ一覧', :inbound_staff_messages %></li>
+      <li><%= link_to '返信一覧', :outbound_staff_messages %></li>
+      <li><%= link_to '全メッセージ一覧', :staff_messages %></li>
+      <li><%= link_to 'ゴミ箱', :deleted_staff_messages %></li>
+    </ul>
+  <li>特典ボーナス獲得者名簿
+    <ul>
+      <li><%= link_to 'ペガサス獲得会員', :customer_pegasus_staff_record %></li>
+      
+      <li><%= link_to 'フェニックス獲得会員', :customer_phoenix_staff_record %></li>
+      
+      <li><%= link_to 'クイーン獲得会員', :customer_queen_staff_record %></li>
+      
+      <li><%= link_to 'キング獲得会員', :customer_king_staff_record %></li>
+      
+      <li><%= link_to 'プレジデント獲得会員', :customer_president_staff_record %></li>
+      
+    </ul>
+    <p>特典ボーナス獲得者データは3月1日に更新され本年度のデータに切り替わります。<br>コピーして書類を保管のこと。</p>
+    <P>特典ボーナスは１月１日、４月１日、７月１日、１０月１日に更新されます。</P>
+  </li> 
+  <li><%= link_to '都道府県別会員数', :prefecture_member_staff_record %></li>
+  <li><%= link_to '次月利用料金未入会員一覧', :not_payment_staff_record %></li>
+  <li><%= link_to '年度、月別/キャッシュバック獲得者一覧検索', :edit_staff_staff_month %></li>
+  <li><%= link_to '年度、クオーター別/ボーナス獲得者一覧検索', :edit_staff_staff_quarter %></li>
+</ul>

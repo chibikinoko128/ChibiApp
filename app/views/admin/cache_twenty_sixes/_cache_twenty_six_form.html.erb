@@ -1,0 +1,6 @@
+<%= FormPresenter.new(f, self).notes %>
+  
+  <fieldset id="TwentySix-fields">
+    <legend><%= @acc_name %>（<%= @nickname %>）様の<%= @cache_year %> 年　<%= @month1 %> 月　キャッシュバック送金履歴更新</legend>
+    <%= render 'cache_twenty_six_fields', f: f, confirming: false %>
+  </fieldset>

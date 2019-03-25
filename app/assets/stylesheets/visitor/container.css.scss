@@ -1,0 +1,17 @@
+@import 'colors';
+@import 'dimensions';
+
+div#wrapper {
+  div#container {
+    h1 {
+      margin: 0;
+      padding: $moderate * 1.5 $moderate;
+      font-size: $large;
+      font-weight: normal;
+      background-color: deepskyblue;
+      color: $light_gray;
+      text-align: center;
+    }
+  }
+}
+

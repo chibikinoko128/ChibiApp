@@ -1,0 +1,58 @@
+<% @title = 'ボーナスとは？' %>
+<h1><%= @title %></h1>
+
+<p>ボーナスシステム（仕組み）の説明
+  <ul>
+    <li>クリスタル以上のタイトルは自身が5000pt以上（ノーマルボーナス）を獲得していることが条件です。</li>
+  </ul>
+  <ul>
+  <p><%= link_to '詳しい説明はこちらから', :bonus_description_visitor_rule %></p>
+  </ul>
+  <%= image_tag("bonus1.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'キャッシュバック説明へ移動', :cache_visitor_rule %>
+  </div>
+</div>
+
+<p>
+<%= image_tag("bonus2.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+<p>
+<%= image_tag("bonus3.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+  <h2>ボーナスタイトル確認と振り込み期日について</h2>
+    <p>タイトルの表示とタイトル獲得までの不足ｐｔ、紹介した人のｐｔ状況は個人成績表ページで確認できます。</p>
+    <p>お振り込みさせていただく期日は翌月末としユーザー様の登録いただいた口座へ振り込み事務手数料を差し引いて、消費税込みの金額をお振り込みさせていただきます。</p>
+    <p>ボーナスタイトルは自分が紹介した1人から発生したグループをを1列としベーシック以上（20,000ｐｔ以上）を1つのクオーター内で何列獲得するかで自分のタイトルが決まります。</p>
+  
+<div class="table-wrapper">
+  <table class="attributes">
+    <ul>
+    <h2><p><strong>振込み事務手数料</strong></p></h2>
+  </ul>
+    <tr><th colspan= "2">振込み事務手数料</th></tr>
+    <tr><th>3万円未満</th><td>700円</td></tr>
+    <tr><th>3万円以上</th><td>1000円</td></tr> 
+  </table>
+  <ul>
+    <h2><p>上記振込み事務手数料金についてはボーナス額より差し引かせていただきます。</p></h2>
+  </ul>
+</div>
+
+  <ul>
+    <p><strong>注意</strong></p>
+    <p>登録された口座名義が本人と一致しない場合はボーナスの支払いは行いません。注意願います。（不正防止のため）</p>
+    <p>繰り越しての翌月の支払いに加算もいたしません。</p>
+  </ul>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'よくある質問へ移動', :question_visitor_rule %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '新規登録画面へ戻る', :dashboard_visitor_rule %>
+  </div>
+</div>

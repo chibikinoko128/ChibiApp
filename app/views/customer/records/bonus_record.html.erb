@@ -1,0 +1,41 @@
+<% @title = 'ボーナス成績' %>
+<h1><strong><%= @title %></strong></h1>
+
+<h2>データは3～6時間ごとに更新されます。</h2>
+<h3><p>ボーナスシステムについては<%= link_to 'ボーナスとは？', :bonus_customer_rule %>のページで確認してください。</p></h3>
+
+<h2><li><%= link_to '※現在のボーナスタイトル', :bonus_title_customer_record %></li></h2>
+<ul>
+  <p>ご自身の現在のボーナスタイトルが表示されます。</p>
+</ul>
+
+<h2><li><%= link_to '※紹介したユーザーの成績とその列の成績', :sponsor_point_customer_record %></li></h2>
+<ul>
+  <p>ご自身が紹介したユーザーのポイント(pt)が表示されます。</p>
+  <p>ご自身が紹介したユーザーのボーナスタイトルが表示されます。</p>  
+</ul>
+
+<h2><li><%= link_to '※現在のクオーター獲得ポイント', :quarter_point_customer_record %></li></h2>
+<ul>
+  <p>ご自身のクオーター（3ヶ月間）の合計ポイント(pt)が表示されます。</p>
+</ul>
+
+<h2><li><%= link_to '※現在のボーナス対象人数', :bonus_point_customer_record %></li></h2>
+<ul>
+  <p>ご自身のボーナス計算の対象となる人数が表示されます。</p>
+</ul>
+
+<h2><li><%= link_to '※現在のボーナス金額', :bonus_money_customer_record %></li></h2>
+<ul>
+  <p>ご自身の現在のボーナス金額が表示されます。</p>
+</ul>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表へ戻る', :individual_customer_record %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

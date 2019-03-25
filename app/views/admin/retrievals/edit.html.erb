@@ -1,0 +1,12 @@
+<% @title = 'WONDER GATEの実績　年月検索' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for @retrieval_form, as: 'form', url: [ :admin, @retrieval_form.retrieval ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '検索', class: "btn btn-default", data: {disable_with: '検索中・・・' } %>
+      <%= link_to 'キャンセル', :admin_root %>
+    </div>
+  <% end %>
+</div>

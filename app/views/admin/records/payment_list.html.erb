@@ -1,0 +1,65 @@
+<% @title = '未支払い者一覧' %>
+<h1><%= @year %>年 <%= @month %>月に支払いを完了させる必要のある  <%= @title %></h1>
+
+<% if @cash_list.present? %>
+  <%= render 'payment_cache' %>
+<% else %>
+  <div class="table-wrapper">
+    <h2><%= @cache_year %> 年　<%= @cache_month %> 月分の <strong>キャッシュバックの支払いは完了</strong>しました。</h2>
+  </div>
+<% end %>
+
+<% if @month == 1 %>
+  <% if @bonus_list.present? %>
+    <%= render 'payment_bonus' %>
+  <% else %>
+    <div class="table-wrapper">
+      <h2><%= @bonus_year %> 年　<%= @quarter %> クオーター分 の<strong>ボーナスの支払いは完了</strong>しました。</h2>
+    </div>
+  <% end %>
+<% elsif @month == 4 %>
+  <% if @bonus_list.present? %>
+    <%= render 'payment_bonus' %>
+  <% else %>
+    <div class="table-wrapper">
+      <h2><%= @bonus_year %> 年　<%= @quarter %> クオーター分 の<strong>ボーナスの支払いは完了</strong>しました。</h2>
+    </div>
+  <% end %>
+<% elsif @month == 7 %>
+  <% if @bonus_list.present? %>
+    <%= render 'payment_bonus' %>
+  <% else %>
+    <div class="table-wrapper">
+      <h2><%= @bonus_year %> 年　<%= @quarter %> クオーター分 の<strong>ボーナスの支払いは完了</strong>しました。</h2>
+    </div>
+  <% end %>
+<% elsif @month == 10 %>
+  <% if @bonus_list.present? %>
+    <%= render 'payment_bonus' %>
+  <% else %>
+    <div class="table-wrapper">
+      <h2><%= @bonus_year %> 年　<%= @quarter %> クオーター分 の<strong>ボーナスの支払いは完了</strong>しました。</h2>
+    </div>
+  <% end %>
+<% else %>
+  <div class="table-wrapper">
+      <h2><%= @month %>月　はボーナスの支払いはありません。</h2>
+    </div>
+<% end %>
+
+<% if @sp_list.present? %>
+  <%= render 'payment_special' %>
+<% else %>
+  <div class="table-wrapper">
+    <h2><%= @sp_year %> 年　<%= @sp_month %> 月分の<strong>特別会員ボーナスの支払いは完了</strong>しました。</h2>
+  </div>
+<% end %> 
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_retrieval %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

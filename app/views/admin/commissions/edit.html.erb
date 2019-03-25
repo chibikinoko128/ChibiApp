@@ -1,0 +1,13 @@
+<% @title = '振込み手数料の編集' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for @commission_form, as: 'form',
+        url: [ :admin, @commission_form.commission ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+      <%= link_to 'キャンセル', :admin_commissions %>
+    </div>
+  <% end %>
+</div>

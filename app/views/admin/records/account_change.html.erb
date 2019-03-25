@@ -1,0 +1,61 @@
+<% @title = '登録口座変更者一覧' %>
+<h1><%= @title %></h1>
+
+<% change_account = [] %>
+<% @sub.each do |m| %>
+  <% bank = Bank.find_by(customer_id: m) %>
+
+  <% if bank.account == bank.account_check %>
+  <% else %>
+    <% change_account << m %>
+  <% end %>
+<% end %>
+
+<% if change_account.present? %>
+  <div class="table-wrapper">
+    <table class="listing">
+      <tr>
+        <th>ID</th>
+        <th>氏名</th>
+        <th>フリガナ</th>
+        <th>ニックネーム</th>
+        <th>WEB総振登録</th>
+        <th>変更前銀行名</th>
+        <th>変更前支店名</th>
+        <th>変更前口座番号</th>
+        <th><strong>変更後銀行名</strong></th>
+        <th><strong>変更後支店名</strong></th>
+        <th><strong>変更後口座番号</strong></th>
+        <th>アクション</th>
+      </tr>
+      <% change_account.each do |f| %>
+        <% p = Customer.find_by(id: f) %>
+        <% b = Bank.find_by(customer_id: f) %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= p.family_name + p.given_name %></td>
+          <td><%= p.family_name_kana + p.given_name_kana %></td>
+          <td><%= p.nickname %></td>
+          <td><strong>※未登録※</strong></td>
+          <td><%= b.bk_name_check %></td>
+          <td><%= b.office_check %></td>
+          <td><%= b.account_check %></td>
+          <td><strong><%= b.bk_name %></strong></td>
+          <td><strong><%= b.office %></strong></td>
+          <td><strong><%= b.account %></strong></td>
+          <td class="actions"> 
+            <%= link_to 'WEB総振登録', admin_bank_account_change_path(f) %>
+          </td>   
+        </tr>
+      <% end %>
+    </table>
+  </div>
+<% else %>
+  <h2>登録口座変更者はおりません。</h2>
+<% end %>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

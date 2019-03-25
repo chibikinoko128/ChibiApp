@@ -1,0 +1,88 @@
+<% @title = '特別会員ボーナス獲得者一覧' %>
+<h1><%= @title %></h1>
+　
+<% if @year_now >= @year %>
+  <% if @sp_member.present? %>
+    <div class="table-wrapper">
+      <p><%= link_to '月別キャッシュバック獲得者一覧', :cache_acquisition_admin_record %><br>
+
+      <%= link_to 'ボーナス獲得者一覧', :bonus_acquisition_admin_record %><br>
+    
+      <%= link_to '現在のクオーターのボーナス獲得者一覧　（途中経過の表示のみ）', :bonus_confirm_admin_record %></p>
+      
+      <p>送金済　→　未送金への変更は会員管理ページより編集機能で「スペシャルlock」を0にすることで変更可能です。</p>
+  
+      <% if @year_now == @year %>
+        <% if @month_now == @month %>
+          <table class="attributes">
+            <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　</strong>支払い総額　￥<%= number_with_delimiter(@total_special_pay) %>　<strong>途中経過</strong></th></tr>
+            <h2><%= @month %>月 終了時点で金額が正式決定します。途中経過です。</h2>
+          </table>
+        <% elsif @month_now < @month %>
+          <h2><%= @month %>月　は次月以降の特別会員ボーナスです。</h2>
+        <% else %>
+          <table class="attributes">
+            <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　</strong>支払い総額　￥<%= number_with_delimiter(@total_special_pay) %></th></tr>
+          </table>
+        <% end %>
+      <% else %>
+        <table class="attributes">
+          <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　</strong>支払い総額　￥<%= number_with_delimiter(@total_special_pay) %></th></tr>
+        </table>
+      <% end %>
+    </div>
+    <% if @year_now == @year %>
+      <% if @month_now < @month %>
+      <% else %>
+        <div class="table-wrapper">
+          <%= paginate @sp_member %>
+        
+          <%= render 'sp_display' %>
+        
+          <%= paginate @sp_member %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="table-wrapper">
+        <%= paginate @sp_member %>
+        
+        <%= render 'sp_display' %>
+        
+        <%= paginate @sp_member %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="table-wrapper">
+      <p><%= link_to 'ボーナス獲得者一覧', :bonus_acquisition_admin_record %><br>
+
+      <%= link_to '月別キャッシュバック獲得者一覧', :cache_acquisition_admin_record %><br>
+
+      <%= link_to '現在のクオーターのボーナス獲得者一覧　（途中経過の表示のみ）', :bonus_confirm_admin_record %></p>
+      <h2><%= @year %>年　<%= @month %>月　の特別会員ボーナス獲得者はおりません。</h2>
+    </div>
+  <% end %>
+<% else %>
+  <div class="table-wrapper">
+    <p><%= link_to 'ボーナス獲得者一覧', :bonus_acquisition_admin_record %><br>
+
+    <%= link_to '月別キャッシュバック獲得者一覧', :cache_acquisition_admin_record %><br>
+
+    <%= link_to '現在のクオーターのボーナス獲得者一覧　（途中経過の表示のみ）', :bonus_confirm_admin_record %></p>
+    <h2><%= @year %>年　は来年以降の特別会員ボーナスです。</h2>
+  </div>
+<% end %>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '会員管理ページへ', :edit_admin_year %>
+  </div>
+  <div class="links">
+    <%= link_to '前ページへ戻る', :acquisition_member_admin_record %>
+  </div>
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_pay %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

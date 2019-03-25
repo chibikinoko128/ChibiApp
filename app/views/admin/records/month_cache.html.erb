@@ -1,0 +1,54 @@
+<% @title = '月別キャッシュバック支払い額、予算、差額（利益）' %>
+<h1><%= @title %></h1>
+<%= link_to '月別会員数、売り上げ', :month_member_admin_record %>　<%= link_to '月別ボーナス支払い実績', :quarter_bonus_admin_record %>　<%= link_to '特別会員ボーナス支払い実績', :sp_bonus_admin_record %> <%= link_to '年度別粗利益', :year_record_admin_record %>
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th colspan="3"><strong><%= @year %>年　<%= @month %>月　キャッシュバック</strong></th></tr>
+    
+    <tr><th>キャッシュバック予算</th><td>￥<%= number_with_delimiter(@cache_budget) %></td></tr>
+    
+    <% if @month == 1 %>
+      <tr><th>支払い額・3月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 2 %>
+      <tr><th>支払い額・4月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 3 %>
+      <tr><th>支払い額・5月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 4 %>
+      <tr><th>支払い額・6月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 5 %>
+      <tr><th>支払い額・7月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 6 %>
+      <tr><th>支払い額・8月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 7 %>
+      <tr><th>支払い額・9月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 8 %>
+      <tr><th>支払い額・10月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 9 %>
+      <tr><th>支払い額・11月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 10 %>
+      <tr><th>支払い額・12月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% elsif @month == 11 %>
+      <tr><th>支払い額・翌年1月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% else %>
+      <tr><th>支払い額・翌年2月支払い</th><td>総額￥<%= number_with_delimiter(@check_cache) %></td></tr>
+    <% end %>
+    
+    <tr><th>キャッシュバック分差額（利益）</th><td>￥<%= number_with_delimiter(@cache_profits) %></td></tr>
+  </table>
+</div>
+<p>支払い額には消費税を含んでおります。</p>
+<p>消費税は支払い額÷1.08で算出する。</p>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '前ページへ戻る', :individual_admin_record %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_retrieval %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

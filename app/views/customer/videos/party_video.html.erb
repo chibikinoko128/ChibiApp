@@ -1,0 +1,23 @@
+<% @title = '資格獲得パーティー映像' %>
+<h1><strong><%= @title %></strong></h1>
+
+<div class="main">
+  <p>パーティー映像は実際の映像となります。3月以降にUP（更新）します。</p>
+  <% if File.exist? "#{Rails.root}/app/assets/videos/party_video.mp4" %>
+    <%= video_tag 'party_video.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+  <% else %>
+    <%= render 'video_non' %>
+  <% end %>
+  
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to '前画面へ戻る', :privilege_video_customer_video %>
+    </div>
+  </div>   
+  
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to '会員特典情報画面へ戻る', :privilege_info_customer_record %>
+    </div>
+  </div>   
+</div>

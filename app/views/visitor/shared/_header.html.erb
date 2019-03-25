@@ -1,0 +1,5 @@
+<header>
+  <span class="logo-mark">＜　WONDER GATE　＞さあ次のステージへGO！</span>
+  <%= content_tag(:span, flash.notice, class: 'notice') if flash.notice %>
+  <%= content_tag(:span, flash.alert, class: 'alert') if flash.alert %>
+</header>

@@ -1,0 +1,40 @@
+<% @title = '銀行別振込み手数料' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links"> 
+    <%= link_to '契約銀行新規登録', :new_admin_commission %>
+  </div>
+  <p>キャッシュバック・ボーナスの振込口座欄は「振込」と入力。（重複禁止）</p> 
+  <table class="listing">
+    <tr>
+      <th>No</th>
+      <th>振込口座</th>
+      <th>銀行名</th>
+      <th>￥30,000未満</th>
+      <th>￥30,000以上</th>
+      <th>アクション</th>
+    </tr>
+    
+    <% @commissions.each do |c| %>
+      <% p = CommissionPresenter.new(c, self) %>
+      <tr>
+        <td><%= p.id %></td>
+        <td><%= p.pay_bank %></td>
+        <td><%= p.bank_name %></td>
+        <td>￥<%= p.fee_low %></td>
+        <td>￥<%= p.fee_high %></td>
+        <td class="actions">
+          <%= link_to '編集', [ :edit, :admin, c ] %> |
+          <%= link_to '削除', [ :admin, c ], method: :delete,
+            data: { confirm: '本当に削除しますか？' } %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+
+</div>

@@ -1,0 +1,55 @@
+<% @title = '会員特典情報' %>
+<h1><strong><%= @title %></strong></h1>
+<div class="main">
+  <h2><strong>※注意※</strong></h2>
+    <ul>
+      <h5><strong>基本的に「サイトの利用料金の入金はお済みですか？」という確認のメールを送信する以外にサイト側から連絡することはありません。<br>本サイト名で金銭を強要することは絶対にありません！！。そのような場合は無視して絶対に対応しないようにしてください。</strong></h5>
+    </ul>
+  
+  <%= link_to(image_tag("g4686.png", size: "60*60", alt: "おすすめ動画", align: "top" ), :daily_customer_hint) %>
+  
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("g4766.png", size: "60*60", alt: "Wonder-gGate配信動画", align: "top" ), :video_menu_customer_video) %>
+  
+  <h2><strong></strong></h2>
+  
+  <%= link_to(image_tag("g4594.png", size: "60*60", alt: "特典ボーナスイベント映像", align: "top" ), :privilege_video_customer_video) %>
+  
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("music.png", size: "60*60", alt: "おすすめミュージシャン", align: "top" ), "https://www.youtube.com/watch?v=VprW9bSfWpA") %>
+
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("youtuber.png", size: "60*60", alt: "おすすめYouTuber", align: "top" ), "https://www.youtube.com/watch?v=E8WfVei73zk") %>
+
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("eng.png", size: "60*60", alt: "おすすめ英会話", align: "top" ), "https://www.youtube.com/playlist?list=PLP6v_XkEGXeraavseTLxZVaL6H7vnRgAX") %>
+
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("sele.png", size: "60*60", alt: "憧れのセレブ生活", align: "top" ), :top_customer_success) %>
+
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("izaka.png", size: "60*60", alt: "居酒屋･飲食店を開業するには？", align: "top" ), :hint_customer_tavern) %>
+
+  <h2><strong></strong></h2>
+    
+    <%= link_to(image_tag("fuuzoku1.png", size: "60*60", alt: "風俗店を開業するには？", align: "top" ), :hint_customer_custom) %>
+
+  <h2><strong></strong></h2>
+
+    <%= link_to(image_tag("taiho1.png", size: "60*60", alt: "逮捕後どうなるか知りたくない？", align: "top" ), :top_customer_prisoner) %>
+
+ <h2><strong>今後もどんどん特典情報を追加していく予定です。<br>微力ながら会員様のお役に立てればと思います。　</strong></h2>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div> 
+   

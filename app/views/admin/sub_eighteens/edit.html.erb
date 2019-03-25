@@ -1,0 +1,44 @@
+<% if @choice_title == "キャッシュバック" %>
+  <% @title = '年月・　キャッシュバック振込チェック' %>
+  <h1><%= @title %></h1>
+
+  <div id="generic-form">
+    <%= form_for @eighteen_form, as: 'form', url: :admin_sub_eighteen do |f| %>
+      <%= render 'form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :cache_acquisition_admin_record %>
+      </div>
+    <% end %>
+  </div>
+
+<% elsif @choice_title == "ボーナス" %>
+  <% @title = '年月・　ボーナス振込チェック' %>
+  <h1><%= @title %></h1>
+
+  <div id="generic-form">
+    <%= form_for @eighteen_form, as: 'form', url: :admin_sub_eighteen do |f| %>
+      <%= render 'form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :bonus_acquisition_admin_record %>
+      </div>
+    <% end %>  
+  </div>
+
+<% else %>
+  <% if @choice_title == "特別会員ボーナス" %>
+    <% @title = '年月・　特別会員ボーナス振込チェック' %>
+    <h1><%= @title %></h1>
+
+    <div id="generic-form">
+      <%= form_for @eighteen_form, as: 'form', url: :admin_sub_eighteen do |f| %>
+        <%= render 'form', f: f %>
+        <div class="buttons">
+          <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+          <%= link_to 'キャンセル', :sp_member_admin_record %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

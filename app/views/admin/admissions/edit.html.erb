@@ -1,0 +1,12 @@
+<% @title = '日別新規登録者検索' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for @admission_form, as: 'form', url: [ :admin, @admission_form.admission ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '検索', class: "btn btn-default", data: {disable_with: '検索中・・・' } %>
+      <%= link_to 'キャンセル', :admin_root %>
+    </div>
+  <% end %>
+</div>

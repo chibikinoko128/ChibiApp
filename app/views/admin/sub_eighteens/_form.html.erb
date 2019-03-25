@@ -1,0 +1,19 @@
+<%= FormPresenter.new(f, self).notes %>
+<% if @choice.remuneration == "キャッシュバック" %>
+  <fieldset id="Eighteen-fields">
+  <legend><%= @acc_name %>（<%= @nickname %>）様の<%= @year %> 年　<%= @month %> 月のキャッシュバック送金履歴更新</legend>
+  <%= render 'eighteen_fields', f: f, confirming: false %>
+  </fieldset>
+<% elsif @choice.remuneration == "ボーナス" %>
+  <fieldset id="Eighteen-fields">
+  <legend><%= @acc_name %>（<%= @nickname %>）様の<%= @year %> 年　<%= @quarter %> クオーター送金履歴更新</legend>
+  <%= render 'eighteen_fields', f: f, confirming: false %>
+  </fieldset>
+<% else %>
+  <% if @choice.remuneration == "特別会員ボーナス" %>
+    <fieldset id="Eighteen-fields">
+    <legend><%= @acc_name %>（<%= @nickname %>）様の<%= @year %> 年　<%= @month %> 月の特別会員ボーナス送金履歴更新</legend>
+    <%= render 'eighteen_fields', f: f, confirming: false %>
+    </fieldset>
+  <% end %>
+<% end %>

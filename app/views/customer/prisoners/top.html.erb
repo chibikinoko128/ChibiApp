@@ -1,0 +1,42 @@
+<% @title = '逮捕されたらどうなっちゃうのか教えます。' %>
+<h1><%= @title %></h1>
+
+<ul class="hint">
+  <h2><strong>※逮捕後の生活状況を紹介します。※</strong></h2>
+  <ul>
+    <h3>各刑務所と罪の内容で多少の違いはあると思いますがだいたいこんな感じです。</h3>
+  </ul>
+  <ol>
+    <h2><li><%= link_to '逮捕から出所まで', :schedule_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '逮捕から留置所', :arrest_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '弁護士面会', :lawyer_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '現場検証', :scene_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '取り調べ（警察署内)', :investigation_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '検察官取り調べ（検察庁内）', :prosecutor_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '起訴', :indictment_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '拘置所へ移送（刑務所内）', :jail_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '起訴内容申し渡し（裁判所）', :hand_over_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '判決（刑期決定）', :judgment_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '執行猶予の場合', :sentence_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '不服申し立て', :complaint_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '刑務所へ', :prison_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '考査期間', :examination_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '満期までの刑務所へ移送', :prison_term_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '新入教育', :education_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '刑務作業工場へ配属', :factory_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '仮釈放', :release_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '保護観察官との面会', :officer_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '満期', :maturity_customer_prisoner %></li></h2>
+    <h2><li><%= link_to '満期になってから', :caution_customer_prisoner %></li></h2>
+  </ol>
+</ul>
+
+<ul>
+  <h3>まだ細かい部分はいろいろあると思いますが、お世話にならないようにしたいものです。</h3>
+</ul>
+
+<div class="table-wrapper">  
+  <div class="links">
+    <%= link_to '会員特典情報ページへ', :privilege_info_customer_record %>
+  </div>
+</div>

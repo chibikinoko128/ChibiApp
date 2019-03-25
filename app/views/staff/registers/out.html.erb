@@ -1,0 +1,12 @@
+<% @title = '在籍 / 退会　の編集' %>
+<h1><%= @title %></h1>
+
+<P><%= @month %>月の在籍会員 , もしくは<%= @next_month %>月 , <%= @two_month_later %>月の入金済み会員です。入金状況の編集は管理者のみ可能です。</P>
+
+<p>１２ヶ月間の在籍状況は顧客管理画面に戻り「詳細」をクリックすると確認できます。</p>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '顧客管理画面へ戻る', :staff_customers %>
+  </div>
+</div>

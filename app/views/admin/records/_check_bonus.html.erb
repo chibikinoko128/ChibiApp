@@ -1,0 +1,46 @@
+<table class="listing">
+  <tr>
+    <th>ID</th>
+    <th>会員形態</th>
+    <th>氏名</th>
+    <th>フリガナ</th>
+    <th>ニックネーム</th>
+    <th>ボーナス額</th>
+    
+    <th>銀行名</th>
+    <th>支店名</th>
+    <th>口座番号</th>
+    <th>振込み期日</th>
+    
+  </tr>
+  <% @bonus_member.each do |c| %>
+    <% e = c.customer_id %>
+    <% p = Customer.find_by(id: e) %>
+    <% b = Bank.find_by(customer_id: e) %>
+    <% @bonus_record = @check_year.find_by(customer_id: e) %>
+    <% data = @bonus_record.attributes %>
+    <% @bonus = data["c_#{@quarter}"] %>
+    <tr>
+      <td><%= @bonus_record.customer_id %></td>
+      <% if p.member_type == '特別会員' %>
+        <td><strong><%= p.member_type %></strong></td>
+      <% else %>
+        <td><%= p.member_type %></td>
+      <% end %>
+      <td><%= p.family_name + p.given_name %></td>
+      <td><%= p.family_name_kana + p.given_name_kana %></td>
+      <td><%= p.nickname %></td>
+      <td>￥<%= number_with_delimiter(@bonus) %></td>      
+      <% if b.bk_name.blank? %>
+        <td><strong>※未登録※</strong></td>
+        <td><strong>※未登録※</strong></td>
+        <td><strong>※未登録※</strong></td>
+      <% else %>
+        <td><%= b.bk_name %></td>
+        <td><%= b.office %></td>
+        <td><%= b.account %></td>
+      <% end %>
+      <td><%= @bonus_pay %></td>
+    </tr>
+  <% end %>
+</table>

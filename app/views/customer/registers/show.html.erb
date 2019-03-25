@@ -1,0 +1,112 @@
+<% @title = 'サービス利用料金の入金状況　(ギリギリにならないようにお早目のご入金お願いします。)' %>
+<h1><strong><%= @title %></strong></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    
+    <tr><th colspan= "4">入金状況</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <% p4 = RegisterPresenter.new(@register, self) %>
+    <% january = p4.rg_1 %>
+    <% february = p4.rg_2 %>
+    <% march = p4.rg_3 %>
+    <% april = p4.rg_4 %>
+    <% may = p4.rg_5 %>
+    <% june = p4.rg_6 %>
+    <% july = p4.rg_7 %>
+    <% august = p4.rg_8 %>
+    <% september = p4.rg_9 %>
+    <% october = p4.rg_10 %>
+    <% november = p4.rg_11 %>
+    <% december = p4.rg_12 %>
+    <% if january == "在籍" %>
+      <tr><th>1月</th><td><%= p4.rg_1 %></td></tr>
+    <% else %>
+      <tr><th>1月</th><td><strong><%= p4.rg_1 %></strong></td></tr>
+    <% end %>
+    
+    <% if february == "在籍" %>
+      <tr><th>2月</th><td><%= p4.rg_2 %></td></tr>
+    <% else %>
+      <tr><th>2月</th><td><strong><%= p4.rg_2 %></strong></td></tr>
+    <% end %>
+    
+    <% if march == "在籍" %>
+      <tr><th>3月</th><td><%= p4.rg_3 %></td></tr>
+    <% else %>
+      <tr><th>3月</th><td><strong><%= p4.rg_3 %></strong></td></tr>
+    <% end %>
+    
+    <% if april == "在籍" %>
+      <tr><th>4月</th><td><%= p4.rg_4 %></td></tr>
+    <% else %>
+      <tr><th>4月</th><td><strong><%= p4.rg_4 %></strong></td></tr>
+    <% end %>
+    
+    <% if may == "在籍" %>
+      <tr><th>5月</th><td><%= p4.rg_5 %></td></tr>
+    <% else %>
+      <tr><th>5月</th><td><strong><%= p4.rg_5 %></strong></td></tr>
+    <% end %>
+    
+    <% if june == "在籍" %>
+      <tr><th>6月</th><td><%= p4.rg_6 %></td></tr>
+    <% else %>
+      <tr><th>6月</th><td><strong><%= p4.rg_6 %></strong></td></tr>
+    <% end %>
+    
+    <% if june == "在籍" %>
+      <tr><th>7月</th><td><%= p4.rg_7 %></td></tr>
+    <% else %>
+      <tr><th>7月</th><td><strong><%= p4.rg_7 %></strong></td></tr>
+    <% end %>
+    
+    <% if august == "在籍" %>
+      <tr><th>8月</th><td><%= p4.rg_8 %></td></tr>
+    <% else %>
+      <tr><th>8月</th><td><strong><%= p4.rg_8 %></strong></td></tr>
+    <% end %>
+    
+    <% if september == "在籍" %>
+      <tr><th>9月</th><td><%= p4.rg_9 %></td></tr>
+    <% else %>
+    <tr><th>9月</th><td><strong><%= p4.rg_9 %></strong></td></tr>
+    <% end %>
+    
+    <% if october == "在籍" %>
+      <tr><th>10月</th><td><%= p4.rg_10 %></td></tr>
+    <% else %>
+      <tr><th>10月</th><td><strong><%= p4.rg_10 %></strong></td></tr>
+    <% end %>
+    
+    <% if november == "在籍" %>
+      <tr><th>11月</th><td><%= p4.rg_11 %></td></tr>
+    <% else %>
+      <tr><th>11月</th><td><strong><%= p4.rg_11 %></strong></td></tr>
+    <% end %>
+    
+    <% if december == "在籍" %>
+      <tr><th>12月</th><td><%= p4.rg_12 %></td></tr>
+    <% else %>
+      <tr><th>12月</th><td><strong><%= p4.rg_12 %></strong></td></tr>
+    <% end %>
+  </table>
+  <ul>
+    <h2><p>在籍と表示されている月は前月に入金済みで利用可能月になります。キャッシュバックと相殺された場合も先行で在籍となります。手違い等で二重に入金した場合は返金せず後の月へ引き当てします。サイト利用料を入金する際は入金状況をよく確認の上入金するようにしてください。</p></h2>
+  </ul>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表画面へ戻る', :individual_customer_record %>
+  </div>
+</div>
+
+ <div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>
+          

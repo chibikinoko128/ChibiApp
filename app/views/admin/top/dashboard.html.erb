@@ -1,0 +1,20 @@
+<% @title = 'ダッシュボード' %>
+<h1><%= @title %></h1>
+
+<ul class="menu">
+  <li><%= link_to '代表専用ページ(管理者編集・新規登録)', :admin_administrators %></li>
+  <li><%= link_to '社員管理(編集・新規登録)', :admin_staff_members %></li>
+  <li><%= link_to '会員管理、会員成績、在籍入力,会員別年度報酬詳細表示', :edit_admin_year %></li>
+  <li><%= link_to '社員のログイン・ログアウト記録', :admin_staff_events %></li>
+  <li><%= link_to '許可IPアドレス管理', :admin_allowed_sources %> 　<strong>※会社のPC（IPアドレス）登録</strong></li>
+  <li><%= link_to '企業実績（年度別、月別、　報酬支払い額及び粗利益）', :edit_admin_retrieval %></li>
+  <li><%= link_to '年月日別新規会員登録検索 / 月別新規登録者の未入金者 / 月別新規登録者の集計', :edit_admin_admission %></li>
+  <li><%= link_to '月別各報酬獲得者一覧/支払金額・支払い総額（月途中の獲得額も表示されます。）', :edit_admin_pay %><strong>　※　「送金状況の変更」はここで行う！！</strong></li>
+  <li><%= link_to 'その月に支払うべき各報酬獲得者の未支払い者一覧　及び企業実績検索', :edit_admin_retrieval %><strong>　　 　　　 　※　「支払済」への更新はここで行う！！</strong></li>
+  <li><%= link_to '登録口座変更者リスト', :account_change_admin_record %></li>
+  <li><%= link_to 'イベントの追加送信（在籍者全員にメール送信）', :event_admin_record %><strong>　　　※クリックするだけでメール送信されます。</strong></li>
+  <li><%= link_to '会員特典情報の追加送信（在籍者全員にメール送信）', :information_admin_record %><strong>　※クリックするだけでメール送信されます。</strong></li>
+  <li><%= link_to '次月利用料金未入会員一覧', :not_payment_admin_record %></li>
+  <li><%= link_to '銀行別振込み手数料一覧 / 新規登録 / 報酬支払い銀行指定', :admin_commissions %></li>
+  <li><%= link_to 'キャッシュバック、ボーナスの　振込み手数料実績', :edit_admin_margin %></li>
+</ul>

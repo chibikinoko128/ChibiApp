@@ -1,0 +1,10 @@
+<%= f.fields_for :commission, f.object.commission do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingCommissionFormPresenter.new(ff, self) :  CommissionFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.bank_name_block(:bank_name, '銀行名')
+      m << q.fee_low_block(:fee_low, '￥30,000未満の振込み手数料')
+      m << q.fee_high_list_block(:fee_high, '￥30,000以上の振込み手数料')
+    end
+  end %>
+<% end %>

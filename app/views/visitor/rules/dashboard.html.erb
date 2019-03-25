@@ -1,0 +1,76 @@
+<% @title = '新規登録・特定商取引法に基づく表記' %>
+<h1><%= @title %></h1>
+
+<div class="main">
+  <h2><%= link_to '新規登録', :new_visitor_customer %></h2>
+</div>
+
+<ul class="menu">
+  <h2><%= link_to 'サイト説明詳細ガイド', :explain_visitor_rule %><strong>　⇦この手順に沿ってサイトの説明および新規登録を進めてください。</strong></h2>
+  <h2>会員登録～サイト利用開始まで</h2>
+  <ol>
+  <li>新規会員登録をします。</li>
+    <ul>
+      <li>登録完了時点でサイトの拡散ができるようになります。</li>
+    </ul>
+  <li>利用料金（初回のみ￥2,000）をサイトへ振込みします。</li>
+    <ul>
+      <li>正式に会員となり報酬を受け取る権利が発生します。<br><h2><%= link_to '報酬額説明についてはここをクリック', :cache_description_visitor_rule %></h2></li>
+      <h2><li><%= link_to '利用料金振り込み用口座', :account_visitor_rule %>（こちらへ振込みお願いします。）</li></h2>
+      <li><strong>初回登録月に限りwelcomeポイント700ptをプレゼントします。（振込み事務手数料￥700円分）<br>従って初回登録月に限り１人に拡散した時点でキャッシュバックが発生します。<br>この700ptはボーナスポイントには加算されません。</strong></li>
+    </ul>
+  <li>毎月の振り込みが面倒な方は6ヶ月分（￥6,000）まで先行での入金を受け付けております。</li>
+  <li>利用料金の確認が取れたらログイン可能になります。</li>
+  <li>ログインし入金口座の登録をします。</li>
+    <ul>
+      <li>サイトからの特典報酬を受け取る口座を登録します。</li>
+    </ul>
+  <li>入金口座の登録完了後、全てのページが閲覧できます。</li>
+  </ol>
+</ul>
+<h2>月額利用料金<strong>￥1,000</strong>以上の費用が発生することはありません。また、会員登録と同時に自動的に費用が発生することもございません。退会も簡単に行えますので安心してサイトを利用していただけます。詳しくは下の利用規約等を参照願います。</h2>
+<ul class="menu">
+  <h2><strong>※注意※</strong></h2>
+   <ul>
+    <h2><strong>基本的に「サイトの利用料金の入金はお済みですか？」という確認のメールと「報酬の確定」を送信する以外にサイト側から連絡することはありません。また、本サイト名で金銭を強要することは絶対にありません！！。そのような場合は無視して絶対に対応しないようにしてください。</strong></h2>
+</ul>
+  
+  <div class="main">
+    <h2><%= link_to '新規登録', :new_visitor_customer %></h2>
+  </div>
+ 
+    <ul>
+      <li>利用規約に同意の上、「新規登録」にて会員登録してくださるようお願いします。<br>
+      登録していただいた場合は利用規約に同意したものとさせていただきます。
+      </li>
+      <li>他人になりすましての登録の事実が発覚した場合は登録を抹消させていただきます。</li>
+      <li>会員登録完了後、利用料金振込み口座へ利用料金を振り込んでください。</li>
+      <h2>※　-重要-　※</h2>
+      <h2><li><strong>初回に限りサイト利用料金は翌月利用分と併せて</strong>￥2,000<strong>となります。振込先は</strong><%= link_to '利用料金振り込み用口座', :account_visitor_rule %><strong>をクリックし確認出来ます。登録月内に入金確認ができると正式にサイトが利用できるようになります。</strong></li></h2>
+      <h2><li>毎月の振り込みが面倒な方は6ヶ月分（￥6,000）まで先行での入金を受け付けております。</li></h2>
+      <li>契約締結（初回利用料金の入金確認）後、特定商取引法に基づき契約内容について明らかにした書面（契約書面）を送付いたします。</li>
+    </ul>
+  <h2><li><%= link_to '利用料金振り込み用口座', :account_visitor_rule %></li></h2> 
+  <h2><li><%= link_to '特定商取引法に基づく表記', :trade_visitor_rule %></li></h2>
+  <ol>
+  <h4><li><%= link_to '利用規約', :agreement_visitor_rule %></li></h4>
+  <h4><li><%= link_to '利用方法', :how_to_use_visitor_rule %></li></h4>
+  <h4><li><%= link_to '個人情報の取り扱い,変更について', :personal_visitor_rule %></li></h4>
+  
+  <h4><li><%= link_to '権利の維持', :maintenance_visitor_rule %></li></h4>
+  <h4><li><%= link_to '退会方法', :unsubscribe_visitor_rule %></li>
+  </h4>
+  <h4><li><%= link_to '会員特典情報とは？', :privilege_visitor_rule %></li></h4>
+  <h4><li><%= link_to '権利の失効', :lapse_visitor_rule %></li></h4>
+  <h4><li><%= link_to 'キャッシュバックとは？', :cache_visitor_rule %></li></h4>
+  <h4><li><%= link_to 'ボーナスとは？', :bonus_visitor_rule %></li></h4>
+  <h4><li><%= link_to '特典ボーナスとは？', :privilege_bonus_visitor_rule %></li></h4>
+  </ol>
+  <h4><li><%= link_to 'よくある質問', :question_visitor_rule %></li></h4>
+</ul>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '初期画面へ戻る', :welcome_visitor_rule %>
+  </div>
+</div>

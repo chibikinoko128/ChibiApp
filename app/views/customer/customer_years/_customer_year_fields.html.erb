@@ -1,0 +1,8 @@
+<%= f.fields_for :customer_year, f.object.customer_year do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingCustomerYearFormPresenter.new(ff, self) : CustomerYearFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year_check, '年（表示したい年度を選択してください。）', CustomerYear::RETRIEVAL_YEAR)
+    end
+  end %>
+<% end %>

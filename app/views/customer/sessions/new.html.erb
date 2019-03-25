@@ -1,0 +1,37 @@
+<% @title = 'ログイン' %>
+
+<ul>
+<p>報酬受け取り用の口座登録がお済みでない方はログイン後<strong>「入金口座登録」</strong>ページへ進みキャッシュバック・ボーナスの受け取り用口座の登録を完了させてください。</p>
+<p>利用料金の確認が取れていない場合ログインはできません。</p>
+</ul>
+<div id="login-form">
+  <h1><%= @title %></h1>
+  
+  <%= form_for @form, url: :customer_session do |f| %>
+    <div>
+      <%= f.label :email, 'メールアドレス' %>
+      <%= f.text_field :email %>
+    </div>
+    <div>
+      <%= f.label :nickname, 'ニックネーム（大文字、小文字の区別はしない）' %>
+      <%= f.text_field :nickname %>
+    </div>
+    <div>
+      <%= f.label :password, 'パスワード(大文字、小文字は区別します)' %>
+      <%= f.password_field :password %>
+    </div>
+    <div>
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me, '次回から自動でログインする' %>
+    </div>
+    <div>
+      <%= f.submit 'ログイン' %>
+    </div>
+  <% end %>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '初期画面へ戻る', :visitor_root %>
+  </div>
+</div>

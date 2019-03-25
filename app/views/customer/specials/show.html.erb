@@ -1,0 +1,29 @@
+<% @title = '特典ボーナスタイトル' %>
+<h1><strong><%= @title %></strong></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <ul>
+      <h2><p><strong>特典ボーナスは現金での支給ではありません<br>獲得タイトルに応じたＪＴＢ旅行券を送付いたします。</strong></p></h2>
+      <h2><p>特典ボーナスの詳細は<%= link_to '特典ボーナスとは？', :privilege_bonus_customer_rule %>で確認してください。</p></h2>
+    </ul>
+    <tr><th colspan= "3">特典ボーナスタイトル</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <tr><th>特典ボーナスタイトル</th><td><%= @special %></td></tr>
+  </table>
+  <h2><strong>2月末日までは前年の特典ボーナスタイトルが表示されます。</strong></h2>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表画面へ戻る', :individual_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

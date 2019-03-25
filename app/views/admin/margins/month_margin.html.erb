@@ -1,0 +1,79 @@
+<% @title = '年、月　別　キャッシュバック / ボーナス　振込み手数料' %>
+<h1><%= @title %></h1>
+
+<% if @unsub == 0 %>
+  <h2><%= @year %> 年　<%= @month %> 月　の振込みはありません。</h2>
+
+<% else %>
+  <div class="table-wrapper">
+    <table class="attributes">
+      <tr><th colspan="3"><strong><%= @year %> 年　<%= @month %>月　</strong></th></tr>
+    </table>
+    <table class="listing">
+      <tr>
+        <th>銀行名</th>
+        <th>振込み年</th>
+        <th>振込み月</th>
+        <th>3万円未満</th>
+        <th>３万円以上</th>
+        <th>３万円未満手数料</th>
+        <th>３万円以上手数料</th>
+        <th><%= @momth %> 月振込み手数料合計</th>
+        <th><%= @month %> 月事務手数料収益</th>
+      </tr>
+      
+      <tr>
+        <td><%= @bank_name %></td>
+        <td><%= @year %> 年</td>
+        <td><%= @month %> 月</td>
+        <td><%= number_with_delimiter(@margin_subtotal) %> 口</td>
+        <td><%= number_with_delimiter(@margin_total) %> 口</td>
+        <td>￥ <%= number_with_delimiter(@low_margin) %></td>
+        <td>￥ <%= number_with_delimiter(@high_margin) %></td>
+        <td>￥ <%= number_with_delimiter(@total) %></td>
+        <td>￥ <%= number_with_delimiter(@margin_month) %></td>
+      </tr>
+    </table>
+  </div>
+<% end %>
+  
+<p></p>
+<p></p>
+  <div class="table-wrapper">   
+    <table class="attributes">
+      <tr><th colspan="3"><strong><%= @year %> 年 振込み実績　</strong></th></tr>
+    </table>
+    <table class="listing">
+      <tr>
+        <th>銀行名</th>
+        <th>振込み年</th>
+        
+        <th>3万円未満</th>
+        <th>３万円以上</th>
+        <th>３万円未満実手数料計</th>
+        <th>３万円以上実手数料計</th>
+        <th><%= @year %> 年振込み手数料合計</th>
+        <th><%= @year %> 年事務手数料収益</th>
+      </tr>
+      
+      <tr>
+        <td><%= @bank_name %></td>
+        <td><%= @year %> 年</td>
+        <td><%= number_with_delimiter(@year_margin_subtotal) %> 口</td>
+        <td><%= number_with_delimiter(@year_margin_total) %> 口</td>
+        <td>￥ <%= number_with_delimiter(@year_low_margin) %></td>
+        <td>￥ <%= number_with_delimiter(@year_high_margin) %></td>
+        <td>￥ <%= number_with_delimiter(@year_total) %></td>
+        <td>￥ <%= number_with_delimiter(@year_profits) %></td>
+      </tr>
+    </table>
+  </div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_margin %>
+  </div>
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<% if @month <= 2 %>
+  <%= f.fields_for :twenty_two, f.object.twenty_two do |ff| %>
+    <% if @month == 1 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyTwoFormPresenter.new(ff, self) : TwentyTwoFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_11, '11月分キャッシュバック送金', TwentyTwo::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyTwoFormPresenter.new(ff, self) : TwentyTwoFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_12, '12月分キャッシュバック送金', TwentyTwo::TRANSFER)
+        end
+      end %>
+    <% end %>
+  <% end %>
+<% else %>
+  <%= f.fields_for :twenty_three, f.object.twenty_three do |ff| %>
+    <% if @month == 3 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_1, '1月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 4 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_2, '2月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 5 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_3, '3月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 6 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_4, '4月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 7 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_5, '5月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 8 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_6, '6月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 9 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_7, '7月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 10 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_8, '8月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 11 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_9, '9月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff, self) : TwentyThreeFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_m_10, '10月分キャッシュバック送金', TwentyThree::TRANSFER)
+        end
+      end %>
+    <% end %>
+  <% end %>
+<% end %>

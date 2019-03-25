@@ -1,0 +1,9 @@
+<%= f.fields_for :margin, f.object.margin do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingMarginFormPresenter.new(ff, self) :  MarginFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year, '年', Margin::RETRIEVAL_YEAR)
+      m << q.drop_down_list_block(:month, '月', Margin::RETRIEVAL_MONTH)
+    end
+  end %>
+<% end %>

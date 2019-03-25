@@ -1,0 +1,62 @@
+<% @title = 'ボーナスとは？' %>
+<h1><%= @title %></h1>
+<h2>タイトルと金額は会員ページで確認できます。個人で計算する必要はありません。</h2>
+  <h3>ボーナスのシステムだけ理解してください。</h3>
+  <h2>語句説明</h2>
+    <p>＊＊段目：　自分の紹介者が1段目、その紹介者が2段目、・・・7段目となります。</p>
+    <p>*列    ：　紹介者1人につき1列となります。</p>
+  <p>ボーナスシステム（仕組み）の説明
+  <ul>
+    <li>クリスタル以上のタイトルは自身が5000pt以上（ノーマルボーナス）を獲得していることが条件です。</li>
+  </ul>
+  <ul>
+  <p><%= link_to '詳しい説明はこちらから', :bonus_description_customer_rule %></p>
+  </ul>
+  <%= image_tag("bonus1.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'キャッシュバック説明へ移動', :cache_customer_rule %>
+  </div>
+</div>
+
+<p>
+<%= image_tag("bonus2.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+<p>
+<%= image_tag("bonus3.png", size: "60*60", alt: "ボーナス", align: "top") %></p>
+
+  <h2>ボーナスタイトル確認と振り込み期日について</h2>
+    <p>タイトルの表示とタイトル獲得までの不足ｐｔ、紹介した人のｐｔ状況は個人成績表ページで確認できます。</p>
+    <p>お振り込みさせていただく期日は翌月末としユーザー様の登録いただいた口座へ振込み事務手数料を差し引いて、消費税込みの金額をお振り込みさせていただきます。</p>
+    <p>ボーナスタイトルは自分が紹介した1人から発生したグループをを1列としベーシック以上（20,000ｐｔ以上）を1つのクオーター内で何列獲得するかで自分のタイトルが決まります。</p>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <ul>
+    <h2><p><strong>振込み事務手数料</strong></p></h2>
+  </ul>
+    <tr><th colspan= "2">振込み事務手数料</th></tr>
+    <tr><th>5万円未満</th><td>700円</td></tr>
+    <tr><th>5万円以上</th><td>1000円</td></tr> 
+  </table>
+  <ul>
+    <h2><p>上記振込み事務手数料金についてはボーナス額より差し引かせていただきます。</p></h2>
+  </ul>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '個人成績表へ移動', :individual_customer_record %>
+  </div>
+  <div class="links">
+    <%= link_to '会員特典へ移動', :privilege_info_customer_record %>
+  </div>
+  <div class="links">
+    <%= link_to 'よくある質問へ移動', :question_customer_rule %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

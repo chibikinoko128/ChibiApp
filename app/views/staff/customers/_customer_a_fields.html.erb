@@ -1,0 +1,23 @@
+<%= f.fields_for :customer, f.object.customer do |ff| %>
+  <%= markup do |m| 
+    p = CustomerFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.text_field_block(:email, 'メールアドレス', size: 32)
+      m << q.password_field_block(:password, 'パスワード設定 /英字、数字(メモを残しましょう。)', size: 32)
+      m << q.nickname_field_block(:nickname, 'ニックネーム設定 /英字、数字、かな、カナ(メモを残しましょう。)', size: 20)
+      m << q.sponsor1_field_block(:sponsor1, '紹介者のニックネーム（後日修正不可・・慎重に！）', size: 20)
+      m << q.full_name_block(:family_name, :given_name, '氏名（姓）　　　　　　氏名（名）')
+      m << q.full_name_block(:family_name_kana, :given_name_kana, 'フリガナ/セイ（姓）　　フリガナ/メイ（名）')
+      m << q.birthday_field_block(:birthday, '生年月日')
+    end
+    m << p.gender_field_block
+    m.div(class: 'input-block') do
+      m << p.decorated_label(:personal_phones, '電話番号')
+      m.ol do
+        p.object.personal_phones.each_with_index do |phone, index|
+          m << render('phone_fields', f: ff, phone: phone, index: index)
+        end
+      end
+    end
+  end %>
+<% end %>

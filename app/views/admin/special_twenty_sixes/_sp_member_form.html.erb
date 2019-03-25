@@ -1,0 +1,5 @@
+<%= FormPresenter.new(f, self).notes %>
+<fieldset id="TwentySix-fields">
+  <legend><%= @acc_name %>（<%= @nickname %>）様の<%= @cache_year %> 年　<%= @month1 %> 月の特別会員ボーナス送金履歴更新</legend>
+  <%= render 'twenty_six_sp_member_fields', f: f, confirming: false %>
+</fieldset>

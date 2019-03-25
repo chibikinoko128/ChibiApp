@@ -1,0 +1,9 @@
+<%= f.fields_for :staff_month, f.object.staff_month do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingStaffMonthFormPresenter.new(ff, self) : StaffMonthFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:retrieval_year, '年', StaffMonth::RETRIEVAL_YEAR)
+      m << q.drop_down_list_block(:retrieval_month, '月', StaffMonth::RETRIEVAL_MONTH)
+    end
+  end %>
+<% end %>

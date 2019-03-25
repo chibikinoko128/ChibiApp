@@ -1,0 +1,18 @@
+<%= f.fields_for :pay, f.object.pay do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingPayFormPresenter.new(ff, self) :  PayFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.drop_down_list_block(:year, '年', Pay::PAY_YEAR)
+      m << q.drop_down_list_block(:month, '月', Pay::PAY_MONTH)
+      m << q.drop_down_list_block(:quarter, 'クオーター', Pay::PAY_QUARTER)
+    end
+  end %>
+<lo>
+  <strong><P>ボーナス検索は月よりもクオーターが優先されます。</P></strong>
+  <li>クオーター欄　＝　0　→　月の入力値で自動検索</li>
+  <li>クオーター欄　＝　1　→　1クオーター（月の入力値に関係無く検索）</li>
+  <li>クオーター欄　＝　2　→　2クオーター（月の入力値に関係無く検索）</li>
+  <li>クオーター欄　＝　3　→　3クオーター（月の入力値に関係無く検索）</li>
+  <li>クオーター欄　＝　4　→　4クオーター（月の入力値に関係無く検索）</li>
+</lo>
+<% end %>

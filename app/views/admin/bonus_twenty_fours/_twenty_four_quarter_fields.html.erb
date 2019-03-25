@@ -1,0 +1,35 @@
+<% if @quarter1 == 4 %>
+  <%= f.fields_for :twenty_three, f.object.twenty_three do |ff| %>
+    <%= markup do |m|
+      p = confirming ? ConfirminTwentyThreeFormPresenter.new(ff,self) :  TwentyThreeFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_4, '４クオーター送金', TwentyThree::TRANSFER)
+      end
+    end %>
+  <% end %>
+<% else%>
+  <%= f.fields_for :twenty_four, f.object.twenty_four do |ff| %>
+    <% if @quarter1 == 1 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyFourFormPresenter.new(ff,self) :  TwentyFourFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_1, '1クオーターボーナス送金', TwentyFour::TRANSFER)
+        end
+      end %>
+    <% elsif @quarter1 == 2 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyFourFormPresenter.new(ff,self) :  TwentyFourFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_2, '２クオーターボーナス送金', TwentyFour::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentyFourFormPresenter.new(ff,self) :  TwentyFourFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_3, '３クオーターボーナス送金', TwentyFour::TRANSFER)
+        end
+      end %>
+    <% end %>
+  <% end %>
+<% end %>

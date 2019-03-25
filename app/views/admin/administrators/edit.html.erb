@@ -1,0 +1,12 @@
+<% @title = 'アカウント編集' %>
+<h1>管理者 / <%= @administrator.family_name + @administrator.given_name %>の<%= @title %></h1>
+
+<div id="generic-form">
+  <%= form_for [ :admin, @administrator ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+      <%= link_to 'キャンセル', :admin_administrators %>
+    </div>
+  <% end %>
+</div>

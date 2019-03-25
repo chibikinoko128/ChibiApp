@@ -1,0 +1,24 @@
+<% @title = '年月・キャッシュバック振込チェック' %>
+<h1><%= @title %></h1>
+
+<% if @month <= 2 %>
+  <div id="generic-form">
+    <%= form_for @twenty_two_form, as: 'form', url: :admin_cache_twenty_two do |f| %>
+      <%= render 'cache_twenty_three_form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :payment_list_admin_record %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <div id="generic-form">
+    <%= form_for @twenty_three_form, as: 'form', url: :admin_cache_twenty_three do |f| %>
+      <%= render 'cache_twenty_three_form', f: f %>
+      <div class="buttons">
+        <%= f.submit '更新', class: "btn btn-default", data: {disable_with: '更新中・・・' } %>
+        <%= link_to 'キャンセル', :payment_list_admin_record %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

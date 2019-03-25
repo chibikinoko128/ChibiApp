@@ -1,0 +1,32 @@
+<% @title = '特典ボーナスとは？' %>
+<h1><%= @title %></h1>
+  <h2>タイトルは会員ページで確認できます。個人で計算する必要はありません。</h2>
+  <h3>特典ボーナスのシステムだけ理解してください。</h3>
+  <p>特典ボーナスシステム(仕組み）の説明
+  <ul>
+    <p><%= link_to '詳しい説明はこちらから', :privilege_a_description_customer_rule %></p>
+  </ul>
+  <%= image_tag("privilege1.png", size: "60*60", alt: "特典ボーナス", align: "top") %></p>
+  <p>
+  <%= image_tag("privilege2.png", size: "60*60", alt: "特典ボーナス", align: "top") %></p>
+
+  <h2>特典ボーナス（仕組み）の説明</h2>
+    <P>現在の特典ボーナスタイトルは個人成績表ページで確認できます。</P>
+    <p>資格獲得パーティーの期日・会場については<strong>サイトイベント一覧</strong>ページで確認できます。</p>
+    <p>資格獲得パーティーは前年度の獲得タイトルの表彰式となります。</p>
+    <p>特典ボーナスタイトルの獲得条件は年をまたいでの回数はカウントされません。第4クオーター（10月～12月）が終了時点で獲得回数もリセットされます。</p>
+    <p>招待旅行はタイトル獲得の翌年に行い、ユーザー様と期日などを打ち合わせの上、実行させていただきます。</p>
+    
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'キャッシュバック説明へ移動', :cache_a_customer_rule %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'ボーナス説明へ移動', :bonus_a_customer_rule %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

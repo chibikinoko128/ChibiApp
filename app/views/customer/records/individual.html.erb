@@ -1,0 +1,21 @@
+<% @title = '個人成績表' %>
+<h1><strong><%= @title %></strong></h1>
+<h1><strong>※※※　現在のご自身の成績が閲覧できます。　※※※</strong></h1>
+<div class="main">
+<h2>タイトルをクリックし確認画面へお進みください。</h2>
+<%= link_to(image_tag("pot1.png", size: "60*60", alt: "利用料金入金確認", align: "top" ), :customer_register) %><br>
+<%= link_to(image_tag("pot2.png", size: "60*60", alt: "今月の獲得pt", align: "top" ), :customer_score) %><br>
+<%= link_to(image_tag("pot3.png", size: "60*60", alt: "ボーナス成績", align: "top" ), :bonus_record_customer_record) %><br>
+<%= link_to(image_tag("pot4.png", size: "60*60", alt: "特典ボーナス成績", align: "top" ), :customer_special) %><br>
+</div>
+
+<div class="main">
+<h2>下のリンクより各年度別の報酬実績が確認できます。</h2>
+<%= link_to(image_tag("visitor.png", size: "60*60", alt: "利用料金入金確認", align: "top" ), :edit_customer_customer_year) %>
+</div>
+  
+<div class="table-wrapper">  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

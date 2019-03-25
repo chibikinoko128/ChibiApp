@@ -1,0 +1,35 @@
+<% if @quarter1 == 4 %>
+  <%= f.fields_for :nineteen, f.object.nineteen do |ff| %>
+    <%= markup do |m|
+      p = confirming ? ConfirminNineteenFormPresenter.new(ff,self) :  NineteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:transfer_c_4, '４クオーター送金', Nineteen::TRANSFER)
+      end
+    end %>
+  <% end %>
+<% else%>
+  <%= f.fields_for :twentie, f.object.twentie do |ff| %>
+    <% if @quarter1 == 1 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff,self) :  TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_1, '1クオーターボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @quarter1 == 2 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff,self) :  TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_2, '２クオーターボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff,self) :  TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:transfer_c_3, '３クオーターボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% end %>
+  <% end %>
+<% end %>

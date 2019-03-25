@@ -1,0 +1,29 @@
+<% @title = '現在のボーナス金額' %>
+<h1><strong><%= @title %></strong></h1>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <h3><p>ボーナス額の算出方法は<%= link_to 'ボーナスとは？', :bonus_customer_rule %>のページで確認してください。</p></h3>
+    <tr><th colspan= "3">現在のボーナス金額</th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <tr><th>ボーナスタイトル</th><td><%= @b_title %></td></tr>
+    <tr><th>ボーナス金額</th><td>￥<%= number_with_delimiter(@b_money1) %>（振込み事務手数料を差し引いた額）<p><%= @b_money2 %></p></td></tr>
+    <% if @b_money3 >= 700 %>
+      <tr><th>振込み日</th><td><%= @b_month %>月末までに振込みいたします。</td></tr>
+    <% end %>
+  </table>
+</div>
+    
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'ボーナス成績画面へ戻る', :bonus_record_customer_record %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :customer_root %>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<% @title = '次月利用料金未入会員一覧' %>
+<h1><%= @title %>　（<%= @next_month %> 月未入金者）</h1>
+
+<% if @sub.present? %>
+  <% if @next_sub.present? %>
+    <div class="table-wrapper">
+    <%= paginate @sub %>
+      <table class="listing">
+        <tr>
+          <th>ID</th>
+          <th>氏名</th>
+          <th>フリガナ</th>
+          <th>ニックネーム</th>
+        </tr>  
+      <% @next_sub.each do |c| %>
+        <% p = Customer.find_by(id: c) %>
+        <tr>
+          <td><%= p.id %></td>
+          <td><%= p.family_name + p.given_name %></td>
+          <td><%= p.family_name_kana + p.given_name_kana %></td>
+          <td><%= p.nickname %></td>
+        </tr>
+      <% end %>
+      </table>
+      <%= paginate @sub %>
+    </div>
+  <% else %>
+    <h2><%= @next_month %> 月の利用料未入金者はおりません。</h2>
+  <% end %>
+<% else %>
+  <h2><%= @month %> 月の在籍者はおりません。</h2>
+<% end %>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :staff_root %>
+  </div>
+</div>

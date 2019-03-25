@@ -1,0 +1,51 @@
+<% @title = '会員トップページ' %>
+<h1><%= @title %></h1>
+<h1><strong>※※※　翌月の利用料金の入金はお済みですか？　※※※</strong></h1>
+<ul class="menu">
+  <h2><%= @name %> 様の個人成績ページです。</h2>
+  <h2>登録情報の変更はページ右上のアカウントをクリックし編集ページに進み変更してください。</h2>
+  <h2><%= link_to 'サイト説明詳細ガイド', :explain_customer_rule %><strong>　⇦この手順に沿ってサイトの説明および新規登録を進めてください。</strong></h2>
+  <h2><strong>※注意※</strong></h2>
+  <ul>
+    <h5><strong>基本的に「サイトの利用料金の入金はお済みですか？」「報酬確定の連絡」という<br>確認のメールを送信する以外にサイト側から連絡することはありません。<br>本サイト名で金銭を強要することは絶対にありません！！。<br>そのような場合は無視して絶対に対応しないようにしてください。</strong></h5>
+  </ul>
+  <h2><li><%= link_to 'サイトイベント一覧・参加申し込み', :customer_programs %>（サイトのイベント情報）</li></h2>
+  <h2><li><%= link_to '問い合わせ回答一覧', :customer_messages %>（お問い合わせの回答）</li></h2>
+  <h2><li><%= link_to '口座アカウント編集', :edit_customer_bank if current_customer %></li></h2>
+  <ol>
+  <h2><li><%= link_to '個人成績表', :individual_customer_record %></li></h2>
+  <h2><li><%= link_to '会員特典情報(閲覧ください）)', :privilege_info_customer_record %></li></h2>
+  </ol>
+  <h2><li><%= link_to '特定商取引法に基づく表記', :trade_customer_rule %></li></h2>
+  <ol>
+  <h2><li>報酬の仕組み</li></h2>
+  
+  <ul>
+  <li><%= link_to 'キャッシュバックとは？', :cache_customer_rule %></li>
+    <p><%= link_to '報酬額説明についてはここをクリック', :cache_description_customer_rule %></p>
+  <li><%= link_to 'ボーナスとは？', :bonus_customer_rule %></li>
+  <li><%= link_to '特典ボーナスとは？', :privilege_bonus_customer_rule %></li>
+  </ul>
+  
+  <h2><li>サイト利用について</li></h2>
+  
+  <ul>
+  <li><%= link_to '利用規約', :agreement_customer_rule %></li>
+  <li><%= link_to '利用方法', :how_to_use_customer_rule %></li>
+  <li><%= link_to '個人情報の取り扱い、変更について', :personal_customer_rule %></li>
+  <li><%= link_to '権利の維持', :maintenance_customer_rule %></li>
+  <li><%= link_to '退会方法', :unsubscribe_customer_rule %></li>
+  <li><%= link_to '会員特典情報とは？', :privilege_customer_rule %></li>
+  <li><%= link_to '権利の失効', :lapse_customer_rule %></li>
+  <li><%= link_to 'よくある質問', :question_customer_rule %></li>
+  </ol>
+  </ul>
+  
+  <h2><li><%= link_to '利用料金振り込み口座', :account_customer_rule %></li></h2> 
+</ul>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '初期画面へ戻る', :visitor_root %>
+  </div>
+</div>

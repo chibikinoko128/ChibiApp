@@ -1,0 +1,98 @@
+<% @title = '今月の動画' %>
+<h1><strong><%= @title %></strong></h1>
+<div class="main">
+  <% if @month == 1 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video1m.mp4" %>
+      <%= video_tag 'video1m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 2 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video2m.mp4" %>
+      <%= video_tag 'video2m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 3 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video3m.mp4" %>
+      <%= video_tag 'video3m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 4 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video4m.mp4" %>
+      <%= video_tag 'video4m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 5 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video5m.mp4" %>
+      <%= video_tag 'video5m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 6 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video6m.mp4" %>
+      <%= video_tag 'video6m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 7 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video7m.mp4" %>
+      <%= video_tag 'video7m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 8 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video8m.mp4" %>
+      <%= video_tag 'video8m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 9 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video9m.mp4" %>
+      <%= video_tag 'video9m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 10 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video10m.mp4" %>
+      <%= video_tag 'video10m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% elsif @month == 11 %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video11m.mp4" %>
+      <%= video_tag 'video11m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  
+  <% else %>
+    <% if File.exist? "#{Rails.root}/app/assets/videos/video12m.mp4" %>
+      <%= video_tag 'video12m.mp4', controls: true, autoplay: false, loop: true, size: '300*150', poster: 'hikoki_animated.gif' %>
+    <% else %>
+      <%= render 'video_non' %>
+    <% end %>
+  <% end %>
+  
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to '戻る', :video_menu_customer_video %>
+    </div>
+    
+    <div class="links">
+      <%= link_to '会員特典情報ページへ', :privilege_info_customer_record %>
+    </div>
+  </div>
+</div>

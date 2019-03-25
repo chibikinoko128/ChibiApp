@@ -1,0 +1,56 @@
+<% @title = '年度別粗利益' %>
+<h1><%= @title %></h1>
+<%= link_to '月別会員数、売り上げ', :month_member_admin_record %>　<%= link_to '月別キャッシュバック支払い実績', :month_cache_admin_record %>　<%= link_to '月別ボーナス支払い実績', :quarter_bonus_admin_record %>　<%= link_to '特別会員ボーナス支払い実績', :sp_bonus_admin_record %>
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th colspan="3"><strong><%= @year %>年度　粗利益</strong></th></tr>
+    
+    <tr><th><%= @year %>年度末　総会員数</th><td><%= number_with_delimiter(@year_end_member) %>人</td></tr>
+    
+    <tr><th><%= @year %>年　総在籍数</th><td><%= number_with_delimiter(@total_member) %>人</td></tr>
+    
+    <tr><th><%= @year %>年　総売り上げ（税込み）</th><td>￥<%= number_with_delimiter(@year_money) %></td></tr>
+    
+    <tr><th><%= @year %>年　キャッシュバック総支払い額（税込み）</th><td>￥<%= number_with_delimiter(@year_total_cache) %></td></tr>
+    
+    <tr><th><%= @year %>年　ボーナス総支払い額（税込み）</th><td>￥<%= number_with_delimiter(@year_total_bonus) %></td></tr>
+    
+    <tr><th><%= @year %>年　特別会員ボーナス総支払い額（税込み）</th><td>￥<%= number_with_delimiter(@year_total_sp) %></td></tr>
+    
+    <tr><th><%= @year %>年　特典ボーナス予算</th><td>￥<%= number_with_delimiter(@privilege_budget) %></td></tr>
+    
+    <tr><th><%= @year %>年　総粗利益</th><td>￥<%= number_with_delimiter(@gross_profit_year) %> (振込み手数料差引き額）</td></tr>
+   
+  </table>
+  
+  <table class="attributes">
+    <tr><th colspan="3"><strong><%= @year %>年度月別粗利益　　(振込み手数料差引き額）</strong></th></tr>
+    <tr><th>1月</th><td>￥<%= number_with_delimiter(@gross_profit_month1) %></td></tr>
+    <tr><th>2月</th><td>￥<%= number_with_delimiter(@gross_profit_month2) %></td></tr>
+    <tr><th>3月</th><td>￥<%= number_with_delimiter(@gross_profit_month3) %></td></tr>
+    <tr><th>4月</th><td>￥<%= number_with_delimiter(@gross_profit_month4) %></td></tr>
+    <tr><th>5月</th><td>￥<%= number_with_delimiter(@gross_profit_month5) %></td></tr>
+    <tr><th>6月</th><td>￥<%= number_with_delimiter(@gross_profit_month6) %></td></tr>
+    <tr><th>7月</th><td>￥<%= number_with_delimiter(@gross_profit_month7) %></td></tr>
+    <tr><th>8月</th><td>￥<%= number_with_delimiter(@gross_profit_month8) %></td></tr>
+    <tr><th>9月</th><td>￥<%= number_with_delimiter(@gross_profit_month9) %></td></tr>
+    <tr><th>10月</th><td>￥<%= number_with_delimiter(@gross_profit_month10) %></td></tr>
+    <tr><th>11月</th><td>￥<%= number_with_delimiter(@gross_profit_month11) %></td></tr>
+    <tr><th>12月</th><td>￥<%= number_with_delimiter(@gross_profit_month12) %></td></tr>
+    
+  </table>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '前ページへ戻る', :individual_admin_record %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_retrieval %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

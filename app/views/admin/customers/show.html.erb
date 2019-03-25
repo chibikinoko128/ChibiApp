@@ -1,0 +1,786 @@
+<% @title = '顧客詳細情報' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '顧客管理画面へ戻る', :admin_customers %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>
+
+<div class="table-wrapper">
+  <table class="attributes">
+    <tr><th colspan="2"><strong>基本情報</strong></th></tr>
+    <% p1 = CustomerPresenter.new(@customer, self) %>
+    <tr><th>会員形態</th><td><%= p1.member_type %></td></tr>
+    <tr><th>id</th><td><%= p1.id %></td></tr>
+    <tr><th>氏名</th><td><%= p1.full_name %></td></tr>
+    <tr><th>フリガナ</th><td><%= p1.full_name_kana %></td></tr>
+    <tr><th>email</th><td><%= p1.email %></td></tr>
+    <tr><th>生年月日</th><td class="date"><%= p1.birthday %></td></tr>
+    <tr><th>性別</th><td><%= p1.gender %></td></tr>
+    <tr><th>ニックネーム</th><td><%= p1.nickname %></td></tr>
+    <tr><th>紹介者</th><td><%= p1.sponsor1 %></td></tr>
+    <tr><th>登録日時</th><td class="date"><%= p1.created_at %></td></tr>
+    <tr><th>更新日時</th><td class="date"><%= p1.updated_at %></td></tr>
+    <tr><th>個人電話番号(1)</th><td><%= p1.personal_phones[0] %></td></tr>
+    <tr><th>個人電話番号(2)</th><td><%= p1.personal_phones[1] %></td></tr>
+    <% if @customer.home_address %>
+      <% p2 = AddressPresenter.new(@customer.home_address, self) %>
+      <tr><th colspan="2"><strong>自宅住所</strong></th></tr>
+      <tr><th>郵便番号</th><td><%= p2.postal_code %></td></tr>
+      <tr><th>都道府県</th><td><%= p2.prefecture %></td></tr>
+      <tr><th>市区町村</th><td><%= p2.city %></td></tr>
+      <tr><th>町域</th><td><%= p2.address1 %></td></tr>
+      <tr><th>番地等</th><td><%= p2.address3 %></td></tr>
+      <tr><th>建物名、部屋番号等</th><td><%= p2.address2 %></td></tr>
+      <tr><th>自宅電話番号(1)</th><td><%= p2.phones[0] %></td></tr>
+      <tr><th>自宅電話番号(2)</th><td><%= p2.phones[1] %></td></tr>
+    <% end %>
+    <% if @customer.bank %>
+      <% p3 = BankPresenter.new(@customer.bank, self) %>
+      <tr><th colspan="2"><strong>入金口座</strong></th></tr>
+      <tr><th>銀行名</th><td><%= p3.bk_name %></td></tr>
+      <tr><th>支店名</th><td><%= p3.office %></td></tr>
+      <tr><th>口座番号</th><td><%= p3.account %></td></tr>
+      <tr><th>口座名義</th><td><%= @acc_name %></td></tr>
+      <tr><th>口座名義（カナ）</th><td><%= @acc_name_kana %></td></tr>
+    <% end %>
+    
+    <% if @customer.special %>
+      <% p9 = SpecialPresenter.new(@customer.special, self) %>
+      <tr><th colspan="2"><strong>年間獲得タイトル</strong></th></tr>
+      <tr><th>ベーシック</th><td><%= p9.basic %>　回</td></tr>
+      <tr><th>クリスタル</th><td><%= p9.crystal %>　回</td></tr>
+      <tr><th>シルバーベーシック</th><td><%= p9.silver %>　回</td></tr>
+      <tr><th>ゴールドベーシック</th><td><%= p9.gold %>　回</td></tr>
+      <tr><th>プラチナベーシック</th><td><%= p9.platinum %>　回</td></tr>
+      <tr><th>ペガサス</th><td><%= p9.pegasus %>　回</td></tr>
+      <tr><th>フェニックス</th><td><%= p9.phoenix %>　回</td></tr>
+      <tr><th>クイーン</th><td><%= p9.queen %>　回</td></tr>
+      <tr><th>キング</th><td><%= p9.king %>　回</td></tr>
+      <tr><th>プレジデント</th><td><%= p9.president %>　回</td></tr>
+    <% end %>
+    
+    <% if @customer.register %>
+      <% p4 = RegisterPresenter.new(@customer.register, self) %>
+      <tr><th colspan="2"><strong>利用料金入金状況</strong></th></tr>
+      <tr><th>１月</th><td><%= p4.rg_1 %></td></tr>
+      <tr><th>２月</th><td><%= p4.rg_2 %></td></tr>
+      <tr><th>３月</th><td><%= p4.rg_3 %></td></tr>
+      <tr><th>４月</th><td><%= p4.rg_4 %></td></tr>
+      <tr><th>５月</th><td><%= p4.rg_5 %></td></tr>
+      <tr><th>６月</th><td><%= p4.rg_6 %></td></tr>
+      <tr><th>７月</th><td><%= p4.rg_7 %></td></tr>
+      <tr><th>８月</th><td><%= p4.rg_8 %></td></tr>
+      <tr><th>９月</th><td><%= p4.rg_9 %></td></tr>
+      <tr><th>１０月</th><td><%= p4.rg_10 %></td></tr>
+      <tr><th>１１月</th><td><%= p4.rg_11 %></td></tr>
+      <tr><th>１２月</th><td><%= p4.rg_12 %></td></tr>
+    <% end %>
+    
+    <% if @now_year >= @year_check %>
+      <% if @customer.score %>
+        <% p10 = ScorePresenter.new(@customer.score, self) %>
+        <tr><th colspan="2"><strong>今年度獲得pt</strong></th></tr>
+        <% if @now_month == 1 %>
+          <tr><th>１月</th><td><%= p10.sc_1 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>１月</th><td><%= p10.sc_1 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 2 %>
+          <tr><th>２月</th><td><%= p10.sc_2 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>２月</th><td><%= p10.sc_2 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 3 %>
+          <tr><th>３月</th><td><%= p10.sc_3 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>３月</th><td><%= p10.sc_3 %> pt</td></tr>
+        <% end %>
+
+        <% if 1 <= @now_month && @now_month <= 3 %>
+          <tr><th>1クオーター</th><td><%= p10.scc_1 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>1クオーター</th><td><%= p10.scc_1 %> pt</td></tr>
+        <% end %>
+    
+        <% if @now_month == 4 %>
+          <tr><th>４月</th><td><%= p10.sc_4 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>４月</th><td><%= p10.sc_4 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 5 %>
+          <tr><th>５月</th><td><%= p10.sc_5 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>５月</th><td><%= p10.sc_5 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 6 %>
+          <tr><th>６月</th><td><%= p10.sc_6 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>６月</th><td><%= p10.sc_6 %> pt</td></tr>
+        <% end %>
+
+        <% if 4 <= @now_month && @now_month <= 6 %>
+          <tr><th>2クオーター</th><td><%= p10.scc_2 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>2クオーター</th><td><%= p10.scc_2 %> pt</td></tr>
+        <% end %>
+    
+        <% if @now_month == 7 %>
+          <tr><th>７月</th><td><%= p10.sc_7 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>７月</th><td><%= p10.sc_7 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 8 %>
+          <tr><th>８月</th><td><%= p10.sc_8 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>８月</th><td><%= p10.sc_8 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 9 %>
+          <tr><th>９月</th><td><%= p10.sc_9 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>９月</th><td><%= p10.sc_9 %> pt</td></tr>
+        <% end %>
+
+        <% if 7 <= @now_month && @now_month <= 9 %>
+          <tr><th>3クオーター</th><td><%= p10.scc_3 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>3クオーター</th><td><%= p10.scc_3 %> pt</td></tr>
+        <% end %>
+    
+        <% if @now_month == 10 %>
+          <tr><th>１０月</th><td><%= p10.sc_10 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>１０月</th><td><%= p10.sc_10 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 11 %>
+          <tr><th>１１月</th><td><%= p10.sc_11 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>１１月</th><td><%= p10.sc_11 %> pt</td></tr>
+        <% end %>
+
+        <% if @now_month == 12 %>
+          <tr><th>１２月</th><td><%= p10.sc_12 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>１２月</th><td><%= p10.sc_12 %> pt</td></tr>
+        <% end %>
+    
+        <% if 10 <= @now_month && @now_month <= 12 %>
+          <tr><th>4クオーター</th><td><%= p10.scc_4 %> pt　<strong>（集計途中）</strong></td></tr>
+        <% else %>
+          <tr><th>4クオーター</th><td><%= p10.scc_4 %> pt</td></tr>
+        <% end %>
+      <% end %>
+    <% else %>
+      <tr><th colspan="2">未来の検索年のため獲得pt表示はありません。</th></tr>
+    <% end %>
+    
+    <% if @customer.member_type == "一般会員" %>
+      <% if @year_check == 2018 %>
+        <% if @customer.eighteen %>
+          <% p5 = EighteenPresenter.new(@customer.eighteen, self) %>
+          <tr><th colspan="2"><strong>2018年報酬実績（実質支払い金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_1) %>　　  　<strong><%= p5.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_2) %>　　  　<strong><%= p5.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_3) %>　　  　<strong><%= p5.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p5.c_1) %>　　  　<strong><%= p5.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_4) %>　　  　<strong><%= p5.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_5) %>　　  　<strong><%= p5.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_6) %>　　  　<strong><%= p5.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p5.c_2) %>　　  　<strong><%= p5.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_7) %>　　  　<strong><%= p5.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_8) %>　　  　<strong><%= p5.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_9) %>　　  　<strong><%= p5.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p5.c_3) %>　　  　<strong><%= p5.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_10) %>　　  　<strong><%= p5.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_11) %>　　  　<strong><%= p5.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_12) %>　　  　<strong><%= p5.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p5.c_4) %>　　  　<strong><%= p5.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2018年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+      <% elsif @year_check == 2019 %>
+        <% if @customer.nineteen %>
+          <% p6 = NineteenPresenter.new(@customer.nineteen, self) %>
+          <tr><th colspan="2"><strong>2019年報酬実績（実質支払い金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_1) %>　　  　<strong><%= p6.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_2) %>　　  　<strong><%= p6.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_3) %>　　  　<strong><%= p6.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p6.c_1) %>　　  　<strong><%= p6.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_4) %>　　  　<strong><%= p6.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_5) %>　　  　<strong><%= p6.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_6) %>　　  　<strong><%= p6.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p6.c_2) %>　　  　<strong><%= p6.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_7) %>　　  　<strong><%= p6.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_8) %>　　  　<strong><%= p6.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_9) %>　　  　<strong><%= p6.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p6.c_3) %>　　  　<strong><%= p6.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_10) %>　　  　<strong><%= p6.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_11) %>　　  　<strong><%= p6.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_12) %>　　  　<strong><%= p6.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p6.c_4) %>　　  　<strong><%= p6.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2019年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2020 %>
+        <% if @customer.twentie %>
+          <% p7 = TwentiePresenter.new(@customer.twentie, self) %>
+          <tr><th colspan="2"><strong>2020年報酬実績（実質支払い金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_1) %>　　  　<strong><%= p7.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_2) %>　　  　<strong><%= p7.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_3) %>　　  　<strong><%= p7.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p7.c_1) %>　　  　<strong><%= p7.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_4) %>　　  　<strong><%= p7.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_5) %>　　  　<strong><%= p7.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_6) %>　　  　<strong><%= p7.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p7.c_2) %>　　  　<strong><%= p7.transfer_c_2 %></strong>　＞＞　振込み日　<%= p7.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_7) %>　　  　<strong><%= p7.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_8) %>　　  　<strong><%= p7.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_9) %>　　  　<strong><%= p7.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p7.c_3) %>　　  　<strong><%= p7.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_10) %>　　  　<strong><%= p7.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_11) %>　　  　<strong><%= p7.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_12) %>　　  　<strong><%= p7.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p7.c_4) %>　　  　<strong><%= p7.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2020年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2021 %>
+        <% if @customer.one %>
+          <% p8 = OnePresenter.new(@customer.one, self) %>
+          <tr><th colspan="2"><strong>2021年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_1) %>　　  　<strong><%= p8.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_2) %>　　  　<strong><%= p8.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_3) %>　　  　<strong><%= p8.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p8.c_1) %>　　  　<strong><%= p8.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_4) %>　　  　<strong><%= p8.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_5) %>　　  　<strong><%= p8.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_6) %>　　  　<strong><%= p8.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p8.c_2) %>　　  　<strong><%= p8.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_7) %>　　  　<strong><%= p8.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_8) %>　　  　<strong><%= p8.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_9) %>　　  　<strong><%= p8.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p8.c_3) %>　　  　<strong><%= p8.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_10) %>　　  　<strong><%= p8.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_11) %>　　  　<strong><%= p8.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_12) %>　　  　<strong><%= p8.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p8.c_4) %>　　  　<strong><%= p8.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2021年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2022 %>
+        <% if @customer.twenty_two %>
+          <% p9 = TwentyTwoPresenter.new(@customer.twenty_two, self) %>
+          <tr><th colspan="2"><strong>2022年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_1) %>　　  　<strong><%= p9.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_2) %>　　  　<strong><%= p9.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_3) %>　　  　<strong><%= p9.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p9.c_1) %>　　  　<strong><%= p9.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_4) %>　　  　<strong><%= p9.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_5) %>　　  　<strong><%= p9.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_6) %>　　  　<strong><%= p9.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p9.c_2) %>　　  　<strong><%= p9.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_7) %>　　  　<strong><%= p9.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_8) %>　　  　<strong><%= p9.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_9) %>　　  　<strong><%= p9.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p9.c_3) %>　　  　<strong><%= p9.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_10) %>　　  　<strong><%= p9.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_11) %>　　  　<strong><%= p9.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_12) %>　　  　<strong><%= p9.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p9.c_4) %>　　  　<strong><%= p9.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2022年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2023 %>
+        <% if @customer.twenty_three %>
+          <% p10 = TwentyThreePresenter.new(@customer.twenty_three, self) %>
+          <tr><th colspan="2"><strong>2023年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_1) %>　　  　<strong><%= p10.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p10.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_2) %>　　  　<strong><%= p10.transfer_m_2 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_3) %>　　  　<strong><%= p10.transfer_m_3 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p10.c_1) %>　　  　<strong><%= p10.transfer_c_1 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_4) %>　　  　<strong><%= p10.transfer_m_4 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_5) %>　　  　<strong><%= p10.transfer_m_5 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_6) %>　　  　<strong><%= p10.transfer_m_6 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p10.c_2) %>　　  　<strong><%= p10.transfer_c_2 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_7) %>　　  　<strong><%= p10.transfer_m_7 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_8) %>　　  　<strong><%= p10.transfer_m_8 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_9) %>　　  　<strong><%= p10.transfer_m_9 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p10.c_3) %>　　  　<strong><%= p10.transfer_c_3 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_10) %>　　  　<strong><%= p10.transfer_m_10 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_11) %>　　  　<strong><%= p10.transfer_m_11 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_12) %>　　  　<strong><%= p10.transfer_m_12 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p10.c_4) %>　　  　<strong><%= p10.transfer_c_4 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2023年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2024 %>
+        <% if @customer.twenty_four %>
+          <% p11 = TwentyFourPresenter.new(@customer.twenty_four, self) %>
+          <tr><th colspan="2"><strong>2024年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_1) %>　　  　<strong><%= p11.transfer_m_1 %></strong>>　＞＞　振込み日　<strong><%= p11.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_2) %>　　  　<strong><%= p11.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_3) %>　　  　<strong><%= p11.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p11.c_1) %>　　  　<strong><%= p11.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_4) %>　　  　<strong><%= p11.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_5) %>　　  　<strong><%= p11.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_6) %>　　  　<strong><%= p11.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p11.c_2) %>　　  　<strong><%= p11.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_7) %>　　  　<strong><%= p11.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_8) %>　　  　<strong><%= p11.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_9) %>　　  　<strong><%= p11.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p11.c_3) %>　　  　<strong><%= p11.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_10) %>　　  　<strong><%= p11.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_11) %>　　  　<strong><%= p11.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_12) %>　　  　<strong><%= p11.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p11.c_4) %>　　  　<strong><%= p11.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2024年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2025 %>
+        <% if @customer.twenty_five %>
+          <% p12 = TwentyFivePresenter.new(@customer.twenty_five, self) %>
+          <tr><th colspan="2"><strong>2025年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_1) %>　　  　<strong><%= p12.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_2) %>　　  　<strong><%= p12.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_3) %>　　  　<strong><%= p12.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p12.c_1) %>　　  　<strong><%= p12.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_4) %>　　  　<strong><%= p12.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_5) %>　　  　<strong><%= p12.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_6) %>　　  　<strong><%= p12.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p12.c_2) %>　　 　<strong><%= p12.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_7) %>　　  　<strong><%= p12.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_8) %>　　  　<strong><%= p12.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_9) %>　　  　<strong><%= p12.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p12.c_3) %>　　  　<strong><%= p12.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_10) %>　　  　<strong><%= p12.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_11) %>　　  　<strong><%= p12.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_12) %>　　  　<strong><%= p12.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p12.c_4) %>　　  　<strong><%= p12.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2025年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2026 %>
+        <% if @customer.twenty_six %>
+          <% p13 = TwentySixPresenter.new(@customer.twenty_six, self) %>
+          <tr><th colspan="2"><strong>2026年報酬実績（実質支払金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_1) %>　　  　<strong><%= p13.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_1 %></strong></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_2) %>　　  　<strong><%= p13.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_2 %></strong></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_3) %>　　  　<strong><%= p13.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_3 %></strong></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p13.c_1) %>　　  　<strong><%= p13.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_4) %>　　  　<strong><%= p13.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_4 %></strong></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_5) %>　　  　<strong><%= p13.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_5 %></strong></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_6) %>　　  　<strong><%= p13.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_6 %></strong></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p13.c_2) %>　　  　<strong><%= p13.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_7) %>　　  　<strong><%= p13.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_7 %></strong></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_8) %>　　  　<strong><%= p13.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_8 %></strong></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_9) %>　　  　<strong><%= p13.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_9 %></strong></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p13.c_3) %>　　  　<strong><%= p13.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_10) %>　　  　<strong><%= p13.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_10 %></strong></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_11) %>　　  　<strong><%= p13.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_11 %></strong></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_12) %>　　  　<strong><%= p13.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_12 %></strong></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p13.c_4) %>　　  　<strong><%= p13.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2026年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+        <% end %>
+    
+      <% else %>
+        <% if @year_check == 2027 %>
+          <% if @customer.twenty_seven %>
+            <% p14 = TwentySevenPresenter.new(@customer.twenty_seven, self) %>
+            <tr><th colspan="2"><strong>2027年報酬実績（実質支払金額）</strong></th></tr>
+            <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_1) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_1 %></strong></td></tr>
+            <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_2) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_2 %></strong></td></tr>
+            <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_3) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_3 %></strong></td></tr>
+            <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p14.c_1) %>　　  振込み　＞＞　<strong><%= p14.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_1 %></strong></td></tr>
+            <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_4) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_4 %></strong></td></tr>
+            <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_5) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_5 %></strong></td></tr>
+            <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_6) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_6 %></strong></td></tr>
+            <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p14.c_2) %>　　  振込み　＞＞　<strong><%= p14.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_2 %></strong></td></tr>
+            <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_7) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_7 %></strong></td></tr>
+            <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_8) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_8 %></strong></td></tr>
+            <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_9) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_9 %></strong></td></tr>
+            <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p14.c_3) %>　　  振込み　＞＞　<strong><%= p14.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_3 %></strong></td></tr>
+            <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_10) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_10 %></strong></td></tr>
+            <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_11) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_11 %></strong></td></tr>
+            <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_12) %>　　  振込み　＞＞　<strong><%= p14.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_12 %></strong></td></tr>
+            <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p14.c_4) %>　　  振込み　＞＞　<strong><%= p14.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_4 %></strong></td></tr>
+            <tr><th><strong>2027年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total_a) %></strong></td></tr>
+          <% end %>
+        <% end %>
+      <% end %>
+
+    <% else %>
+      <% if @year_check == 2018 %>
+        <% if @customer.eighteen %>
+          <% p5 = EighteenPresenter.new(@customer.eighteen, self) %>
+          <tr><th colspan="2"><strong>2018年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_1) %>  振込み　＞＞　<strong><%= p5.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_1 %></strong></td></tr>
+          <tr><th>１月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p5.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_2) %>  振込み　＞＞　<strong><%= p5.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p5.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_3) %>  振込み　＞＞　<strong><%= p5.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p5.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p5.c_1) %>  振込み　＞＞　<strong><%= p5.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_4) %>  振込み　＞＞　<strong><%= p5.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p5.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_5) %>  振込み　＞＞　<strong><%= p5.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p5.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_6) %>  振込み　＞＞　<strong><%= p5.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p5.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p5.c_2) %>  振込み　＞＞　<strong><%= p5.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_7) %>  振込み　＞＞　<strong><%= p5.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p5.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_8) %>  振込み　＞＞　<strong><%= p5.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p5.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_9) %>  振込み　＞＞　<strong><%= p5.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p5.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p5.c_3) %>  振込み　＞＞　<strong><%= p5.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_10) %>  振込み　＞＞　<strong><%= p5.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p5.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_11) %>  振込み　＞＞　<strong><%= p5.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p5.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p5.m_12) %>  振込み　＞＞　<strong><%= p5.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p5.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p5.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p5.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p5.c_4) %>  振込み　＞＞　<strong><%= p5.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p5.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2018年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+      <% elsif @year_check == 2019 %>
+        <% if @customer.nineteen %>
+          <% p6 = NineteenPresenter.new(@customer.nineteen, self) %>
+          <tr><th colspan="2"><strong>2019年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_1) %>  振込み　＞＞　<strong><%= p6.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p6.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_2) %>  振込み　＞＞　<strong><%= p6.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p6.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_3) %>  振込み　＞＞　<strong><%= p6.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p6.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p6.c_1) %>  振込み　＞＞　<strong><%= p6.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_4) %>  振込み　＞＞　<strong><%= p6.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p6.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_5) %>  振込み　＞＞　<strong><%= p6.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p6.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_6) %>  振込み　＞＞　<strong><%= p6.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p6.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p6.c_2) %>  振込み　＞＞　<strong><%= p6.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_7) %>  振込み　＞＞　<strong><%= p6.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p6.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_8) %>  振込み　＞＞　<strong><%= p6.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p6.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_9) %>  振込み　＞＞　<strong><%= p6.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p6.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p6.c_3) %>  振込み　＞＞　<strong><%= p6.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_10) %>  振込み　＞＞　<strong><%= p6.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p6.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_11) %>  振込み　＞＞　<strong><%= p6.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p6.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p6.m_12) %>  振込み　＞＞　<strong><%= p6.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p6.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p6.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p6.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p6.c_4) %>  振込み　＞＞　<strong><%= p6.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p6.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2019年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2020 %>
+        <% if @customer.twentie %>
+          <% p7 = TwentiePresenter.new(@customer.twentie, self) %>
+          <tr><th colspan="2"><strong>2020年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_1) %>  振込み　＞＞　<strong><%= p7.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p7.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_2) %>  振込み　＞＞　<strong><%= p7.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p7.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_3) %>  振込み　＞＞　<strong><%= p7.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p7.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p7.c_1) %>  振込み　＞＞　<strong><%= p7.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_4) %>  振込み　＞＞　<strong><%= p7.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p7.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_5) %>  振込み　＞＞　<strong><%= p7.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p7.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_6) %>  振込み　＞＞　<strong><%= p7.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p7.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p7.c_2) %>  振込み　＞＞　<strong><%= p7.transfer_c_2 %></strong>　＞＞　振込み日　<%= p7.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_7) %>  振込み　＞＞　<strong><%= p7.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p7.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_8) %>  振込み　＞＞　<strong><%= p7.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p7.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_9) %>  振込み　＞＞　<strong><%= p7.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p7.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p7.c_3) %>  振込み　＞＞　<strong><%= p7.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_10) %>  振込み　＞＞　<strong><%= p7.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p7.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_11) %>  振込み　＞＞　<strong><%= p7.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p7.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p7.m_12) %>  振込み　＞＞　<strong><%= p7.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p7.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p7.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p7.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p7.c_4) %>  振込み　＞＞　<strong><%= p7.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p7.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2020年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2021 %>
+        <% if @customer.one %>
+          <% p8 = OnePresenter.new(@customer.one, self) %>
+          <tr><th colspan="2"><strong>2021年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_1) %>  振込み　＞＞　<strong><%= p8.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p8.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_2) %>  振込み　＞＞　<strong><%= p8.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p8.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_3) %>  振込み　＞＞　<strong><%= p8.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p8.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p8.c_1) %>  振込み　＞＞　<strong><%= p8.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_4) %>  振込み　＞＞　<strong><%= p8.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p8.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_5) %>  振込み　＞＞　<strong><%= p8.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p8.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_6) %>  振込み　＞＞　<strong><%= p8.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p8.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p8.c_2) %>  振込み　＞＞　<strong><%= p8.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_7) %>  振込み　＞＞　<strong><%= p8.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p8.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_8) %>  振込み　＞＞　<strong><%= p8.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p8.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_9) %>  振込み　＞＞　<strong><%= p8.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p8.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p8.c_3) %>  振込み　＞＞　<strong><%= p8.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_10) %>  振込み　＞＞　<strong><%= p8.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p8.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_11) %>  振込み　＞＞　<strong><%= p8.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p8.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p8.m_12) %>  振込み　＞＞　<strong><%= p8.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p8.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p8.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p8.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p8.c_4) %>  振込み　＞＞　<strong><%= p8.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p8.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2021年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2022 %>
+        <% if @customer.twenty_two %>
+          <% p9 = TwentyTwoPresenter.new(@customer.twenty_two, self) %>
+          <tr><th colspan="2"><strong>2022年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_1) %>  振込み　＞＞　<strong><%= p9.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p9.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_2) %>  振込み　＞＞　<strong><%= p9.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p9.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_3) %>  振込み　＞＞　<strong><%= p9.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p9.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p9.c_1) %>  振込み　＞＞　<strong><%= p9.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_4) %>  振込み　＞＞　<strong><%= p9.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p9.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_5) %>  振込み　＞＞　<strong><%= p9.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p9.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_6) %>  振込み　＞＞　<strong><%= p9.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p9.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p9.c_2) %>  振込み　＞＞　<strong><%= p9.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_7) %>  振込み　＞＞　<strong><%= p9.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p9.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_8) %>  振込み　＞＞　<strong><%= p9.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p9.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_9) %>  振込み　＞＞　<strong><%= p9.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p9.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p9.c_3) %>  振込み　＞＞　<strong><%= p9.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_10) %>  振込み　＞＞　<strong><%= p9.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p9.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_11) %>  振込み　＞＞　<strong><%= p9.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p9.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p9.m_12) %>  振込み　＞＞　<strong><%= p9.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p9.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p9.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p9.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p9.c_4) %>  振込み　＞＞　<strong><%= p9.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p9.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2022年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2023 %>
+        <% if @customer.twenty_three %>
+          <% p10 = TwentyThreePresenter.new(@customer.twenty_three, self) %>
+          <tr><th colspan="2"><strong>2023年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_1) %>  振込み　＞＞　<strong><%= p10.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p10.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p10.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_2) %>  振込み　＞＞　<strong><%= p10.transfer_m_2 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p10.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_3) %>  振込み　＞＞　<strong><%= p10.transfer_m_3 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p10.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p10.c_1) %>  振込み　＞＞　<strong><%= p10.transfer_c_1 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_4) %>  振込み　＞＞　<strong><%= p10.transfer_m_4 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p10.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_5) %>  振込み　＞＞　<strong><%= p10.transfer_m_5 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p10.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_6) %>  振込み　＞＞　<strong><%= p10.transfer_m_6 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p10.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p10.c_2) %>  振込み　＞＞　<strong><%= p10.transfer_c_2 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_7) %>  振込み　＞＞　<strong><%= p10.transfer_m_7 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p10.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_8) %>  振込み　＞＞　<strong><%= p10.transfer_m_8 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p10.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_9) %>  振込み　＞＞　<strong><%= p10.transfer_m_9 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p10.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p10.c_3) %>  振込み　＞＞　<strong><%= p10.transfer_c_3 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_10) %>  振込み　＞＞　<strong><%= p10.transfer_m_10 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p10.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_11) %>  振込み　＞＞　<strong><%= p10.transfer_m_11 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p10.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p10.m_12) %>  振込み　＞＞　<strong><%= p10.transfer_m_12 %></strong>>　＞＞　振込み日　<strong><%= p10.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p10.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p10.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p10.c_4) %>  振込み　＞＞　<strong><%= p10.transfer_c_4 %></strong>>　＞＞　振込み日　<strong><%= p10.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2023年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2024 %>
+        <% if @customer.twenty_four %>
+          <% p11 = TwentyFourPresenter.new(@customer.twenty_four, self) %>
+          <tr><th colspan="2"><strong>2024年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_1) %>  振込み　＞＞　<strong><%= p11.transfer_m_1 %></strong>>　＞＞　振込み日　<strong><%= p11.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p11.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_2) %>  振込み　＞＞　<strong><%= p11.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p11.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_3) %>  振込み　＞＞　<strong><%= p11.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p11.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p11.c_1) %>  振込み　＞＞　<strong><%= p11.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_4) %>  振込み　＞＞　<strong><%= p11.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p11.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_5) %>  振込み　＞＞　<strong><%= p11.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p11.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_6) %>  振込み　＞＞　<strong><%= p11.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p11.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p11.c_2) %>  振込み　＞＞　<strong><%= p11.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_7) %>  振込み　＞＞　<strong><%= p11.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p11.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_8) %>  振込み　＞＞　<strong><%= p11.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p11.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_9) %>  振込み　＞＞　<strong><%= p11.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p11.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p11.c_3) %>  振込み　＞＞　<strong><%= p11.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_10) %>  振込み　＞＞　<strong><%= p11.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p11.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_11) %>  振込み　＞＞　<strong><%= p11.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p11.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p11.m_12) %>  振込み　＞＞　<strong><%= p11.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p11.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p11.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p11.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p11.c_4) %>  振込み　＞＞　<strong><%= p11.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p11.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2024年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2025 %>
+        <% if @customer.twenty_five %>
+          <% p12 = TwentyFivePresenter.new(@customer.twenty_five, self) %>
+          <tr><th colspan="2"><strong>2025年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_1) %>  振込み　＞＞　<strong><%= p12.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p12.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_2) %>  振込み　＞＞　<strong><%= p12.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p12.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_3) %>  振込み　＞＞　<strong><%= p12.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p12.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p12.c_1) %>  振込み　＞＞　<strong><%= p12.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_4) %>  振込み　＞＞　<strong><%= p12.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p12.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_5) %>  振込み　＞＞　<strong><%= p12.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p12.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_6) %>  振込み　＞＞　<strong><%= p12.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p12.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p12.c_2) %>  振込み　＞＞　<strong><%= p12.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_7) %>  振込み　＞＞　<strong><%= p12.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p12.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_8) %>  振込み　＞＞　<strong><%= p12.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p12.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_9) %>  振込み　＞＞　<strong><%= p12.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p12.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p12.c_3) %>  振込み　＞＞　<strong><%= p12.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_10) %>  振込み　＞＞　<strong><%= p12.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p12.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_11) %>  振込み　＞＞　<strong><%= p12.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p12.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p12.m_12) %>  振込み　＞＞　<strong><%= p12.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p12.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p12.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p12.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p12.c_4) %>  振込み　＞＞　<strong><%= p12.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p12.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2025年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% elsif @year_check == 2026 %>
+        <% if @customer.twenty_six %>
+          <% p13 = TwentySixPresenter.new(@customer.twenty_six, self) %>
+          <tr><th colspan="2"><strong>2026年報酬実績（税込み獲得金額）</strong></th></tr>
+          <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_1) %>  振込み　＞＞　<strong><%= p13.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_1 %></strong></td></tr>
+          <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p13.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_1 %></strong></p></td></tr>
+          <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_2) %>  振込み　＞＞　<strong><%= p13.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_2 %></strong></td></tr>
+          <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p13.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_2 %></strong></p></td></tr>
+          <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_3) %>  振込み　＞＞　<strong><%= p13.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_3 %></strong></td></tr>
+          <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p13.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_3 %></strong></p></td></tr>
+          <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p13.c_1) %>  振込み　＞＞　<strong><%= p13.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_1 %></strong></td></tr>
+          <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_4) %>  振込み　＞＞　<strong><%= p13.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_4 %></strong></td></tr>
+          <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p13.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_4 %></strong></p></td></tr>
+          <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_5) %>  振込み　＞＞　<strong><%= p13.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_5 %></strong></td></tr>
+          <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p13.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_5 %></strong></p></td></tr>
+          <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_6) %>  振込み　＞＞　<strong><%= p13.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_6 %></strong></td></tr>
+          <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p13.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_6 %></strong></p></td></tr>
+          <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p13.c_2) %>  振込み　＞＞　<strong><%= p13.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_2 %></strong></td></tr>
+          <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_7) %>  振込み　＞＞　<strong><%= p13.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_7 %></strong></td></tr>
+          <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p13.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_7 %></strong></p></td></tr>
+          <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_8) %>  振込み　＞＞　<strong><%= p13.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_8 %></strong></td></tr>
+          <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p13.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_8 %></strong></p></td></tr>
+          <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_9) %>  振込み　＞＞　<strong><%= p13.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_9 %></strong></td></tr>
+          <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p13.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_9 %></strong></p></td></tr>
+          <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p13.c_3) %>  振込み　＞＞　<strong><%= p13.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_3 %></strong></td></tr>
+          <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_10) %>  振込み　＞＞　<strong><%= p13.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_10 %></strong></td></tr>
+          <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p13.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_10 %></strong></p></td></tr>
+          <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_11) %>  振込み　＞＞　<strong><%= p13.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_11 %></strong></td></tr>
+          <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p13.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_11 %></strong></p></td></tr>
+          <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p13.m_12) %>  振込み　＞＞　<strong><%= p13.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p13.cache_payment_12 %></strong></td></tr>
+          <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p13.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p13.special_payment_12 %></strong></p></td></tr>
+          <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p13.c_4) %>  振込み　＞＞　<strong><%= p13.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p13.bonus_payment_4 %></strong></td></tr>
+          <tr><th><strong>2026年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+        <% end %>
+    
+      <% else %>
+        <% if @year_check == 2027 %>
+          <% if @customer.twenty_seven %>
+            <% p14 = TwentySevenPresenter.new(@customer.twenty_seven, self) %>
+            <tr><th colspan="2"><strong>2027年報酬実績（税込み獲得金額）</strong></th></tr>
+            <tr><th>１月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_1) %>  振込み　＞＞　<strong><%= p14.transfer_m_1 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_1 %></strong></td></tr>
+            <tr><th>1月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_1) %>  振込み　＞＞　<strong><%= p14.sp_transfer_1 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_1 %></strong></p></td></tr>
+            <tr><th>２月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_2) %>  振込み　＞＞　<strong><%= p14.transfer_m_2 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_2 %></strong></td></tr>
+            <tr><th>2月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_2) %>  振込み　＞＞　<strong><%= p14.sp_transfer_2 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_2 %></strong></p></td></tr>
+            <tr><th>３月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_3) %>  振込み　＞＞　<strong><%= p14.transfer_m_3 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_3 %></strong></td></tr>
+            <tr><th>3月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_3) %>  振込み　＞＞　<strong><%= p14.sp_transfer_3 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_3 %></strong></p></td></tr>
+            <tr><th>ボーナス1</th><td>￥<%= number_with_delimiter(p14.c_1) %>  振込み　＞＞　<strong><%= p14.transfer_c_1 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_1 %></strong></td></tr>
+            <tr><th>４月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_4) %>  振込み　＞＞　<strong><%= p14.transfer_m_4 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_4 %></strong></td></tr>
+            <tr><th>4月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_4) %>  振込み　＞＞　<strong><%= p14.sp_transfer_4 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_4 %></strong></p></td></tr>
+            <tr><th>５月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_5) %>  振込み　＞＞　<strong><%= p14.transfer_m_5 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_5 %></strong></td></tr>
+            <tr><th>5月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_5) %>  振込み　＞＞　<strong><%= p14.sp_transfer_5 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_5 %></strong></p></td></tr>
+            <tr><th>６月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_6) %>  振込み　＞＞　<strong><%= p14.transfer_m_6 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_6 %></strong></td></tr>
+            <tr><th>6月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_6) %>  振込み　＞＞　<strong><%= p14.sp_transfer_6 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_6 %></strong></p></td></tr>
+            <tr><th>ボーナス2</th><td>￥<%= number_with_delimiter(p14.c_2) %>  振込み　＞＞　<strong><%= p14.transfer_c_2 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_2 %></strong></td></tr>
+            <tr><th>７月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_7) %>  振込み　＞＞　<strong><%= p14.transfer_m_7 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_7 %></strong></td></tr>
+            <tr><th>7月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_7) %>  振込み　＞＞　<strong><%= p14.sp_transfer_7 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_7 %></strong></p></td></tr>
+            <tr><th>８月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_8) %>  振込み　＞＞　<strong><%= p14.transfer_m_8 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_8 %></strong></td></tr>
+            <tr><th>8月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_8) %>  振込み　＞＞　<strong><%= p14.sp_transfer_8 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_8 %></strong></p></td></tr>
+            <tr><th>９月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_9) %>  振込み　＞＞　<strong><%= p14.transfer_m_9 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_9 %></strong></td></tr>
+            <tr><th>9月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_9) %>  振込み　＞＞　<strong><%= p14.sp_transfer_9 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_9 %></strong></p></td></tr>
+            <tr><th>ボーナス3</th><td>￥<%= number_with_delimiter(p14.c_3) %>  振込み　＞＞　<strong><%= p14.transfer_c_3 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_3 %></strong></td></tr>
+            <tr><th>１０月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_10) %>  振込み　＞＞　<strong><%= p14.transfer_m_10 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_10 %></strong></td></tr>
+            <tr><th>10月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_10) %>  振込み　＞＞　<strong><%= p14.sp_transfer_10 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_10 %></strong></p></td></tr>
+            <tr><th>１１月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_11) %>  振込み　＞＞　<strong><%= p14.transfer_m_11 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_11 %></strong></td></tr>
+            <tr><th>11月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_11) %>  振込み　＞＞　<strong><%= p14.sp_transfer_11 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_11 %></strong></p></td></tr>
+            <tr><th>１２月キャッシュバック</th><td>￥<%= number_with_delimiter(p14.m_12) %>  振込み　＞＞　<strong><%= p14.transfer_m_12 %></strong>　＞＞　振込み日　<strong><%= p14.cache_payment_12 %></strong></td></tr>
+            <tr><th>12月特別会員ボーナス</th><td><p>￥<%= number_with_delimiter(@sp_12) %>  振込み　＞＞　<strong><%= p14.sp_transfer_12 %></strong>>　＞＞　振込み日　<strong><%= p14.special_payment_12 %></strong></p></td></tr>
+            <tr><th>ボーナス4</th><td>￥<%= number_with_delimiter(p14.c_4) %>  振込み　＞＞　<strong><%= p14.transfer_c_4 %></strong>　＞＞　振込み日　<strong><%= p14.bonus_payment_4 %></strong></td></tr>
+            <tr><th><strong>2027年合計</strong></th><td><strong>￥<%= number_with_delimiter(@total) %></strong></td></tr>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+</div>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '顧客管理画面へ戻る', :admin_customers %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

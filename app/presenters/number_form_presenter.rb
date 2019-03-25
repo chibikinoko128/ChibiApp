@@ -1,0 +1,2 @@
+class NumberFormPresenter < FormPresenter
+end

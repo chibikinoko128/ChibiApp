@@ -1,0 +1,125 @@
+<% @title = '顧客管理' %>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '新規登録', :new_admin_customer %>
+  </div>
+
+  <%= render 'search_form' %>
+  
+  <h2>特別会員</h2>
+  <% if @special_member.present? %>
+    <table class="listing">
+      <tr>
+        <th>id</th>
+        <th>登録形態</th>
+        <th>氏名</th>
+        <th>フリガナ</th>
+        <th>ニックネーム</th>
+        <th>メールアドレス</th>
+      </tr>
+    
+    <% @special_member.each do |j| %>
+      <% o = CustomerPresenter.new(j, self) %>
+      <tr>
+        <td><%= o.id %></td>
+        <td><strong><%= o.member_type %></strong></td>
+        <td><%= o.full_name %></td>
+        <td><%= o.full_name_kana %></td>
+        <td><%= o.nickname %></td>
+        <td class="email"><%= o.email %></td> 
+      </tr>
+    <% end %>
+    </table>  
+  <% elsif @special_member.blank? %>
+    <h2><strong>特別会員はおりません。</strong></h2>
+  <% end %>
+  
+  <%= paginate @customers %>
+  
+  <table class="listing">
+    <tr>
+      <th>id</th>
+      <th>登録</th>
+      <th>登録形態</th>
+      <th>氏名</th>
+      <th>フリガナ</th>
+      <th>ニックネーム</th>
+      <th>メールアドレス</th>
+      <th>生年月日</th>
+      <th>性別</th>
+      <th>紹介者</th>
+      <th>アクション</th>
+    </tr>
+    <h2>サイト登録総人数<strong><%= number_with_delimiter(@customer_ids) %></strong>人(退会者は<strong>赤文字</strong>で表示）</h2>
+    <% @customers.each do |c| %>
+      <% p = CustomerPresenter.new(c, self) %>
+      <% r = Register.find_by(customer_id: c) %>
+      <tr>
+        <td><%= p.id %></td>
+        <% if r["rg_#{@month}"] == "退会" %>
+          <td><strong><%= r["rg_#{@month}"] %></strong></td>   
+        <% else %>
+          <td><%= r["rg_#{@month}"] %></td>
+        <% end %>
+        <% if p.member_type == "特別会員" %>
+          <td><strong><%= p.member_type %></strong></td>
+        <% else %>
+          <td><%= p.member_type %></td>
+        <% end %>
+        
+        <% if r["rg_#{@month}"] == "退会" %>
+          <td><strong><%= p.full_name %></strong></td>
+          <td><strong><%= p.full_name_kana %></strong></td>
+          <td><strong><%= p.nickname %></strong></td>
+          <td class="email"><strong><%= p.email %></strong></td>
+          <td class="date"><strong><%= p.birthday %></strong></td>
+          <td><strong><%= p.gender %></strong></td>
+          <td><strong><%= p.sponsor1 %></strong></td>
+        <% else %>
+          <td><%= p.full_name %></td>
+          <td><%= p.full_name_kana %></td>
+          <td><%= p.nickname %></td>
+          <td class="email"><%= p.email %></td>
+          <td class="date"><%= p.birthday %></td>
+          <td><%= p.gender %></td>
+          <td><%= p.sponsor1 %></td>
+        <% end %>
+        
+        <% if p.email =~ /^exit/ %>
+          <td class="actions">
+            <%= link_to '詳細', [ :admin, c] %> |
+            <%= link_to '編集', [ :edit, :admin, c ] %> |
+            <%= link_to '口座情報', edit_admin_bank_path(c) %> |
+            <%= link_to '削除', [ :admin, c ], method: :delete,
+              data: { confirm: '本当に削除しますか？' } %>
+          </td>
+        <% else %>
+          <td class="actions">
+            <%= link_to '詳細', [ :admin, c] %> |
+            <%= link_to '編集', [ :edit, :admin, c ] %> |
+            <%= link_to '入金確認', edit_admin_register_path(c) %> |
+            <%= link_to '口座情報', edit_admin_bank_path(c) %> |
+            <%= link_to '削除', [ :admin, c ], method: :delete,
+              data: { confirm: '本当に削除しますか？' } %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
+  <%= paginate @customers %>
+
+  <div class="links">
+    <%= link_to '新規登録', :new_admin_customer %>
+  </div>
+  
+  <div class="links">
+    <%= link_to '検索ページへ', :edit_admin_year %>
+  </div>
+  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

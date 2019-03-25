@@ -1,0 +1,40 @@
+<%
+  if @administrator
+    email = @administrator.email
+    @title = "#{email}のログイン・ログアウト記録"
+  else
+    @title = '管理者のログイン・ログアウト記録'
+  end
+%>
+<h1><%= @title %></h1>
+
+<div class="table-wrapper">
+  <div class="links">
+    <%= link_to '管理者一覧', :admin_administrators %>
+  </div>
+  
+  <%= paginate @events %>
+
+  <table class="listing">
+    <tr>
+      <% unless @administrator %><th>メールアドレス</th><% end %>
+      <th>種別</th>
+      <th>日時</th>
+    </tr>
+    <% @events.each do |event| %>
+      <%= AdminEventPresenter.new(event, self).table_row %>
+    <% end %>
+    <% if @events.empty? %>
+      <tr>
+        <%= content_tag(:td, '記録がありません',
+          colspan: @administrator ? 2 : 3, style: 'text-align: center') %>
+      </tr>
+    <% end %>
+  </table>
+  
+  <%= paginate @events %>
+
+  <div class="links">
+    <%= link_to '管理者一覧', :admin_administrators %>
+  </div>
+</div>

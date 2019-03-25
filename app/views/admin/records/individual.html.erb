@@ -1,0 +1,21 @@
+<% @title = '企業実績' %>
+<h1><strong><%= @title %></strong></h1>
+
+<ul class='menu'></ul>
+<li><%= link_to '月別会員数。売り上げ', :month_member_admin_record %></li>
+<li><%= link_to '月別キャッシュバック支払い実績', :month_cache_admin_record %></li>
+<li><%= link_to '月別ボーナス支払い実績', :quarter_bonus_admin_record %></li>
+<li><%= link_to '特別会員ボーナス支払い実績', :sp_bonus_admin_record %></li>
+<li><%= link_to '年度別粗利益', :year_record_admin_record %></li>
+</ul>
+
+<div class="table-wrapper">  
+  <div class="links">
+    <%= link_to '検索画面へ戻る', :edit_admin_retrieval %>
+  </div>
+</div>
+<div class="table-wrapper">  
+  <div class="links">
+    <%= link_to 'トップ画面へ戻る', :admin_root %>
+  </div>
+</div>

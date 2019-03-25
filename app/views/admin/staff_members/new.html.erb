@@ -1,0 +1,12 @@
+<% @title = '社員の新規登録' %>
+<h1><%= @title %></h1>
+
+<div id="generic-form">  
+  <%= form_for [ :admin, @staff_member ] do |f| %>
+    <%= render 'form', f: f %>
+    <div class="buttons">
+      <%= f.submit '登録', class: "btn btn-default", data: {disable_with: '登録中・・・' } %>
+      <%= link_to 'キャンセル', :admin_staff_members %>
+    </div>
+  <% end %>
+</div>

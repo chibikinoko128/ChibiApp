@@ -1,0 +1,80 @@
+<% @title = '会員登録ページ' %>
+<% @title_a = '会員専用ページ' %>
+
+<div class="main">
+  <h1><%= "※" %><%= link_to @title, :dashboard_visitor_rule %><%= "※ ※" %><%= link_to @title_a, :customer_root %><%= "※" %></h1>
+
+  <h2><strong></strong></h2>
+  <ul>
+  <p><strong>会員登録ページへ</strong>をクリックすると会員特典等の詳細が確認できます。</p>
+  </ul>
+  <%= link_to(image_tag("new.png", size: "60*60", alt: "新規会員登録", align: "top" ), :dashboard_visitor_rule) %>
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("customer.png", size: "60*60", alt: "会員専用", align: "top" ), :customer_root) %>
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("sigoto.png", size: "60*60", alt: "ビジネスに参加するには？", align: "top" ), :invi_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("g4686.png", size: "60*60", alt: "おすすめ動画", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("g4766.png", size: "60*60", alt: "Wonder-gGate配信動画", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("g4594.png", size: "60*60", alt: "特典ボーナスイベント動画", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("sele.png", size: "60*60", alt: "めざせ！セレブ生活！ヒント教えます。", align: "top" ), :invi_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("izaka.png", size: "60*60", alt: "居酒屋･飲食店を開業するには？", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("fuuzoku1.png", size: "60*60", alt: "風俗店を開業するには？", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("taiho1.png", size: "60*60", alt: "逮捕後どうなるか知りたくない？", align: "top" ), :invitation_visitor_rule) %>
+
+  <h2><strong>以下おすすめは無料です。ご自由に視聴してください。</strong></h2>
+
+  <%= link_to(image_tag("eng.png", size: "60*60", alt: "おすすめ英会話動画", align: "top" ), "https://www.youtube.com/playlist?list=PLP6v_XkEGXeraavseTLxZVaL6H7vnRgAX") %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("music.png", size: "60*60", alt: "おすすめミュージシャン", align: "top" ), "https://www.youtube.com/watch?v=VprW9bSfWpA") %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("youtuber.png", size: "60*60", alt: "おすすめYouTuber", align: "top" ), "https://www.youtube.com/watch?v=E8WfVei73zk") %>
+
+  <h2><strong></strong></h2>
+  <ul>
+  <p><strong>会員登録ページへ</strong>をクリックすると会員特典等の詳細が確認できます。</p>
+  </ul>
+  <%= link_to(image_tag("new.png", size: "60*60", alt: "新規会員登録", align: "top" ), :dashboard_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("senyou1.png", size: "60*60", alt: "会員専用ページ", align: "top" ), :customer_root) %>
+
+  <h2><strong></strong></h2>
+
+  <%= link_to(image_tag("bit1.png", size: "60*60", alt: "特定商取引法に基づく表記", align: "top" ), :dashboard_visitor_rule) %>
+
+  <h2><strong></strong></h2>
+
+  <div class="table-wrapper">
+    <div class="links">
+      <%= link_to 'トップ画面へ戻る', :visitor_root %>
+    </div>
+  </div>     
+</div>

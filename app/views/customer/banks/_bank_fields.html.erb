@@ -1,0 +1,10 @@
+<%= f.fields_for :bank, f.object.bank do |ff| %>
+  <%= markup do |m|
+    #p = confirming ? ConfirmingBankFormPresenter.new(ff, self) :  BankFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.bk_name_block(:bk_name, '銀行名')
+      m << q.office_block(:office, '支店名')
+      m << q.account_block(:account, '口座番号')
+    end
+  end %>
+<% end %>

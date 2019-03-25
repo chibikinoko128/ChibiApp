@@ -1,0 +1,39 @@
+<% @cacheback_member.each do |c| %>
+  <% e = c.customer_id %>
+  <% p = Customer.find_by(id: e) %>
+  <% b = Bank.find_by(customer_id: e) %>
+  <% @lock = p.lock %>
+  <% if @year == 2018 %>
+    <% @cache_record = Eighteen.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2019 %>
+    <% @cache_record = Nineteen.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2020 %>
+    <% @cache_record = Twentie.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2021 %>
+    <% @cache_record = One.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2022 %>
+    <% @cache_record = TwentyTwo.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2023 %>
+    <% @cache_record = TwentyThree.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2024 %>
+    <% @cache_record = TwentyFour.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2025 %>
+    <% @cache_record = TwentyFive.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% elsif @year == 2026 %>
+    <% @cache_record = TwentySix.find_by(customer_id: e) %>
+    <% render 'cache_year' %>
+  <% else %>
+    <% if @year == 2027 %>
+      <% @cache_record = TwentySeven.find_by(customer_id: e) %>
+      <% render 'cache_year' %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,19 @@
+<ul>
+<p>登録された口座名義が本人と一致しない場合は<br>不正防止のため<strong>キャッシュバック、ボーナス</strong>の<br>支払いは行いません。注意してください。</p>
+<p>ゆうちょ銀行は取り扱っておりません。</p>
+</ul>
+<%= f.fields_for :bank, f.object.bank do |ff| %>
+  <%= markup do |m|
+    p = confirming ? ConfirmingBankFormPresenter.new(ff, self) :  BankFormPresenter.new(ff, self)
+    p.with_options(required: true) do |q|
+      m << q.bk_name_block(:bk_name, '銀行名')
+      m << q.office_block(:office, '支店名')
+      m << q.account_block(:account, '口座番号(半角数字で入力)')
+    end
+  end %>
+<% end %>
+<ul>
+  <p><strong>口座名義は本人名で登録させていただきます。</strong></p>
+  <p>口座名義: <%= @acc_name %></p>
+  <p>（カナ）: <%= @acc_name_kana %></p>
+</ul>  

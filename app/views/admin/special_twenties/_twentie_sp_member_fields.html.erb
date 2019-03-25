@@ -1,0 +1,91 @@
+<% if @month == 1 %>
+  <%= f.fields_for :nineteen, f.object.nineteen do |ff| %>
+    <%= markup do |m|
+      p = confirming ? ConfirminNineteenFormPresenter.new(ff,self) : NineteenFormPresenter.new(ff, self)
+      p.with_options(required: true) do |q|
+        m << q.drop_down_list_block(:sp_transfer_12, '12月特別会員ボーナス送金', Nineteen::TRANSFER)
+      end
+    end %>
+  <% end %>
+<% else %>
+  <%= f.fields_for :twentie, f.object.twentie do |ff| %>
+    <% if @month == 2 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_1, '1月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 3 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_2, '2月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 4 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_3, '3月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 5 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_4, '4月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 6 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_5, '5月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 7 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_6, '6月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 8 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_7, '7月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 9 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_8, '8月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 10 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_9, '9月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% elsif @month == 11 %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_10, '10月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% else %>
+      <%= markup do |m|
+        p = confirming ? ConfirminTwentieFormPresenter.new(ff, self) : TwentieFormPresenter.new(ff, self)
+        p.with_options(required: true) do |q|
+          m << q.drop_down_list_block(:sp_transfer_11, '11月特別会員ボーナス送金', Twentie::TRANSFER)
+        end
+      end %>
+    <% end %>
+  <% end %>
+<% end %>

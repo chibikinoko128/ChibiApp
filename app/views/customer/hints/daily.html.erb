@@ -1,0 +1,68 @@
+<% @title = '本日のおすすめ動画' %>
+<h1><strong><%= @title %></strong></h1>
+<div class="main">
+<h2>自己啓発YouTubue動画です。</h2>
+</div>
+  <% if @day == 1 %>
+    <%= render "first" %>
+  <% elsif @day == 2 %>
+    <%= render "second" %>
+  <% elsif @day == 3 %>
+    <%= render "third" %>
+  <% elsif @day == 4 %>
+    <%= render "fourth" %>
+  <% elsif @day == 5 %>
+    <%= render "fifth" %>
+  <% elsif @day == 6 %>
+    <%= render "sixth" %>
+  <% elsif @day == 7 %>
+    <%= render "seventh" %>
+  <% elsif @day == 8 %>
+    <%= render "eighth" %>
+  <% elsif @day == 9 %>
+    <%= render "ninth" %>
+  <% elsif @day == 10 %>
+    <%= render "tenth" %>
+  <% elsif @day == 11 %>
+    <%= render "eleventh" %>
+  <% elsif @day == 12 %>
+    <%= render "twelfth" %>
+  <% elsif @day == 13 %>
+    <%= render "thirteenth" %>
+  <% elsif @day == 14 %>
+    <%= render "fourteenth" %>
+  <% elsif @day == 15 %>
+    <%= render "fifteenth" %>
+  <% elsif @day == 16 %>
+    <%= render "sixteenth" %>
+  <% elsif @day == 17 %>
+    <%= render "seventeenth" %>
+  <% elsif @day == 18 %>
+    <%= render "eighteenth" %>
+  <% elsif @day == 19 %>
+    <%= render "nineteenth" %>
+  <% elsif @day == 20 %>
+    <%= render "twentieth" %>
+  <% elsif @day == 21 %>
+    <%= render "twenty_first" %>
+  <% elsif @day == 22 %>
+    <%= render "twenty_second" %>
+  <% elsif @day == 23 %>
+    <%= render "twenty_third" %>
+  <% elsif @day == 24 %>
+    <%= render "twenty_fourth" %>
+  <% elsif @day == 25 %>
+    <%= render "twenty_fifth" %>
+  <% elsif @day == 26 %>
+    <%= render "twenty_sixth" %>
+  <% elsif @day == 27 %>
+    <%= render "twenty_seventh" %>
+  <% elsif @day == 28 %>
+    <%= render "twenty_eighth" %>
+  <% elsif @day == 29 %>
+    <%= render "twenty_ninth" %>
+  <% elsif @day == 30 %>
+    <%= render "thirtieth" %>
+  <% else %>
+    <%= render "thirty_first" %>
+  <% end %>
