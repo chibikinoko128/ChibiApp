@@ -162,7 +162,7 @@ namespace :deploy do
     #invoke  'puma:stop'
     #invoke! 'puma:start'
   #end
-
+  
   after  :migrate,      :seed
   before :starting,     :check_revision
   after  :finishing,    :compile_assets

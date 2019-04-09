@@ -23,18 +23,3 @@ Things you may want to cover:
 
 * ...
 
-=Dhibi - 顧客管理システム
-
-== 説明
-
-Chibiは企業向けの顧客管理システムです。
-
-== 推奨されるシステム環境
-
-* Centos7.0
-
-* Ruby 2.3.1
-
-* Rails 5.1.3
-
-* MySQL　14.14

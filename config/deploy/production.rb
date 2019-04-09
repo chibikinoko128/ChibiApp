@@ -91,7 +91,7 @@ set :migration_role, 'db'
     #forward_agent: true,
     #auth_methods: %w(publickey)
 
-server 'wonder-gate.com', user: 'kinoko', roles: %w{app web db}
+server '153.126.131.89', user: 'kinoko', roles: %w{app web db}
 #role :app, %w{kinoko@wonder-gate.com}
 #role :web, %w{kinoko@wonder-gate.com}
 #role :db, %w{kinoko@wonder-gate.com}

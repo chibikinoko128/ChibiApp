@@ -10,6 +10,7 @@ end
 gem 'rails', '~> 5.1.3'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
+gem 'mysql'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -32,6 +33,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv-rails'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -51,7 +53,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem "capistrano-maintenance", require: false
+  #gem "capistrano-maintenance", require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -73,18 +75,18 @@ group :test do
   gem 'rails-controller-testing'
 end
 
-group :deployment do
+#group :deployment do
   #gem 'whenever', require: false
-  gem 'capistrano', '~> 3.11', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rbenv', require: false
-  gem 'capistrano3-puma', require: false
-  gem 'capistrano-rvm', require: false
-  gem 'capistrano-chruby', require: false
-  gem 'capistrano-passenger', require: false
-  gem 'sshkit-sudo', '~> 0.1.0', require: false
-  gem 'whenever', require: false
-end
+  #gem 'capistrano', '~> 3.11', require: false
+  #gem 'capistrano-bundler', require: false
+  #gem 'capistrano-rails', require: false
+  #gem 'capistrano-rbenv', require: false
+  #gem 'capistrano3-puma', require: false
+  #gem 'capistrano-rvm', require: false
+  #gem 'capistrano-chruby', require: false
+  #gem 'capistrano-passenger', require: false
+  #gem 'sshkit-sudo', '~> 0.1.0', require: false
+  #gem 'whenever', require: false
+#end
 
 gem 'rake', '< 11.0'
