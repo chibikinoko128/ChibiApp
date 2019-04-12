@@ -59,14 +59,14 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.access.log"
-set :puma_error_log,  "#{release_path}/log/puma.error.log"
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true
+#set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
+#set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+#set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+#set :puma_access_log, "#{release_path}/log/puma.access.log"
+#set :puma_error_log,  "#{release_path}/log/puma.error.log"
+#set :puma_preload_app, true
+#set :puma_worker_timeout, nil
+#set :puma_init_active_record, true
 
 set :stage, :production
 set :rails_env, 'production'
@@ -91,7 +91,7 @@ set :migration_role, 'db'
     #forward_agent: true,
     #auth_methods: %w(publickey)
 
-server '153.126.131.89', user: 'kinoko', roles: %w{app web db}
+server 'wonder-gate.com', user: 'kinoko', roles: %w{app web db}
 #role :app, %w{kinoko@wonder-gate.com}
 #role :web, %w{kinoko@wonder-gate.com}
 #role :db, %w{kinoko@wonder-gate.com}

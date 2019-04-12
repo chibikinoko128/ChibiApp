@@ -3,10 +3,10 @@ lock "~> 3.11.0"
 
 set :application, "chibi"
 set :rails_env, "production"
-set :repo_url, "https://github.com/harubot/capistrano_sample.git"
+set :repo_url, "https://github.com/chibikinoko128/ChibiApp.git"
 set :branch, 'master'
 set :conditionally_migrate, true
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+
 #set :scm, :git
 #server 'wonder-gate.com', user: 'kinoko', port: 60128, roles: %w{web app db}
 # Default branch is :master
@@ -44,33 +44,34 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 # set :ssh_options, verify_host_key: :secure
 
 set :user,            'kinoko'
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
+#set :puma_threads,    [4, 16]
+#set :puma_workers,    0
 set :pty,             true
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/var/www/html"
+set :deploy_to,       "/usr/share/nginx/html"
 set :format, :pretty
 set :log_level, :debug
 set :keep_releases, 3
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.access.log"
-set :puma_error_log,  "#{release_path}/log/puma.error.log"
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true
-#set :rbenv_type, :user
-#set :rbenv_path, '/usr/local/rbenv'
-#set :rbenv_ruby, '2.3.1-p112'
+#set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
+#set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+#set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+#set :puma_access_log, "#{release_path}/log/puma.access.log"
+#set :puma_error_log,  "#{release_path}/log/puma.error.log"
+#set :puma_preload_app, true
+#set :puma_worker_timeout, nil
+#set :puma_init_active_record, true
+set :rbenv_type, :user
+#set :rbenv_path, '/home/vagrant/.rbenv'
+set :rbenv_ruby_version, 'ruby_2.3.1'
+set :rbenv_custom_path, '/root/.rbenv'
 #set :chruby_ruby, 'ruby-2.3.1p112'
-set :rvm_ruby_version, "ruby-2.3.1"
+#set :rvm_ruby_version, "ruby-2.3.1"
 
 #set :rbenv_prefix, "RBENV_ROOT=#{fetch(:rbenv_path)} RBENV_VERSION=#{fetch(:rbenv_ruby)} #{fetch(:rbenv_path)}/bin/rbenv exec"
 #set :rbenv_map_bins, %w{rake gem bundle ruby rails}
-#et :rbenv_roles, :all
+#set :rbenv_roles, :all
 
 set :linked_dirs, fetch(:linked_dirs, []).push(
   'log',
@@ -87,22 +88,7 @@ set :linked_files, fetch(:linked_files, []).push(
   '.env'
 )
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
-
-set :passenger_rvm_ruby_version, '2.3.1p112'
-set :passenger_environment_variables, { :path => '/path-to-passenger/bin:$PATH' }
-set :passenger_restart_command, "/path-to-passenger/bin/passenger-config restart-app #{deploy_to}"
-set :passenger_restart_with_touch, true
-
-namespace :puma do
-  desc 'Create Directories for Puma Pids and Socket'
-  task :make_dirs do
-    on roles(:app) do
-      execute "mkdir #{shared_path}/tmp/sockets -p"
-      execute "mkdir #{shared_path}/tmp/pids -p"
-    end
-  end
-  before :start, :make_dirs
-end
+set :whenever_roles,        ->{ :batch }
 
 namespace :deploy do
   desc 'Upload database.yml'
@@ -133,18 +119,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      Rake::Task["puma:restart"].reenable
-      invoke! 'puma:restart'
-    end
-  end
-  
-  desc "Resterts application."
-  task :restart do
-    on roles :all do 
-      execute :mkdir, "-p :#{shared_path}/tmp"
-      execute :touch, "#{shared_path}/tmp/restart.txt"
-    end
+    invoke 'unicorn:restart'
   end
 
   desc 'reload the database with seed data'
@@ -158,11 +133,6 @@ namespace :deploy do
     end
   end
   
-  #task :restart_puma do
-    #invoke  'puma:stop'
-    #invoke! 'puma:start'
-  #end
-  
   after  :migrate,      :seed
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
@@ -171,7 +141,6 @@ end
 
 before 'deploy:starting', 'deploy:upload'
 after 'deploy:publishing', 'deploy:restart'
-#after 'deploy:finishing', 'deploy:restart_puma'
 
 require "capistrano/maintenance"
 set :maintenance_template_path, File.join(File.dirname(__FILE__), "..", "app", "views", "system", "maintenance.html.erb")

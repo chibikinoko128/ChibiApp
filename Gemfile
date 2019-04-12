@@ -60,6 +60,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'nokogiri'
 gem 'rails-i18n', '~> 4.0.1'
+gem 'whenever', require: false
 #gem 'foreigner', '~> 1.6.1'
 gem 'kaminari'
 gem 'date_validator', '~> 0.7.0'
@@ -75,18 +76,15 @@ group :test do
   gem 'rails-controller-testing'
 end
 
-#group :deployment do
-  #gem 'whenever', require: false
-  #gem 'capistrano', '~> 3.11', require: false
-  #gem 'capistrano-bundler', require: false
-  #gem 'capistrano-rails', require: false
-  #gem 'capistrano-rbenv', require: false
-  #gem 'capistrano3-puma', require: false
-  #gem 'capistrano-rvm', require: false
+group :deployment do
+  gem 'capistrano', '~> 3.11', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-rails', require: false
+  gem 'capistrano-rbenv', require: false
+  gem 'capistrano3-unicorn', require: false
+  gem 'capistrano-maintenance', require: false
   #gem 'capistrano-chruby', require: false
-  #gem 'capistrano-passenger', require: false
-  #gem 'sshkit-sudo', '~> 0.1.0', require: false
-  #gem 'whenever', require: false
-#end
+  gem 'sshkit-sudo', '~> 0.1.0', require: false
+end
 
 gem 'rake', '< 11.0'
