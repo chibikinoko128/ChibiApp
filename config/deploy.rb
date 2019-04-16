@@ -53,7 +53,7 @@ set :deploy_via,      :remote_cache
 set :deploy_to,       "/usr/share/nginx/html"
 set :format, :pretty
 set :log_level, :debug
-set :keep_releases, 3
+set :keep_releases, 5
 #set :puma_bind,       "unix://#{shared_path}/tmp/sockets/puma.sock"
 #set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 #set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -80,7 +80,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   'tmp/sockets',
   'vendor/bundle',
   'public/system',
-  'public/uploads'
+  'public/uploads',
+  'public/tmp'
 )
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml',
@@ -90,96 +91,155 @@ set :linked_files, fetch(:linked_files, []).push(
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :whenever_roles,        ->{ :batch }
 
+
 namespace :deploy do
-  desc 'Upload database.yml'
-  task :upload do
-    on roles(:app) do |host|
-      if test "[ ! -d #{shared_path}/config ]"
-        execute "mkdir -p #{shared_path}/config"
-      end
-      upload!('config/database.yml', "#{shared_path}/config/database.yml")
-    end
-  end
-  
-  desc 'Make sure local git is in sync with remote.'
-  task :check_revision do
-    on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-      end
-    end
-  end
-
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
-
   desc 'Restart application'
   task :restart do
     invoke 'unicorn:restart'
   end
 
-  desc 'reload the database with seed data'
-  task :seed do
-    on roles(:db) do
+  desc 'Create database'
+  task :db_create do
+    on roles(:db) do |host|
       with rails_env: fetch(:rails_env) do
-        within release_path do
+        within current_path do
+          execute :bundle, :exec, :rake, 'db:create'
+        end
+      end
+    end
+  end
+
+  desc 'Run seed'
+  task :seed do
+    on roles(:app) do
+      with rails_env: fetch(:rails_env) do
+        within current_path do
           execute :bundle, :exec, :rake, 'db:seed'
         end
       end
     end
   end
-  
-  after  :migrate,      :seed
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
-end
 
-before 'deploy:starting', 'deploy:upload'
-after 'deploy:publishing', 'deploy:restart'
+  after :publishing, :restart
 
-require "capistrano/maintenance"
-set :maintenance_template_path, File.join(File.dirname(__FILE__), "..", "app", "views", "system", "maintenance.html.erb")
-$VERBOSE = nil
-
-namespace :db do
-  desc "Dump the database and compress it."
-  task :backup do
-    on roles(:db) do
-  #task :backup, :roles => :db, :only => { :primary => true } do
-      backups_path = "#{shared_path}/db_backups"
-
-      date = capture "cat #{current_path}/config/database.yml"
-      config = YAML::load(data)[rails_env]
-      abort unless config && config['adapter'] == 'mysql2'
-
-      file_name = "#{config['database']}-#{release_name}.sql.gz"
-
-      command = "/usr/bin/mysqldump --user=#{config['username']}"
-      command += " --password" if config['password']
-      command += " --host=#{config['host']}" if config['host']
-      command += " --port=#{config['port']}" if config['port']
-      command += " #{config['database']}"
-      command += " | gzip -c > #{backups_path}/#{file_name}"
-
-      run "mkdir -p #{backups_path}"
-      run command do |channel, _, output|
-        if output =~ /^Enter password:/
-          channel.send_data "#{config['password']}n"
-        end
-      end
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
     end
   end
 end
 
-Rake::Task["deploy:new_release_path"].clear
 
-namespace :deploy do
-  task :new_release_path do
-    set_release_path(Time.now.strftime("%Y%m%d%H%M%S"))
+namespace :maintenance do
+  desc 'start maintenance'
+  task :on do
+    on roles(:web) do
+      target_dir = "#{shared_path}/public/tmp"
+      target_path = "#{target_dir}/maintenance.html"
+      source_path = "#{release_path}/public/maintenance.html"
+      execute :mkdir, '-p', target_dir
+      execute :cp, '-f', source_path, target_path
+    end
+  end
+
+  desc 'stop maintenance'
+  task :off do
+    on roles(:web) do
+      target = "#{shared_path}/public/tmp/maintenance.html"
+      execute :rm, target if test "[ -f #{target} ]"
+    end
   end
 end
+
+#namespace :deploy do
+  #desc 'Upload database.yml'
+  #task :upload do
+    #on roles(:app) do |host|
+      #if test "[ ! -d #{shared_path}/config ]"
+        #execute "mkdir -p #{shared_path}/config"
+      #end
+      #upload!('config/database.yml', "#{shared_path}/config/database.yml")
+    #end
+  #end
+  
+  #desc 'Make sure local git is in sync with remote.'
+  #task :check_revision do
+    #on roles(:app) do
+      #unless `git rev-parse HEAD` == `git rev-parse origin/master`
+      #end
+    #end
+  #end
+
+  #desc 'Initial Deploy'
+  #task :initial do
+    #on roles(:app) do
+      #before 'deploy:restart', 'puma:start'
+      #invoke 'deploy'
+    #end
+  #end
+
+  #desc 'Restart application'
+  #task :restart do
+    #invoke 'unicorn:restart'
+  #end
+
+  #desc 'reload the database with seed data'
+  #task :seed do
+    #on roles(:db) do
+      #with rails_env: fetch(:rails_env) do
+        #within release_path do
+          #execute :bundle, :exec, :rake, 'db:seed'
+        #end
+      #end
+    #end
+  #end
+  
+  #after  :migrate,      :seed
+  #before :starting,     :check_revision
+  #after  :finishing,    :compile_assets
+  #after  :finishing,    :cleanup
+#end
+
+#before 'deploy:starting', 'deploy:upload'
+#after 'deploy:publishing', 'deploy:restart'
+
+#require "capistrano/maintenance"
+#set :maintenance_template_path, File.join(File.dirname(__FILE__), "..", "app", "views", "system", "maintenance.html.erb")
+#$VERBOSE = nil
+
+#namespace :db do
+  #desc "Dump the database and compress it."
+  #task :backup do
+    #on roles(:db) do
+  
+      #backups_path = "#{shared_path}/db_backups"
+
+      #date = capture "cat #{current_path}/config/database.yml"
+      #config = YAML::load(data)[rails_env]
+      #abort unless config && config['adapter'] == 'mysql2'
+
+      #file_name = "#{config['database']}-#{release_name}.sql.gz"
+
+      #command = "/usr/bin/mysqldump --user=#{config['username']}"
+      #command += " --password" if config['password']
+      #command += " --host=#{config['host']}" if config['host']
+      #command += " --port=#{config['port']}" if config['port']
+      #command += " #{config['database']}"
+      #command += " | gzip -c > #{backups_path}/#{file_name}"
+
+      #run "mkdir -p #{backups_path}"
+      #run command do |channel, _, output|
+        #if output =~ /^Enter password:/
+          #channel.send_data "#{config['password']}n"
+        #end
+      #end
+    #end
+  #end
+#end
+
+#Rake::Task["deploy:new_release_path"].clear
+
+#namespace :deploy do
+  #task :new_release_path do
+    #set_release_path(Time.now.strftime("%Y%m%d%H%M%S"))
+  #end
+#end

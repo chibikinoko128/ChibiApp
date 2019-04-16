@@ -90,8 +90,10 @@ set :migration_role, 'db'
   #keys: [File.expand_path('~/.ssh/id_rsa')],
     #forward_agent: true,
     #auth_methods: %w(publickey)
-
-server 'wonder-gate.com', user: 'kinoko', roles: %w{app web db}
+role :app, %w{kinoko@153.126.131.89}
+role :web, %w{kinoko@153.126.131.89}
+role :db,  %w{kinoko@153.126.131.89}
+server '153.126.131.89', user: 'kinoko', roles: %w{app web db}
 #role :app, %w{kinoko@wonder-gate.com}
 #role :web, %w{kinoko@wonder-gate.com}
 #role :db, %w{kinoko@wonder-gate.com}
@@ -99,7 +101,8 @@ server 'wonder-gate.com', user: 'kinoko', roles: %w{app web db}
 set :ssh_options, {
   port: 60128,
   #keys: [File.expand_path('~/.ssh/id_rsa')],
-  keys: %w(/home/vagrant/.ssh/id_rsa),
+  #keys: %w(/home/vagrant/.ssh/id_rsa),
+  keys: %w(/home/vagrant/chibi/chibi/.ssh/id_rsa),
   forward_agent: true,
   auth_methods: %w(publickey)
 }
