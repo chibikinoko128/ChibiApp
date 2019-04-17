@@ -81,7 +81,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   'vendor/bundle',
   'public/system',
   'public/uploads',
-  'public/tmp'
+  'public/tmp',
+  'db'
 )
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml',
