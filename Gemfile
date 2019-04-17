@@ -87,4 +87,4 @@ group :deployment do
   gem 'sshkit-sudo', '~> 0.1.0', require: false
 end
 
-gem 'rake', '< 11.0'
+gem 'rake'
