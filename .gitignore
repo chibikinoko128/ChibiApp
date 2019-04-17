@@ -17,3 +17,10 @@
 /yarn-error.log
 
 .byebug_history
+administrators.rb
+db/seeds/development/commissions.rb
+db/seeds/development/staff_members.rb
+
+db/seeds/production/administrators.rb
+db/seeds/production/commissions.rb
+db/seeds/production/staff_members.rb
