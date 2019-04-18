@@ -65,7 +65,7 @@ set :keep_releases, 5
 set :rbenv_type, :user
 #set :rbenv_path, '/home/vagrant/.rbenv'
 set :rbenv_ruby_version, 'ruby_2.3.1'
-set :rbenv_custom_path, '/root/.rbenv'
+set :rbenv_custom_path, '/home/kinoko/.rbenv'
 #set :chruby_ruby, 'ruby-2.3.1p112'
 #set :rvm_ruby_version, "ruby-2.3.1"
 
