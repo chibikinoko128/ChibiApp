@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "chibi"
+set :application, "ChibiApp"
 set :rails_env, "production"
 set :repo_url, "https://github.com/chibikinoko128/ChibiApp.git"
 set :branch, 'master'
