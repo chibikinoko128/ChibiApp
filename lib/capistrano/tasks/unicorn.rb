@@ -18,7 +18,7 @@ namespace :unicorn do
   end
 
 #unicornを再起動するメソッド
-  def restart_unicorn
+  def reload_unicorn
     execute :kill, "-s USR2 $(< #{fetch(:unicorn_pid)})"
   end
 
@@ -48,7 +48,7 @@ namespace :unicorn do
   task restart: :environment do
     on roles(:app) do
       if test("[ -f #{fetch(:unicorn_pid)} ]")
-        restart_unicorn
+        reload_unicorn
       else
         start_unicorn
       end
