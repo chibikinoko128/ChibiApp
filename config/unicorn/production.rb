@@ -23,11 +23,11 @@
 #ホットデプロイをするかしないかを設定
   preload_app true
 
-root = "/usr/share/nginx/html/current"
+#root = "/usr/share/nginx/html/current"
 
-before_exec do |server|
-  ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
-end
+#before_exec do |server|
+  #ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
+#end
 
 
 #fork前に行うことを定義。後述
