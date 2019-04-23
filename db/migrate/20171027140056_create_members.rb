@@ -1,7 +1,8 @@
 class CreateMembers < ActiveRecord::Migration[5.1]
   def change
     create_table :members do |t|
-      t.references :customer, null: false               # 顧客への外部キー
+      #t.references :customer, null: false               # 顧客への外部キー
+      t.integer :customer_id, null: false
       t.integer :mb_1, null: false, default: 0          # 1月
       t.integer :mb_2, null: false, default: 0          # 2月
       t.integer :mb_3, null: false, default: 0          # 3月
@@ -22,7 +23,7 @@ class CreateMembers < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    add_foreign_key :members, :customers
+    #add_foreign_key :members, :customers
     add_index :members, :mb_1
     add_index :members, :mb_2
     add_index :members, :mb_3

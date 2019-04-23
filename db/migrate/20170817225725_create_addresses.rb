@@ -1,7 +1,8 @@
 class CreateAddresses < ActiveRecord::Migration[5.1]
   def change
     create_table :addresses do |t|
-      t.references :customer, null: false               # 顧客への外部キー
+      #t.references :customer, null: false               # 顧客への外部キー
+      t.integer :customer_id, null: false
       t.string :type, null: false                       # 継承カラム
       t.string :postal_code, null: false                # 郵便番号
       t.string :prefecture, null: false                 # 都道府県
@@ -15,6 +16,6 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
     
     add_index :addresses, [ :type, :customer_id ], unique: true
     add_index :addresses, :address1
-    add_foreign_key :addresses, :customers
+    #add_foreign_key :addresses, :customers
   end
 end

@@ -1,7 +1,8 @@
 class CreateSpecials < ActiveRecord::Migration[5.1]
   def change
     create_table :specials do |t|
-      t.references :customer, null: false            # 顧客への外部キー
+      #t.references :customer, null: false            # 顧客への外部キー
+      t.integer :customer_id, null: false
       t.integer :basic, null: false, default: 0      # ベーシック
       t.integer :crystal, null: false, default: 0    # クリスタル
       t.integer :silver, null: false, default: 0     # シルバーベーシック
@@ -16,7 +17,7 @@ class CreateSpecials < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    add_foreign_key :specials, :customers
+    #add_foreign_key :specials, :customers
     add_index :specials, :basic
     add_index :specials, :crystal
     add_index :specials, :silver

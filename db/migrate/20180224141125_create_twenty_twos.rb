@@ -1,7 +1,8 @@
 class CreateTwentyTwos < ActiveRecord::Migration[5.1]
   def change
     create_table :twenty_twos do |t|
-      t.references :customer, null: false               # 顧客への外部キー
+      #t.references :customer, null: false               # 顧客への外部キー
+      t.integer :customer_id, null: false
       t.integer :year, null: false, default: 2022       # 年
       t.integer :m_1, null: false, default: 0           # 1月
       t.integer :m_2, null: false, default: 0           # 2月
@@ -94,7 +95,7 @@ class CreateTwentyTwos < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    add_foreign_key :twenty_twos, :customers
+    #add_foreign_key :twenty_twos, :customers
     add_index :twenty_twos, :m_1
     add_index :twenty_twos, :m_2
     add_index :twenty_twos, :m_3
