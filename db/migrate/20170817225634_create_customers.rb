@@ -11,8 +11,8 @@ class CreateCustomers < ActiveRecord::Migration[5.1]
       t.string :gender                        # 性別
       t.date :birthday                        # 誕生日
       t.string :hashed_password               # パスワード
-      t.string :sponsor1, null: false, default: "sss"  # 紹介者
-      t.string :member_type, null: false, default: "一般会員"
+      t.string :sponsor1, null: false, default: 'sss'  # 紹介者
+      t.string :member_type, null: false, default: '一般会員'
       t.string :lock, null: false, default: "0"
       t.string :bonus_lock, null: false, default: "0"
       t.string :special_lock, null: false, default: "0"
