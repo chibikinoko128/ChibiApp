@@ -35,6 +35,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'dotenv-rails'
 gem 'unicorn'
+#gem 'unicorn-worker-killer'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -82,9 +83,8 @@ group :deployment do
   gem 'capistrano-bundler', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rbenv', require: false
-  #gem 'capistrano3-unicorn', require: false
+  gem 'capistrano3-unicorn', require: false
   gem 'capistrano-maintenance', require: false
-  #gem 'capistrano-chruby', require: false
   gem 'sshkit-sudo', '~> 0.1.0', require: false
 end
 

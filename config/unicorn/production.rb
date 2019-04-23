@@ -23,30 +23,32 @@
 #ホットデプロイをするかしないかを設定
   preload_app true
 
+root = "/usr/share/nginx/html/current"
+
+before_exec do |server|
+  ENV['BUNDLE_GEMFILE'] = "#{root}/Gemfile"
+end
+
+
 #fork前に行うことを定義。後述
   before_fork do |server, worker|
-    defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
+  # the following is highly recomended for Rails + "preload_app true"
+  # as there's no need for the master process to hold a connection
+  if defined?(ActiveRecord::Base)
+    ActiveRecord::Base.connection.disconnect!
+  end
 
-    old_pid = "#{ server.config[:pid] }.oldbin"
-    unless old_pid == server.pid
-      begin
-        sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-        Process.kill :QUIT, File.read(old_pid).to_i
-      rescue Errno::ENOENT, Errno::ESRCH
-      end
+  # Before forking, kill the master process that belongs to the .oldbin PID.
+  # This enables 0 downtime deploys.
+  old_pid = "#{root}/tmp/pids/unicorn.pid.oldbin"
+  if File.exists?(old_pid) && server.pid != old_pid
+    begin
+      Process.kill("QUIT", File.read(old_pid).to_i)
+    rescue Errno::ENOENT, Errno::ESRCH
+      # someone else did our job for us
     end
   end
-  #before_fork do |server, worker|
-    #defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!
-    #old_pid = "#{server.config[:pid]}.oldbin"
-    #if old_pid != server.pid
-      #begin
-        #sig = (worker.nr + 1) >= server.worker_processes ? :QUIT : :TTOU
-        #Process.kill "QUIT", File.read(old_pid).to_i
-      #rescue Errno::ENOENT, Errno::ESRCH
-      #end
-    #end
-  #end
+end
 
 #fork後に行うことを定義。後述
   after_fork do |server, worker|
