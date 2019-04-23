@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "chibiap"
+set :application, "chibi"
 set :rails_env, "production"
 set :repo_url, "https://github.com/chibikinoko128/ChibiApp.git"
 set :branch, 'master'
@@ -82,12 +82,12 @@ set :linked_dirs, fetch(:linked_dirs, []).push(
   'public/system',
   'public/uploads',
   'public/tmp',
-  'db'
+  #'db'
 )
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml',
   'config/secrets.yml',
-  '.env'
+  #'.env'
 )
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :whenever_roles,        ->{ :batch }
