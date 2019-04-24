@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.date "birthday"
     t.string "hashed_password"
     t.string "sponsor1", default: "sss", null: false
-    t.string "member_type", default: "normal", null: false
+    t.string "member_type", default: "一般会員", null: false
     t.string "lock", default: "0", null: false
     t.string "bonus_lock", default: "0", null: false
     t.string "special_lock", default: "0", null: false
