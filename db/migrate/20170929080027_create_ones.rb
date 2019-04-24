@@ -1,8 +1,8 @@
 class CreateOnes < ActiveRecord::Migration[5.1]
   def change
     create_table :ones do |t|
-      #t.references :customer, null: false               # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false               # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.integer :year, null: false, default: 2021       # 年
       t.integer :m_1, null: false, default: 0           # 1月
       t.integer :m_2, null: false, default: 0           # 2月
@@ -96,7 +96,7 @@ class CreateOnes < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    #add_foreign_key :ones, :customers
+    add_foreign_key :ones, :customers
     add_index :ones, :m_1
     add_index :ones, :m_2
     add_index :ones, :m_3

@@ -1,8 +1,8 @@
 class CreateRegisters < ActiveRecord::Migration[5.1]
   def change
     create_table :registers do |t|
-      #t.references :customer, null: false               # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false               # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.string :rg_1, null: false, default: "退会"          # 1月
       t.string :rg_2, null: false, default: "退会"          # 2月
       t.string :rg_3, null: false, default: "退会"          # 3月
@@ -19,7 +19,7 @@ class CreateRegisters < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    #add_foreign_key :registers, :customers
+    add_foreign_key :registers, :customers
     add_index :registers, :rg_1
     add_index :registers, :rg_2
     add_index :registers, :rg_3

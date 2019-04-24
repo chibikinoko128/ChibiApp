@@ -1,8 +1,8 @@
 class CreateScores < ActiveRecord::Migration[5.1]
   def change
     create_table :scores do |t|
-      #t.references :customer, null: false               # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false               # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.integer :sc_1, null: false, default: 0          # 1月
       t.integer :sc_2, null: false, default: 0          # 2月
       t.integer :sc_3, null: false, default: 0          # 3月
@@ -23,7 +23,7 @@ class CreateScores < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    #add_foreign_key :scores, :customers
+    add_foreign_key :scores, :customers
     add_index :scores, :sc_1
     add_index :scores, :sc_2
     add_index :scores, :sc_3

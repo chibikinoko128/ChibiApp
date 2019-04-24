@@ -1,8 +1,8 @@
 class CreatePoints < ActiveRecord::Migration[5.1]
   def change
     create_table :points do |t|
-      #t.references :customer, null: false               # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false               # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.integer :bns_1, null: false, default: 0          # 1月
       t.integer :bns_2, null: false, default: 0          # 2月
       t.integer :bns_3, null: false, default: 0          # 3月
@@ -23,7 +23,7 @@ class CreatePoints < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    #add_foreign_key :points, :customers
+    add_foreign_key :points, :customers
     add_index :points, :bns_1
     add_index :points, :bns_2
     add_index :points, :bns_3

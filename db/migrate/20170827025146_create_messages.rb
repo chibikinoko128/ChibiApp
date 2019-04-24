@@ -1,8 +1,8 @@
 class CreateMessages < ActiveRecord::Migration[5.1]
   def change
     create_table :messages do |t|
-      #t.references :customer, null: false               # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false               # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.references :staff_member                        # 職員への外部キー
       t.bigint :root_id                                # Messageへの外部キー
       t.bigint :parent_id                              # Messageへの外部キー
@@ -24,7 +24,7 @@ class CreateMessages < ActiveRecord::Migration[5.1]
     add_index :messages, [ :customer_id, :deleted, :status, :created_at ],
       name: 'index_messages_on_c_d_s_c'
     add_index :messages, [ :root_id, :deleted, :created_at ]
-    #add_foreign_key :messages, :customers
+    add_foreign_key :messages, :customers
     add_foreign_key :messages, :staff_members
     add_foreign_key :messages, :messages, column: 'root_id'
     add_foreign_key :messages, :messages, column: 'parent_id'

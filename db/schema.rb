@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20190111183814) do
 
   create_table "addresses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "type", null: false
     t.string "postal_code", null: false
     t.string "prefecture", null: false
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.datetime "updated_at", null: false
     t.index ["address1"], name: "index_addresses_on_address1"
     t.index ["city"], name: "index_addresses_on_city"
+    t.index ["customer_id"], name: "index_addresses_on_customer_id"
     t.index ["postal_code"], name: "index_addresses_on_postal_code"
     t.index ["prefecture", "city"], name: "index_addresses_on_prefecture_and_city"
     t.index ["type", "city"], name: "index_addresses_on_type_and_city"
@@ -77,7 +78,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "banks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "bk_name", default: "", null: false
     t.string "office", default: "", null: false
     t.integer "account"
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["account_check"], name: "index_banks_on_account_check"
     t.index ["bk_name"], name: "index_banks_on_bk_name"
     t.index ["bk_name_check"], name: "index_banks_on_bk_name_check"
+    t.index ["customer_id"], name: "index_banks_on_customer_id"
     t.index ["office"], name: "index_banks_on_office"
     t.index ["office_check"], name: "index_banks_on_office_check"
   end
@@ -113,10 +115,11 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "customer_years", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year_check", default: 2018, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_customer_years_on_customer_id"
     t.index ["year_check"], name: "index_customer_years_on_year_check"
   end
 
@@ -180,7 +183,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "eighteens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2018, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -273,6 +276,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_eighteens_on_c_2"
     t.index ["c_3"], name: "index_eighteens_on_c_3"
     t.index ["c_4"], name: "index_eighteens_on_c_4"
+    t.index ["customer_id"], name: "index_eighteens_on_customer_id"
     t.index ["m_1"], name: "index_eighteens_on_m_1"
     t.index ["m_10"], name: "index_eighteens_on_m_10"
     t.index ["m_11"], name: "index_eighteens_on_m_11"
@@ -301,11 +305,12 @@ ActiveRecord::Schema.define(version: 20190111183814) do
 
   create_table "entries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "program_id", null: false
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.boolean "approved", default: false, null: false
     t.boolean "canceled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_entries_on_customer_id"
     t.index ["program_id", "customer_id"], name: "index_entries_on_program_id_and_customer_id", unique: true
     t.index ["program_id"], name: "index_entries_on_program_id"
   end
@@ -327,7 +332,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "members", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "mb_1", default: 0, null: false
     t.integer "mb_2", default: 0, null: false
     t.integer "mb_3", default: 0, null: false
@@ -346,6 +351,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.integer "mbc_4", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_members_on_customer_id"
     t.index ["mb_1"], name: "index_members_on_mb_1"
     t.index ["mb_10"], name: "index_members_on_mb_10"
     t.index ["mb_11"], name: "index_members_on_mb_11"
@@ -373,7 +379,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.bigint "staff_member_id"
     t.bigint "root_id"
     t.bigint "parent_id"
@@ -389,6 +395,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["customer_id", "deleted", "created_at"], name: "index_messages_on_customer_id_and_deleted_and_created_at"
     t.index ["customer_id", "deleted", "status", "created_at"], name: "index_messages_on_c_d_s_c"
     t.index ["customer_id", "discarded", "created_at"], name: "index_messages_on_customer_id_and_discarded_and_created_at"
+    t.index ["customer_id"], name: "index_messages_on_customer_id"
     t.index ["parent_id"], name: "fk_rails_aafcb31dbf"
     t.index ["root_id", "deleted", "created_at"], name: "index_messages_on_root_id_and_deleted_and_created_at"
     t.index ["staff_member_id"], name: "index_messages_on_staff_member_id"
@@ -414,7 +421,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "nineteens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2019, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -507,6 +514,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_nineteens_on_c_2"
     t.index ["c_3"], name: "index_nineteens_on_c_3"
     t.index ["c_4"], name: "index_nineteens_on_c_4"
+    t.index ["customer_id"], name: "index_nineteens_on_customer_id"
     t.index ["m_1"], name: "index_nineteens_on_m_1"
     t.index ["m_10"], name: "index_nineteens_on_m_10"
     t.index ["m_11"], name: "index_nineteens_on_m_11"
@@ -559,7 +567,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "ones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2021, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -652,6 +660,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_ones_on_c_2"
     t.index ["c_3"], name: "index_ones_on_c_3"
     t.index ["c_4"], name: "index_ones_on_c_4"
+    t.index ["customer_id"], name: "index_ones_on_customer_id"
     t.index ["m_1"], name: "index_ones_on_m_1"
     t.index ["m_10"], name: "index_ones_on_m_10"
     t.index ["m_11"], name: "index_ones_on_m_11"
@@ -687,7 +696,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "phones", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.bigint "address_id"
     t.string "number", default: "0", null: false
     t.string "number_for_index", null: false
@@ -696,12 +705,13 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.datetime "updated_at", null: false
     t.string "last_four_digits"
     t.index ["address_id"], name: "index_phones_on_address_id"
+    t.index ["customer_id"], name: "index_phones_on_customer_id"
     t.index ["last_four_digits"], name: "index_phones_on_last_four_digits"
     t.index ["number_for_index"], name: "index_phones_on_number_for_index"
   end
 
   create_table "points", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "bns_1", default: 0, null: false
     t.integer "bns_2", default: 0, null: false
     t.integer "bns_3", default: 0, null: false
@@ -736,6 +746,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["cbns_2"], name: "index_points_on_cbns_2"
     t.index ["cbns_3"], name: "index_points_on_cbns_3"
     t.index ["cbns_4"], name: "index_points_on_cbns_4"
+    t.index ["customer_id"], name: "index_points_on_customer_id"
   end
 
   create_table "programs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -753,7 +764,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "registers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "rg_1", default: "退会", null: false
     t.string "rg_2", default: "退会", null: false
     t.string "rg_3", default: "退会", null: false
@@ -768,6 +779,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.string "rg_12", default: "退会", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_registers_on_customer_id"
     t.index ["rg_1"], name: "index_registers_on_rg_1"
     t.index ["rg_10"], name: "index_registers_on_rg_10"
     t.index ["rg_11"], name: "index_registers_on_rg_11"
@@ -791,7 +803,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "scores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "sc_1", default: 0, null: false
     t.integer "sc_2", default: 0, null: false
     t.integer "sc_3", default: 0, null: false
@@ -810,6 +822,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.integer "scc_4", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_scores_on_customer_id"
     t.index ["sc_1"], name: "index_scores_on_sc_1"
     t.index ["sc_10"], name: "index_scores_on_sc_10"
     t.index ["sc_11"], name: "index_scores_on_sc_11"
@@ -829,7 +842,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "seventeens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2017, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -854,6 +867,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_seventeens_on_c_2"
     t.index ["c_3"], name: "index_seventeens_on_c_3"
     t.index ["c_4"], name: "index_seventeens_on_c_4"
+    t.index ["customer_id"], name: "index_seventeens_on_customer_id"
     t.index ["m_1"], name: "index_seventeens_on_m_1"
     t.index ["m_10"], name: "index_seventeens_on_m_10"
     t.index ["m_11"], name: "index_seventeens_on_m_11"
@@ -869,7 +883,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "specials", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "basic", default: 0, null: false
     t.integer "crystal", default: 0, null: false
     t.integer "silver", default: 0, null: false
@@ -884,6 +898,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.datetime "updated_at", null: false
     t.index ["basic"], name: "index_specials_on_basic"
     t.index ["crystal"], name: "index_specials_on_crystal"
+    t.index ["customer_id"], name: "index_specials_on_customer_id"
     t.index ["gold"], name: "index_specials_on_gold"
     t.index ["king"], name: "index_specials_on_king"
     t.index ["pegasus"], name: "index_specials_on_pegasus"
@@ -895,7 +910,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "sponsors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.string "sponsor1", default: "dragon", null: false
     t.string "sponsor2", default: "dragon", null: false
     t.string "sponsor3", default: "dragon", null: false
@@ -905,6 +920,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.string "sponsor7", default: "dragon", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_sponsors_on_customer_id"
     t.index ["sponsor1"], name: "index_sponsors_on_sponsor1"
     t.index ["sponsor2"], name: "index_sponsors_on_sponsor2"
     t.index ["sponsor3"], name: "index_sponsors_on_sponsor3"
@@ -982,7 +998,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2020, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1075,6 +1091,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenties_on_c_2"
     t.index ["c_3"], name: "index_twenties_on_c_3"
     t.index ["c_4"], name: "index_twenties_on_c_4"
+    t.index ["customer_id"], name: "index_twenties_on_customer_id"
     t.index ["m_1"], name: "index_twenties_on_m_1"
     t.index ["m_10"], name: "index_twenties_on_m_10"
     t.index ["m_11"], name: "index_twenties_on_m_11"
@@ -1119,7 +1136,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_fives", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2025, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1212,6 +1229,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_fives_on_c_2"
     t.index ["c_3"], name: "index_twenty_fives_on_c_3"
     t.index ["c_4"], name: "index_twenty_fives_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_fives_on_customer_id"
     t.index ["m_1"], name: "index_twenty_fives_on_m_1"
     t.index ["m_10"], name: "index_twenty_fives_on_m_10"
     t.index ["m_11"], name: "index_twenty_fives_on_m_11"
@@ -1256,7 +1274,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_fours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2024, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1349,6 +1367,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_fours_on_c_2"
     t.index ["c_3"], name: "index_twenty_fours_on_c_3"
     t.index ["c_4"], name: "index_twenty_fours_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_fours_on_customer_id"
     t.index ["m_1"], name: "index_twenty_fours_on_m_1"
     t.index ["m_10"], name: "index_twenty_fours_on_m_10"
     t.index ["m_11"], name: "index_twenty_fours_on_m_11"
@@ -1393,7 +1412,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_sevens", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2027, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1486,6 +1505,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_sevens_on_c_2"
     t.index ["c_3"], name: "index_twenty_sevens_on_c_3"
     t.index ["c_4"], name: "index_twenty_sevens_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_sevens_on_customer_id"
     t.index ["m_1"], name: "index_twenty_sevens_on_m_1"
     t.index ["m_10"], name: "index_twenty_sevens_on_m_10"
     t.index ["m_11"], name: "index_twenty_sevens_on_m_11"
@@ -1530,7 +1550,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_sixes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2026, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1623,6 +1643,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_sixes_on_c_2"
     t.index ["c_3"], name: "index_twenty_sixes_on_c_3"
     t.index ["c_4"], name: "index_twenty_sixes_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_sixes_on_customer_id"
     t.index ["m_1"], name: "index_twenty_sixes_on_m_1"
     t.index ["m_10"], name: "index_twenty_sixes_on_m_10"
     t.index ["m_11"], name: "index_twenty_sixes_on_m_11"
@@ -1667,7 +1688,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_threes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2023, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1760,6 +1781,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_threes_on_c_2"
     t.index ["c_3"], name: "index_twenty_threes_on_c_3"
     t.index ["c_4"], name: "index_twenty_threes_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_threes_on_customer_id"
     t.index ["m_1"], name: "index_twenty_threes_on_m_1"
     t.index ["m_10"], name: "index_twenty_threes_on_m_10"
     t.index ["m_11"], name: "index_twenty_threes_on_m_11"
@@ -1804,7 +1826,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
   end
 
   create_table "twenty_twos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "customer_id", null: false
+    t.bigint "customer_id", null: false
     t.integer "year", default: 2022, null: false
     t.integer "m_1", default: 0, null: false
     t.integer "m_2", default: 0, null: false
@@ -1897,6 +1919,7 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.index ["c_2"], name: "index_twenty_twos_on_c_2"
     t.index ["c_3"], name: "index_twenty_twos_on_c_3"
     t.index ["c_4"], name: "index_twenty_twos_on_c_4"
+    t.index ["customer_id"], name: "index_twenty_twos_on_customer_id"
     t.index ["m_1"], name: "index_twenty_twos_on_m_1"
     t.index ["m_10"], name: "index_twenty_twos_on_m_10"
     t.index ["m_11"], name: "index_twenty_twos_on_m_11"
@@ -1929,12 +1952,33 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "addresses", "customers"
   add_foreign_key "admin_events", "administrators"
+  add_foreign_key "banks", "customers"
+  add_foreign_key "eighteens", "customers"
+  add_foreign_key "entries", "customers"
   add_foreign_key "entries", "programs"
+  add_foreign_key "members", "customers"
+  add_foreign_key "messages", "customers"
   add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "messages", "messages", column: "root_id"
   add_foreign_key "messages", "staff_members"
+  add_foreign_key "nineteens", "customers"
+  add_foreign_key "ones", "customers"
   add_foreign_key "phones", "addresses"
+  add_foreign_key "phones", "customers"
+  add_foreign_key "points", "customers"
   add_foreign_key "programs", "staff_members", column: "registrant_id"
+  add_foreign_key "registers", "customers"
+  add_foreign_key "scores", "customers"
+  add_foreign_key "seventeens", "customers"
+  add_foreign_key "specials", "customers"
   add_foreign_key "staff_events", "staff_members"
+  add_foreign_key "twenties", "customers"
+  add_foreign_key "twenty_fives", "customers"
+  add_foreign_key "twenty_fours", "customers"
+  add_foreign_key "twenty_sevens", "customers"
+  add_foreign_key "twenty_sixes", "customers"
+  add_foreign_key "twenty_threes", "customers"
+  add_foreign_key "twenty_twos", "customers"
 end

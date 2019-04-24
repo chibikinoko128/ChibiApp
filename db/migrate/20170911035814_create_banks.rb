@@ -1,8 +1,8 @@
 class CreateBanks < ActiveRecord::Migration[5.1]
   def change
     create_table :banks do |t|
-      #t.references :customer, null: false            # 顧客への外部キー
-      t.integer :customer_id, null: false
+      t.references :customer, null: false            # 顧客への外部キー
+      #t.integer :customer_id, null: false
       t.string :bk_name, null: false, default: ''    # 銀行名
       t.string :office, null: false, default: ''     # 支店
       t.integer :account      # 口座番号
@@ -14,7 +14,7 @@ class CreateBanks < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    #add_foreign_key :banks, :customers
+    add_foreign_key :banks, :customers
     add_index :banks, :bk_name
     add_index :banks, :office
     add_index :banks, :account
