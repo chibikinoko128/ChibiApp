@@ -111,7 +111,6 @@ ActiveRecord::Schema.define(version: 20190111183814) do
     t.integer "fee_high", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pay_bank"], name: "index_commissions_on_pay_bank", unique: true
   end
 
   create_table "customer_years", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

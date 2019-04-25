@@ -9,6 +9,6 @@ class CreateCommissions < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     
-    add_index :commissions, :pay_bank, unique: true
+    #add_index :commissions, :pay_bank, unique: true
   end
 end
