@@ -37,10 +37,10 @@ require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/rails/assets'
 require 'capistrano/rails/migrations'
-#require 'capistrano3/unicorn'
+require 'capistrano3/unicorn'
 #require 'sshkit/sudo'
 require 'whenever/capistrano'
-require "capistrano/maintenance"
+#require "capistrano/maintenance"
 
 #install_plugin Capistrano::Puma
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
