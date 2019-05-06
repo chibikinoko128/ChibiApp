@@ -92,9 +92,9 @@ set :linked_files, fetch(:linked_files, []).push(
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :whenever_roles,        ->{ :batch }
 
-set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
-set :unicorn_config_path, "config/unicorn/production.rb"
-set :unicorn_rack_env, 'deployment'
+set :unicorn_pid, "/usr/share/nginx/html/current/tmp/pids/unicorn.pid"
+set :unicorn_config_path, "/usr/share/nginx/html/current/config/unicorn/production.rb"
+set :unicorn_rack_env, 'production'
 
 namespace :deploy do
   desc 'Restart application'
