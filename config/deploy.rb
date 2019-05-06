@@ -92,6 +92,9 @@ set :linked_files, fetch(:linked_files, []).push(
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 set :whenever_roles,        ->{ :batch }
 
+set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
+set :unicorn_config_path, "config/unicorn/production.rb"
+set :unicorn_rack_env, 'deployment'
 
 namespace :deploy do
   desc 'Restart application'
@@ -132,26 +135,26 @@ namespace :deploy do
 end
 
 
-namespace :maintenance do
-  desc 'start maintenance'
-  task :on do
-    on roles(:web) do
-      target_dir = "#{shared_path}/public/tmp"
-      target_path = "#{target_dir}/maintenance.html"
-      source_path = "#{release_path}/public/maintenance.html"
-      execute :mkdir, '-p', target_dir
-      execute :cp, '-f', source_path, target_path
-    end
-  end
+#namespace :maintenance do
+  #desc 'start maintenance'
+  #task :on do
+    #on roles(:web) do
+      #target_dir = "#{shared_path}/public/tmp"
+      #target_path = "#{target_dir}/maintenance.html"
+      #source_path = "#{release_path}/public/maintenance.html"
+      #execute :mkdir, '-p', target_dir
+      #execute :cp, '-f', source_path, target_path
+    #end
+  #end
 
-  desc 'stop maintenance'
-  task :off do
-    on roles(:web) do
-      target = "#{shared_path}/public/tmp/maintenance.html"
-      execute :rm, target if test "[ -f #{target} ]"
-    end
-  end
-end
+  #desc 'stop maintenance'
+  #task :off do
+    #on roles(:web) do
+      #target = "#{shared_path}/public/tmp/maintenance.html"
+      #execute :rm, target if test "[ -f #{target} ]"
+    #end
+  #end
+#end
 
 #namespace :deploy do
   #desc 'Upload database.yml'
