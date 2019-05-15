@@ -10,7 +10,8 @@ namespace :unicorn do
 #unicornをスタートさせるメソッド
   def start_unicorn
     within current_path do
-      execute :bundle, :exec, :unicorn, "-c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
+      #execute :bundle, :exec, :unicorn, "-c #{fetch(:unicorn_config)} -E #{fetch(:rails_env)} -D"
+      execute :bundle, :exec, :unicorn, "-c #{fetch(:unicorn_config)} -E production -D"
     end
   end
 
