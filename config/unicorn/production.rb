@@ -5,7 +5,7 @@
 #自分のアプリケーション名、currentがつくことに注意。
   $app_dir = "/usr/share/nginx/html/current"
 #リクエストを受け取るポート番号を指定。後述
-  $listen  = File.expand_path 'tmp/sockets/.unicorn.sock', $app_dir
+  $listen  = File.expand_path 'tmp/sockets/.111unicorn.sock', $app_dir
   $pid  = File.expand_path 'tmp/pids/unicorn.pid', $app_dir
   #listen "/var/run/unicorn.sock"
   #pid "/var/run/unicorn.pid"
