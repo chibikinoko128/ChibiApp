@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'ワンダーゲート運営局'
+  default from: 'wonder.gate128@gmail.com'
   layout 'mailer'
 end
 
