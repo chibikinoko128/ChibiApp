@@ -68,6 +68,7 @@
 #set :puma_worker_timeout, nil
 #set :puma_init_active_record, true
 
+set :whenever_environment, :production
 set :stage, :production
 set :rails_env, 'production'
  

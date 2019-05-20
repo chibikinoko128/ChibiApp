@@ -17,6 +17,7 @@ module Chibi
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.paths.add 'lib', eager_load: true
+    config.mail_logger = Logger.new("log/mail_#{Rails.env}.log")
     
     config.i18n.load_path +=
       Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]

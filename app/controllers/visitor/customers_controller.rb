@@ -84,15 +84,15 @@ class Visitor::CustomersController < Visitor::Base
   end
   
   def move_now
-    render action: 'move_now'
+    render action: 'move_now' and return
   end
   
   def move_on
-    render action: 'move_on'
+    render action: 'move_on' and return
   end
   
   def not_payment
-    render action: 'not_payment'
+    render action: 'not_payment' and return
   end
       
   def city_crear
