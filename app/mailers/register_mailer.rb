@@ -1,5 +1,5 @@
 class RegisterMailer < ApplicationMailer
-  default from: 'wonder.gate128@gmail.com'
+  default from: '<wonder.gate128@gmail.com>'
   
   def payment(user)
     @time = Time.zone.now
