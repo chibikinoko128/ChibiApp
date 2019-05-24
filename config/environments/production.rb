@@ -89,6 +89,10 @@ Rails.application.configure do
     restrict_ip_addresses: false
   }
   
+  config.action_mailer.perform_deliveries = true
+  host = 'wonder-gate.com'
+  config.action_mailer.default_url_options = { host: host }
+  
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.smtp_settings = {
