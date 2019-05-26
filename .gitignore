@@ -15,8 +15,13 @@
 /db/*
 /.env
 /.ssh
+/server.crt
+/server.csr
+/server.key
 config/database.yml
 config/secrets.yml
+config/environments/development.rb
+config/environments/production.rb
 /node_modules
 /yarn-error.log
 
