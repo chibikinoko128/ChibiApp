@@ -13,7 +13,7 @@
 !/log/.keep
 !/tmp/.keep
 
-.ssh
+.ssh/*
 .env
 config/database.yml
 config/secrets.yml
