@@ -13,6 +13,8 @@
 !/log/.keep
 !/tmp/.keep
 /db/*
+/.env
+/.ssh
 config/database.yml
 config/secrets.yml
 /node_modules
@@ -20,9 +22,3 @@ config/secrets.yml
 
 .byebug_history
 administrators.rb
-/db/seeds/development/commissions.rb
-/db/seeds/development/staff_members.rb
-
-/db/seeds/production/administrators.rb
-/db/seeds/production/commissions.rb
-/db/seeds/production/staff_members.rb
