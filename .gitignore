@@ -12,8 +12,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-/db/*
-!/db/migrate/*
+db/seeds/development/administrators.rb
+db/seeds/development/staff_members.rb
+db/seeds/development/commissions.rb
+db/seeds/production/administrators.rb
+db/seeds/production/staff_members.rb
+db/seeds/production/commissions.rb
 /.env
 /.ssh
 /server.crt
