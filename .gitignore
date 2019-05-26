@@ -13,6 +13,7 @@
 !/log/.keep
 !/tmp/.keep
 /db/*
+!/db/migrate/*
 /.env
 /.ssh
 /server.crt
