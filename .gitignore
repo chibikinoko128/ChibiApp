@@ -12,9 +12,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
-
-id_rsa
-.env
+/db/*
 config/database.yml
 config/secrets.yml
 /node_modules
