@@ -1,5 +1,5 @@
 class SpMemberMailer < ApplicationMailer
-  default from: 'ワンダーゲート運営局'
+  default from: '<wonder.gate128@gmail.com>'
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #

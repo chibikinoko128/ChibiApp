@@ -1,5 +1,5 @@
 class BonusTitleMailer < ApplicationMailer
-  default from: 'ワンダーゲート運営局'
+  default from: '<wonder.gate128@gmail.com>'
   
   def normal(user)
     @user = user

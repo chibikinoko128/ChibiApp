@@ -1,5 +1,5 @@
 class BankMailer < ApplicationMailer
-  default from: 'ワンダーゲート運営局'
+  default from: '<wonder.gate128@gmail.com>'
   
   def registration(user)
     time = Time.zone.now

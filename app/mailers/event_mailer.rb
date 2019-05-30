@@ -1,5 +1,5 @@
 class EventMailer < ApplicationMailer
- default from: 'ワンダーゲート運営局'
+ default from: '<wonder.gate128@gmail.com>'
   
   def notification(user)
     @user = user

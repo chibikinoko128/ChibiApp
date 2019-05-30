@@ -1,5 +1,5 @@
 class CongratsMailer < ApplicationMailer
-  default from: 'ワンダーゲート運営局'
+  default from: '<wonder.gate128@gmail.com>'
   def membership_fee(user)
     time = Time.zone.now
     @month = time.month

@@ -1,5 +1,5 @@
 class DirectMailer < ApplicationMailer
-  default from: 'ワンダーゲート運営局'
+  default from: '<wonder.gate128@gmail.com>'
   def d_mail(user)
     time = Time.zone.now
     @day = time.day
