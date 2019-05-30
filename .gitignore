@@ -25,8 +25,8 @@ db/seeds/production/commissions.rb
 /server.key
 config/database.yml
 config/secrets.yml
-config/environments/development.rb
-config/environments/production.rb
+#config/environments/development.rb
+#config/environments/production.rb
 /node_modules
 /yarn-error.log
 
